@@ -9,6 +9,6 @@
 <body>
 	<jsp:forward page="WEB-INF/views/main.jsp"/>
 	<!-- 새벽새벽새벽 -->
-	<!-- test -->
+	<!-- test2 -->
 </body>
 </html>
