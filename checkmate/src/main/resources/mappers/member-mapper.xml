@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mamberMapper">
+	
+	<resultMap type="member" id="memberResultSet">
+		<result column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_PW" property="userPw"/>
+		<result column="USER_NICK" property="userNick"/>
+		<result column="USER_EMAIL" property="userEmail"/>
+		<result column="USER_PHONE" property="userPhone"/>
+		<result column="USER_ENROLLDATE" property="enrollDate"/>
+		<result column="USER_STATUS" property="status"/>
+		<result column="USER_ADDRESS" property="userAddress"/>
+		<result column="USER_ORIGIN_PROFILE" property="userOriginProfile"/>
+		<result column="USER_CHANGE_PROFILE" property="userChangeProfile"/>
+	</resultMap>	
+	
+	<select id="loginMember" resultMap="memberResultSet">
+		SELECT USER_NO,USER_NAME,USER_ID,USER_PW,USER_NICK,USER_EMAIL,USER_PHONE
+			  ,USER_ENROLLDATE,USER_STATUS,USER_ADDRESS,USER_ORIGIN_PROFILE,USER_CHANGE_PROFILE
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		AND USER_STATUS = 'Y'	
+	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO MEMBER(
+						USER_NO,
+						USER_NAME,
+						USER_ID,
+						USER_PW,
+						USER_NICK,
+						USER_EMAIL,
+						USER_PHONE,
+						USER_ADDRESS						
+						)
+					VALUES(
+						SEQ_USER_NO.NEXTVAL,
+						#{userName},
+						#{userId},
+						#{userPw},
+						#{userNick},
+						#{userEmail},
+						#{userPhone},
+						#{userAddress}
+						)
+	</insert>
+	
+	<insert id="insertMember2" parameterType="member">
+		INSERT INTO MEMBER(
+						USER_NO,
+						USER_NAME,
+						USER_ID,
+						USER_PW,
+						USER_NICK,
+						USER_EMAIL,
+						USER_PHONE,
+						USER_ADDRESS,
+						USER_ORIGIN_PROFILE,	
+						USER_CHANGE_PROFILE			
+						)
+					VALUES(
+						SEQ_USER_NO.NEXTVAL,
+						#{userName},
+						#{userId},
+						#{userPw},
+						#{userNick},
+						#{userEmail},
+						#{userPhone},
+						#{userAddress},
+						#{userOriginProfile},
+						#{userChangeProfile}
+						)
+	</insert>
+	
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="nickCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE USER_NICK = #{userNick}
+	</select>
+	
+	
+	
+</mapper>

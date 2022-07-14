@@ -5,10 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 <body>
-	<jsp:forward page="WEB-INF/views/member/memberLogin.jsp"/>
-	
+	<h1 align="center" style="color:red">${errorMsg}</h1>
 </body>
 </html>
