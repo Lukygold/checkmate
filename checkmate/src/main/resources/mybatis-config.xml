@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
-<configuration>
 
+<configuration>
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation" alias="SharingInformation"/>
+		<typeAlias type="com.kh.checkmate.member.model.vo.Member" alias="member"/>
 	</typeAliases>
-	
+		
 	<mappers>
-		<mapper resource="/mappers/sharingInformation-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
 	</mappers>
 
 </configuration>
