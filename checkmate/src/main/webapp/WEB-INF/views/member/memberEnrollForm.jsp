@@ -11,6 +11,7 @@
 
 <meta charset="UTF-8">
 <title>CHECKMATE 회원가입</title>
+<jsp:include page="../common/header.jsp" />
 <style>
     #logonEnrollHeader{
         display:flex;
@@ -97,15 +98,12 @@
         border-radius: 100px;
     }
 
+
 </style>
 </head>
 <body>
-    <br><br>
-	 <div id="logonEnrollHeader">
-            <h1>회원가입</h1>
-    </div>
-    <br><br>
-    
+
+    <br><br><br><br><br>
     
     <form action="insert.me" method="post" enctype="multipart/form-data">
     
@@ -118,12 +116,12 @@
     	<br><br>
     	
     	
-        <div class="input-box">
+        <div class="input-box" align="center">
             <input id="userId" type="text" name="userId" placeholder="아이디" required>
             <label for="userId">아이디</label>
             <button type="button" id="idBtn" class="checkBtn">중복 확인</button>
         </div>
-        <div class="input-box">
+        <div class="input-box" align="center">
 	        <span class="idCheck">6~16자 영문,숫자를 사용하세요.</span>
         </div>
 
