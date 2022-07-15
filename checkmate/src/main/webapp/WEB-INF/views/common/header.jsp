@@ -60,6 +60,15 @@
 <!-- Semantic UI theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/845fa7ca1e.js" crossorigin="anonymous"></script>
+
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <!-- =======================================================
   * Template Name: Hidayah - v4.7.0
   * Template URL: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/
@@ -73,7 +82,7 @@
 			class="container d-flex align-items-center justify-content-between">
 
 			<h1 class="logo">
-				<a href="index.html">CHECKMATE</a>
+				<a href="./">CHECKMATE</a>
 			</h1>
 
 			<nav id="navbar" class="navbar">
@@ -130,6 +139,9 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
+					<li><a class="nav-link scrollto" href="#">Login</a></li>
+					<li><a class="nav-link scrollto" href="#">Join</a></li>
+
 					<c:choose>
 						<c:when test="${ empty loginUser }">
 							<li><a class="nav-link scrollto" data-toggle="modal" data-target="#loginModal">Login</a></li>
@@ -141,8 +153,6 @@
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
 						</c:otherwise>
 					</c:choose>
-					
-					
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
