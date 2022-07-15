@@ -91,7 +91,7 @@ public class MemberController {
 			m.setUserChangeProfile("resources/uploadFiles/"+changeName);
 			
 			int result = memberService.insertMember2(m);		
-			System.out.println(m);
+			
 			if(result>0) {
 				
 				session.setAttribute("alertMsg", "회원가입 성공");
