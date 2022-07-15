@@ -28,7 +28,7 @@
         position:relative;
         display:flex;
         margin:10px 0;
-        margin-left: 550px;
+        margin-left: 29%;
         width: 1000px;
     }
     .input-box > input{
@@ -90,7 +90,18 @@
         font-size: 14pt;       
     }
     .checkBtn:hover{
-        cursor: pointer;
+        cursor: pointer;              
+    }
+    .addressBtn{
+    	background-color: #8aa1a1;
+        border:none;
+        color:white;
+        border-radius: 5px;
+        width: 130px;
+        font-size: 14pt; 
+    }   
+    .addressBtn{
+    	cursor: pointer; 
     }
     img{
         width: 200px;
@@ -163,7 +174,7 @@
         <div class="input-box" align="center">
             <input id="addr1" type="text" readonly="readonly" placeholder="우편번호">
             <label for="addr1">우편번호</label>
-            <button type="button" class="checkBtn" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+            <button type="button" class="addressBtn" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
         </div>
 
         <div class="input-box" align="center">
