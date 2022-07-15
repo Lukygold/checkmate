@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -28,6 +29,16 @@
   <link href="resources/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="resources/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+   <!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
@@ -731,6 +742,34 @@
   </main><!-- End #main -->
 
   <jsp:include page="common/footer.jsp"/>
+  
+  	<!-- 로그인 모달 -->
+	<div class="modal fade" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="login.me" method="post">
+                    <!-- Modal body -->
+                    
+	                <div class="login-header">
+	                    <h2>Login</h2>
+	                </div>
+                    <div class="input-box">
+		                <input id="username" type="text" name="userId" placeholder="아이디">
+		                <label for="username">아이디</label>
+		            </div>
+                    <div class="input-box">
+		                <input id="password" type="password" name="userPw" placeholder="비밀번호">
+		                <label for="password">비밀번호</label>	                
+		            <div id="forgot">
+		            <a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
+		            </div>
+                    <button type="submit" id="loginBtn">로그인</button>
+                    <br><br>
+		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
+                </form>
+            </div>
+        </div>
+    </div>
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -748,5 +787,13 @@
   <script src="resources/js/main.js"></script>
 
 </body>
+
+<!-- 얼럿 -->
+<c:if test="${not empty alertMsg}">
+		<script>
+			alertify.alert("서비스 요청 성공 ","${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>	
+</c:if>
 
 </html>
