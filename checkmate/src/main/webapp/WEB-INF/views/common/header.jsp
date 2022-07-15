@@ -139,8 +139,7 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
-					<li><a class="nav-link scrollto" href="#">Login</a></li>
-					<li><a class="nav-link scrollto" href="#">Join</a></li>
+
 
 					<c:choose>
 						<c:when test="${ empty loginUser }">
