@@ -76,7 +76,7 @@
 			class="container d-flex align-items-center justify-content-between">
 
 			<h1 class="logo">
-				<a href="index.html">CHECKMATE</a>
+				<a href="./">CHECKMATE</a>
 			</h1>
 
 			<nav id="navbar" class="navbar">
