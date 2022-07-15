@@ -42,6 +42,15 @@
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
 
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/845fa7ca1e.js" crossorigin="anonymous"></script>
+
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <!-- =======================================================
   * Template Name: Hidayah - v4.7.0
   * Template URL: https://bootstrapmade.com/hidayah-free-simple-html-template-for-corporate/
@@ -112,6 +121,7 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
+					<li><a class="nav-link scrollto" href="messageList.do">메시지 테스트</a></li>
 					<li><a class="nav-link scrollto" href="#">Login</a></li>
 					<li><a class="nav-link scrollto" href="#">Join</a></li>
 				</ul>
