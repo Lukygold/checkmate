@@ -33,7 +33,6 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 
 	
 	
-	////////////////////////////////////////////////////////
 	@Override
 	public int insertBoard(SharingInformation b) {
 		
@@ -52,8 +51,7 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 
 	@Override
 	public int deleteBoard(int boardNo) {
-//		return sid.deleteBoard(sqlSession,boardNo);
-		return 0;
+		return sid.deleteBoard(sqlSession,boardNo);
 	}
 
 	@Override

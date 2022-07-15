@@ -42,4 +42,8 @@ public class SharingInformationDao {
 	public int insertBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
 		return sqlSession.insert("sharingInformationMapper.insertBoard",b);
 	}
+
+	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("sharingInformationMapper.deleteBoard",boardNo);
+	}
 }

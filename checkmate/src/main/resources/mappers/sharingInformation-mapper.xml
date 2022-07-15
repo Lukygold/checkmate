@@ -19,6 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="INFORMATION_DATE" property="informationDate"/>
 		
 		<result column="INFORMATION_VIEW" property="informationView"/>
+		<result column="INFORMATION_ORIGIN_NAME" property="informationOriginName"/>
+		<result column="INFORMATION_CHANGE_NAME" property="informationChangeName"/>
 	</resultMap>
 	
 	<select id="selectList" resultMap="siResultSet">
@@ -39,17 +41,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertBoard" parameterType="SharingInformation">
 		INSERT INTO INFORMATION_TB(
 						  INFORMATION_NO
-						 ,INFORMATION_TITLE
 						 ,USER_NO
+						 ,INFORMATION_CATEGORY
+						 ,INFORMATION_TITLE
 						 ,INFORMATION_CONTENT
+						 ,INFORMATION_DATE
+						 ,INFORMATION_VIEW
+						 ,INFORMATION_STATUS
 						 ,INFORMATION_ORIGIN_NAME
 						 ,INFORMATION_CHANGE_NAME
 						 )
 		VALUES(
 				SEQ_INFORMATION_NO.NEXTVAL
+				,1
+				,#{informationCategory}
 				,#{informationTitle}
-				,#{userNo}
 				,#{informationContent}
+				,SYSDATE
+				,DEFAULT
+				,DEFAULT
 				,#{informationOriginName}
 				,#{informationChangeName}
 				)
@@ -70,17 +80,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       INFORMATION_TITLE,
 		       INFORMATION_CONTENT,
 		       INFORMATION_DATE,
-		       INFORMATION_VIEW
+		       INFORMATION_VIEW,
+		       INFORMATION_ORIGIN_NAME,
+		       INFORMATION_CHANGE_NAME
 		FROM INFORMATION_TB
 		JOIN MEMBER M USING(USER_NO)
 		WHERE INFORMATION_NO = #{informationNo}
 	</select>
 	
-<!-- 	<update id="deleteBoard" parameterType="_int"> -->
-<!-- 		UPDATE BOARD -->
-<!-- 		SET STATUS='N' -->
-<!-- 		WHERE BOARD_NO = #{boardNo} -->
-<!-- 	</update> -->
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE INFORMATION_TB
+		SET INFORMATION_STATUS='N'
+		WHERE INFORMATION_NO = #{informationNo}
+	</update>
 	
 	<update id="updateBoard" parameterType="SharingInformation">
 		UPDATE INFORMATION_TB

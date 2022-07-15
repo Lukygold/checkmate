@@ -36,13 +36,14 @@
 	<jsp:include page="../../common/header.jsp" />
 	<main role="main" class="container back-image">
 		<form name="form" method="POST" action="insert.si" enctype="multipart/form-data">
+			<input type="hidden" name="informationCategory" value="정보공유">
 			<input class="form-control col-3 text-center" type="text"
 				value="정보공유 게시판" aria-label="readonly input example" readonly>
 			<div class="pt-1"></div>
-			<input type="text" name="title" placeholder="제목을 입력하세요"
+			<input type="text" name="informationTitle" placeholder="제목을 입력하세요"
 				style="border-radius: 5px; width: 100%; padding: 5px;">
 			<div class="pt-1">
-				<textarea id="summernote" name="contents"></textarea>
+				<textarea id="summernote" name="informationContent"></textarea>
 			</div>
 			<script>
 				$('#summernote').summernote({
@@ -52,7 +53,7 @@
 				});
 			</script>
 			<div class="mb-3">
-				<input class="form-control" type="file" name="formFileMultiple" multiple>
+				<input class="form-control" type="file" name="upfile" multiple>
 			</div>
 			<div class="pt-1 text-right">
 				<button class="btn btn btn-success" type="submit" style="width: 10%; padding: 5px;">등록</button>

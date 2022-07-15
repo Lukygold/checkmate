@@ -50,8 +50,9 @@ public class SharingInformationController {
 		return "board/sharingInformation/siEnrollForm";
 	}
 	
-	@RequestMapping("insert.bo")
+	@RequestMapping("insert.si")
 	public String insertBoard(SharingInformation b, MultipartFile upfile, HttpSession session, Model model) {
+		
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(upfile,session);
 			b.setInformationOriginName(upfile.getOriginalFilename());
@@ -59,10 +60,9 @@ public class SharingInformationController {
 		}
 		
 		int result = sharingInformationService.insertBoard(b);
- 		System.out.println(b);
 		if(result>0) {
 			session.setAttribute("alertMsg", "게시글을 작성하셨습니다.");
-			return "redirect:list.bo";
+			return "redirect:list.si";
 		}else { 
 			model.addAttribute("errorMsg", "게시글 작성 실패");
 			return "common/errorPage";
@@ -81,6 +81,26 @@ public class SharingInformationController {
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
+		return mv;
+	}
+	
+	@RequestMapping("delete.si")
+	public ModelAndView deleteBoard(ModelAndView mv, int informationNo, String filePath, HttpSession session) {
+		
+		int result = sharingInformationService.deleteBoard(informationNo);
+		
+		if(result>0) {
+			if(!filePath.equals("")) {
+				String realPath = session.getServletContext().getRealPath(filePath);
+				new File(realPath).delete();
+			}
+			
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			mv.setViewName("redirect:list.si");
+		}else {
+			mv.addObject("errorMsg", "게시글 삭제 실패").setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 	

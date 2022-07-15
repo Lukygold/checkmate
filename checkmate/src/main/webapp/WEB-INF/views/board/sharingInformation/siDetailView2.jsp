@@ -30,56 +30,73 @@
 
 <link href="resources/css/sharingInformation.css" rel="stylesheet"
 	type="text/css" />
+	<link rel="stylesheet" href="resource/alertify.core.css" />
+<link rel="stylesheet" href="resource/alertify.default.css" id="toggleCSS" />
+<script src="resource/alertify.min.js"></script>
 </head>
 <body style="padding-top: 7rem;">
 	<jsp:include page="../../common/header.jsp" />
-	업데이트
 	<main role="main" class="container back-image">
-		<!-- 		<form name="form" method="POST" action="/bulletin_wr01"> -->
-		<form name="form" method="POST" action="update.si"
-			enctype="multipart/form-data">
-			<input type="hidden" name="informationNo" value="${b.informationNo }">
+		디테일
+		<form name="form" method="POST" action="/bulletin_wr01">
 			<input class="form-control col-4 text-center float-left" type="text"
-				value="작성자" readonly> <input
+				value="작성자" aria-label="input example"> <input
 				class="form-control col-4 text-center float-left" type="text"
-				value="등록일" readonly> <input
+				value="등록일" aria-label="input example"> <input
 				class="form-control col-4 text-center" type="text" value="조회수"
-				readonly> <input
+				aria-label="input example"> <input
 				class="form-control col-4 text-center float-left" type="text"
-				value="${b.userId}" aria-label="input example" readonly> <input
+				value="${b.userId}" aria-label="input example"> <input
 				class="form-control col-4 text-center float-left" type="text"
-				value="${b.informationDate}" aria-label="input example" readonly>
-			<input class="form-control col-4 text-center" type="text"
-				value="${b.informationView}" readonly>
+				value="${b.informationDate}" aria-label="input example"> <input
+				class="form-control col-4 text-center" type="text"
+				value="${b.informationView}" aria-label="input example">
 			<div class="pt-1"></div>
 			<input type="text" name="title" placeholder="제목을 입력하세요."
 				value="${b.informationTitle}"
-				style="border-radius: 5px; width: 100%; padding: 5px;"> <br>
+				style="border-radius: 5px; width: 100%; padding: 5px;" readonly>
+			<br>
 
-			<div class="pt-1">
-				<textarea id="summernote" name="informationContent">${b.informationContent}</textarea>
+<!-- 			<div class="mb-3"> -->
+<!-- 				<textarea class="form-control" id="exampleFormControlTextarea1" -->
+<%-- 					contenteditable="true" rows="3" readonly>${b.informationContent}</textarea> --%>
+<!-- 			</div> -->
+
+			<div class="mb-3 form-control" style="hieght=30px">
+				${b.informationContent}
 			</div>
-			<script>
-				$('#summernote').summernote({
-					placeholder : '내용을 입력해주세요',
-					tabsize : 2,
-					height : 300
-				});
-			</script>
-
 
 			<div class="mb-3">
-				<input class="form-control" type="file" id="formFileMultiple"
-					multiple>
+				<!-- 				<input class="form-control" type="file" id="formFileMultiple" multiple> -->
+				첨부파일 : <a href="${b.informationChangeName }"
+					download="${b.informationOriginName }">${b.informationOriginName }</a>
 			</div>
 
 			<div class="btn-group">
-				<button type="submit" class="btn btn-secondary">수정하기</button>
-				<button type="button" class="btn btn-secondary"
-					onclick="javascript:history.go(-1);">이전으로</button>
+				<a class="btn btn-secondary" onclick="postFormSubmit(1)">글수정</a>
+				<a class="btn btn-secondary" onclick="postFormSubmit(2)">글삭제</a>
 			</div>
 		</form>
 	</main>
+
+	<form id="postForm" method="post">
+		<input type="hidden" name="informationNo" value="${b.informationNo}">
+		<input type="hidden" name="filePath" value="${b.informationChangeName }">
+	</form>
+
+	<script>
+		function postFormSubmit(num) {
+			
+			if (num == 1) {
+				$("#postForm").attr("action", "updateForm.si").submit();
+			} else {
+				if()
+				$("#postForm").attr("action", "delete.si").submit();
+			}
+
+		}
+	</script>
+
 	<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>
