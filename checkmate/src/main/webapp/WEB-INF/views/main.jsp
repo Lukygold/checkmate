@@ -30,15 +30,6 @@
   <link href="resources/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-   <!-- JavaScript -->
-	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-	
-	<!-- CSS -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-	<!-- Default theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
-	<!-- Semantic UI theme -->
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
@@ -788,12 +779,6 @@
 
 </body>
 
-<!-- 얼럿 -->
-<c:if test="${not empty alertMsg}">
-		<script>
-			alertify.alert("서비스 요청 성공 ","${alertMsg}");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>	
-</c:if>
+
 
 </html>

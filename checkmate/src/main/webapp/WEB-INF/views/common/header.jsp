@@ -53,6 +53,12 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<!-- 얼럿 CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
 <!-- =======================================================
   * Template Name: Hidayah - v4.7.0
@@ -143,7 +149,36 @@
 		</div>
 	</header>
 	
+	<script>
+    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
+    	
+    	function kakaoLogin(){
+        	window.Kakao.Auth.login({
+        		scope:'profile_nickname,profile_image,account_email',
+        		success: function(authObj){
+        			console.log(authObj);
+        			window.Kakao.API.request({
+        				url:'/v2/user/me',
+        				success: res => {
+        					const kakao_account = res.kakao_account;
+        					console.log(kakao_account);
+        				}
+        			});
+        		}
+        	});
+        	
+    	};
+    	
+    
+    </script>
 	
+	<!-- 얼럿 -->
+	<c:if test="${not empty alertMsg}">
+			<script>
+				alertify.alert("서비스 요청 성공 ","${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>	
+	</c:if>
 
 </body>
 </html>
