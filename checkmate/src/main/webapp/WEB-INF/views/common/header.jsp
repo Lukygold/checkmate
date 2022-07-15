@@ -133,7 +133,6 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
-					<li><a class="nav-link scrollto" href="messageList.do">메시지 테스트</a></li>
 					<li><a class="nav-link scrollto" href="#">Login</a></li>
 					<li><a class="nav-link scrollto" href="#">Join</a></li>
 
