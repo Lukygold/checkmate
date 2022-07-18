@@ -78,28 +78,58 @@
 <title>Insert title here</title>
 </head>
 <body>
-<br><br><br><br><br><br><br><br>
- 					<div class="login-header">
-	                    <h2>Login</h2>
-	                </div>
-	                <br><br>
-                <form action="login.me" method="post" >
-                    <div class="input-box">
-		                <input id="username" type="text" name="userId" placeholder="아이디">
-		                <label for="username">아이디</label>
-		            </div>
-                    <div class="input-box">
-		                <input id="password" type="password" name="userPw" placeholder="비밀번호">
-		                <label for="password">비밀번호</label>	                
-		            <div id="forgot">
-		            <a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
-		            </div>
-                    <button type="submit" id="loginBtn">로그인</button>
-                    <br><br>
-                    <div id="kakao">
-		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
-                    </div>
-                </form>
+	<br><br><br><br><br><br><br><br>
+	
+ 	<div class="login-header">
+	    <h2>Login</h2>
+	</div>
+	<br><br>
+    <form action="login.me" method="post" >
+        <div class="input-box">
+          	<input id="username" type="text" name="userId" placeholder="아이디">
+         	<label for="username">아이디</label>
+      	</div>
+        <div class="input-box">
+          	<input id="password" type="password" name="userPw" placeholder="비밀번호">
+          	<label for="password">비밀번호</label>	
+                          
+	    <div id="forgot">
+	      	<a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
+	    </div>
+        <button type="submit" id="loginBtn">로그인</button>
+        <br><br>
+        <div id="kakao">
+      		<a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
+         </div>
+         </div>
+    </form>
+                
+    <script>
+    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
+    	
+    	function kakaoLogin(){
+        	window.Kakao.Auth.login({
+        		scope:'profile_nickname,profile_image,account_email',
+        		success: function(authObj){
+        			console.log(authObj);
+        			window.Kakao.API.request({
+        				url:'/v2/user/me',
+        				success: res => {
+        					const kakao_account = res.kakao_account;
+        					const kEmail = res.kakao_account.email;
+        					const KName = res.properties.nickname;
+        					const kProfile = res.properties.profile_image;
+        					console.log(kEmail);
+        					console.log(KName);
+        					console.log(kProfile);
+        					console.log(kakao_account);
+        				}
+        			});
+        		}
+        	});
+        	
+    	};
+    </script>
     
 </body>
 </html>
