@@ -34,10 +34,10 @@
 			<div class="mb-3">
 				<input class="form-control" type="file" name="upfile" multiple>
 			</div>
-			<div class="pt-1 text-right">
-				<button class="btn btn btn-success" type="submit" onclick="save();"
+			<div class="pt-1 text-right float-right">
+				<button class="btn btn btn-success float-right" type="submit" onclick="save();"
 					style="width: 10%; padding: 5px;">등록</button>
-				<button class="btn btn btn-success" type="reset"
+				<button class="btn btn btn-success float-right" type="reset"
 					style="width: 10%; padding: 5px;">취소</button>
 			</div>
 		</form>

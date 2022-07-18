@@ -135,8 +135,6 @@
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
 						</c:otherwise>
 					</c:choose>
-					
-					
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>

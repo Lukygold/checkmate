@@ -14,13 +14,17 @@ public class SharingInformation {
 	private String informationStatus;	//	INFORMATION_STATUS	VARCHAR2(1 BYTE)
 	private String informationOriginName;
 	private String informationChangeName;
+	private String searchContent;
+	
 	public SharingInformation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public SharingInformation(int informationNo, int userNo, String userId, String informationCategory,
 			String informationTitle, String informationContent, Date informationDate, int informationView,
-			String informationStatus, String informationOriginName, String informationChangeName) {
+			String informationStatus, String informationOriginName, String informationChangeName,
+			String searchContent) {
 		super();
 		this.informationNo = informationNo;
 		this.userNo = userNo;
@@ -33,73 +37,105 @@ public class SharingInformation {
 		this.informationStatus = informationStatus;
 		this.informationOriginName = informationOriginName;
 		this.informationChangeName = informationChangeName;
+		this.searchContent = searchContent;
 	}
+
 	public int getInformationNo() {
 		return informationNo;
 	}
+
 	public void setInformationNo(int informationNo) {
 		this.informationNo = informationNo;
 	}
+
 	public int getUserNo() {
 		return userNo;
 	}
+
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	public String getInformationCategory() {
 		return informationCategory;
 	}
+
 	public void setInformationCategory(String informationCategory) {
 		this.informationCategory = informationCategory;
 	}
+
 	public String getInformationTitle() {
 		return informationTitle;
 	}
+
 	public void setInformationTitle(String informationTitle) {
 		this.informationTitle = informationTitle;
 	}
+
 	public String getInformationContent() {
 		return informationContent;
 	}
+
 	public void setInformationContent(String informationContent) {
 		this.informationContent = informationContent;
 	}
+
 	public Date getInformationDate() {
 		return informationDate;
 	}
+
 	public void setInformationDate(Date informationDate) {
 		this.informationDate = informationDate;
 	}
+
 	public int getInformationView() {
 		return informationView;
 	}
+
 	public void setInformationView(int informationView) {
 		this.informationView = informationView;
 	}
+
 	public String getInformationStatus() {
 		return informationStatus;
 	}
+
 	public void setInformationStatus(String informationStatus) {
 		this.informationStatus = informationStatus;
 	}
+
 	public String getInformationOriginName() {
 		return informationOriginName;
 	}
+
 	public void setInformationOriginName(String informationOriginName) {
 		this.informationOriginName = informationOriginName;
 	}
+
 	public String getInformationChangeName() {
 		return informationChangeName;
 	}
+
 	public void setInformationChangeName(String informationChangeName) {
 		this.informationChangeName = informationChangeName;
 	}
+
+	public String getSearchContent() {
+		return searchContent;
+	}
+
+	public void setSearchContent(String searchContent) {
+		this.searchContent = searchContent;
+	}
+
 	@Override
 	public String toString() {
 		return "SharingInformation [informationNo=" + informationNo + ", userNo=" + userNo + ", userId=" + userId
@@ -107,8 +143,7 @@ public class SharingInformation {
 				+ ", informationContent=" + informationContent + ", informationDate=" + informationDate
 				+ ", informationView=" + informationView + ", informationStatus=" + informationStatus
 				+ ", informationOriginName=" + informationOriginName + ", informationChangeName="
-				+ informationChangeName + "]";
+				+ informationChangeName + ", searchContent=" + searchContent + "]";
 	}
-	
 	
 }

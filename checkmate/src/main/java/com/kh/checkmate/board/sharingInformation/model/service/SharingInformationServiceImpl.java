@@ -31,8 +31,6 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 		return sid.selectList(sqlSession,pi);
 	}
 
-	
-	
 	@Override
 	public int insertBoard(SharingInformation b) {
 		
@@ -58,6 +56,13 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 	public int updateBoard(SharingInformation b) {
 		return sid.updateBoard(sqlSession,b);
 	}
+
+	@Override
+	public ArrayList<SharingInformation> searchList(PageInfo pi, SharingInformation b) {
+		return sid.searchList(sqlSession, pi, b);
+	}
+	
+	
 
 //	@Override
 //	public ArrayList<Reply> selectReplyList(int boardNo) {

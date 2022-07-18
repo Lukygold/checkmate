@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,9 @@
 
 <link href="resources/css/sharingInformation.css" rel="stylesheet"
 	type="text/css" />
+<script type="text/javascript"
+	src="resources/naver-smarteditor2/demo/js/service/HuskyEZCreator.js"
+	charset="utf-8"></script>
 </head>
 <body style="padding-top: 7rem;">
 	<jsp:include page="../../common/header.jsp" />
@@ -52,12 +56,16 @@
 			<input class="form-control col-4 text-center" type="text"
 				value="${b.informationView}" readonly>
 			<div class="pt-1"></div>
-			<input type="text" name="title" placeholder="제목을 입력하세요."
+			<input type="text" name="informationTitle" placeholder="제목을 입력하세요."
 				value="${b.informationTitle}"
 				style="border-radius: 5px; width: 100%; padding: 5px;"> <br>
 
 			<div class="pt-1">
-				<textarea id="summernote" name="informationContent">${b.informationContent}</textarea>
+				<textarea class="form-control" name="informationContent"
+					id="informationContent" rows="20" cols="10"
+					placeholder="내용을 입력해주세요" style="width: 100%;">${b.informationContent}</textarea>
+
+				<%-- 				<textarea id="summernote" name="informationContent">${b.informationContent}</textarea> --%>
 			</div>
 			<script>
 				$('#summernote').summernote({
@@ -71,15 +79,42 @@
 			<div class="mb-3">
 				<input class="form-control" type="file" id="formFileMultiple"
 					multiple>
+				<c:if test="${not empty b.informationOriginName }">
+                            	현재 업로드된 파일 : 
+                            <a href="${b.informationChangeName }"
+						download="${b.informationOriginName }">${b.informationOriginName }</a>
+					<input type="hidden" name="informationOriginName" value="${b.informationOriginName }">
+					<input type="hidden" name="informationChangeName" value="${b.informationChangeName }">
+				</c:if>
 			</div>
 
 			<div class="btn-group">
-				<button type="submit" class="btn btn-secondary">수정하기</button>
+				<button type="submit" onclick="save();" class="btn btn-secondary">수정하기</button>
 				<button type="button" class="btn btn-secondary"
 					onclick="javascript:history.go(-1);">이전으로</button>
 			</div>
 		</form>
 	</main>
+	<script>
+		var oEditors = [];
+
+		nhn.husky.EZCreator
+				.createInIFrame({
+					oAppRef : oEditors,
+					elPlaceHolder : "informationContent",
+					sSkinURI : "resources/naver-smarteditor2/demo/SmartEditor2Skin.html",
+					fCreator : "createSEditor2"
+				});
+
+		function save() {
+			oEditors.getById["informationContent"].exec(
+					"UPDATE_CONTENTS_FIELD", []);
+			var content = document.getElementById("smartEditor").value;
+			alert(document.getElementById("informationContent").value);
+			return;
+		}
+	</script>
+
 	<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

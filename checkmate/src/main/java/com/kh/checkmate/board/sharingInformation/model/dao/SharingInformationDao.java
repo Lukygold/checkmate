@@ -28,7 +28,6 @@ public class SharingInformationDao {
 
 	public int increaseCount(SqlSessionTemplate sqlSession, int informationNo) {
 		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
-//		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
 	}
 
 	public SharingInformation selectBoard(SqlSessionTemplate sqlSession, int informationNo) {
@@ -45,5 +44,14 @@ public class SharingInformationDao {
 
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("sharingInformationMapper.deleteBoard",boardNo);
+	}
+
+	public ArrayList<SharingInformation> searchList(SqlSessionTemplate sqlSession, PageInfo pi, SharingInformation b) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+ 		return (ArrayList)sqlSession.selectList("sharingInformationMapper.searchList",b,rowBounds);
 	}
 }

@@ -33,7 +33,7 @@ public class SharingInformationController {
 		int listCount = sharingInformationService.selectListCount();
 
 		int pageLimit = 10;
-		int boardLimit = 5;
+		int boardLimit = 15;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
@@ -76,7 +76,6 @@ public class SharingInformationController {
 		
 		if (result > 0) {
 			SharingInformation b = sharingInformationService.selectBoard(informationNo);
-			System.out.println(b);
 			mv.addObject("b", b).setViewName("board/sharingInformation/siDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
@@ -126,8 +125,6 @@ public class SharingInformationController {
 //			b.setOriginName(upfile.getOriginalFilename());
 //			b.setChangeName("resources/uploadFiles/"+changeName);
 //		}
-		System.out.println(b.getInformationNo());
-		System.out.println(b);
 		int result = sharingInformationService.updateBoard(b);
 		
 		if(result>0) {
@@ -137,6 +134,23 @@ public class SharingInformationController {
 			mv.addObject("errorMsg","게시글 수정 실패").setViewName("common/errorPage");
 		}
 		return mv;
+	}
+	
+	@RequestMapping("search.si")
+	public String searchList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model, SharingInformation b) {
+		int listCount = sharingInformationService.selectListCount();
+
+		int pageLimit = 10;
+		int boardLimit = 15;
+
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+
+		ArrayList<SharingInformation> list = sharingInformationService.searchList(pi, b);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+
+		return "board/sharingInformation/siListView";
 	}
 	
 	public String saveFile(MultipartFile upfile,HttpSession session) {
@@ -161,7 +175,6 @@ public class SharingInformationController {
 		}
 		
 		return changeName;
-		
 	}
 
 }

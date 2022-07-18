@@ -30,6 +30,9 @@ public interface SharingInformationService {
 	//게시글 수정
 	public abstract int updateBoard(SharingInformation b);
 	
+	// 검색화면
+	ArrayList<SharingInformation> searchList(PageInfo pi, SharingInformation b);
+	
 //	//댓글 리스트 조회 
 //	public abstract ArrayList<Reply> selectReplyList(int boardNo);
 //	

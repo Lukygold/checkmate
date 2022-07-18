@@ -103,6 +103,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE INFORMATION_NO = #{informationNo}
 	</update>
 	
+	<select id="searchList" resultMap="siResultSet">
+		SELECT INFORMATION_NO,
+		       USER_NO,
+               USER_ID,
+		       INFORMATION_CATEGORY,
+		       INFORMATION_TITLE,
+		       INFORMATION_CONTENT,
+		       INFORMATION_DATE,
+		       INFORMATION_VIEW
+		FROM INFORMATION_TB
+        JOIN MEMBER M USING(USER_NO)
+		WHERE INFORMATION_STATUS = 'Y'
+        AND INFORMATION_TITLE LIKE '%'||#{searchContent}||'%'
+		ORDER BY INFORMATION_DATE DESC
+	</select>
+	
+	
 <!-- 	<resultMap type="reply" id="replyResultSet"> -->
 <!-- 		<result column="REPLY_WRITER" property="replyWriter"/> -->
 <!-- 		<result column="REPLY_CONTENT" property="replyContent"/> -->
