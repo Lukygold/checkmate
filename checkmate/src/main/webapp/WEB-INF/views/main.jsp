@@ -756,11 +756,39 @@
 		            </div>
                     <button type="submit" id="loginBtn">로그인</button>
                     <br><br>
+                    <div id="kakao">
 		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+    
+    <script>
+    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
+    	
+    	function kakaoLogin(){
+        	window.Kakao.Auth.login({
+        		scope:'profile_nickname,profile_image,account_email',
+        		success: function(authObj){
+        			console.log(authObj);
+        			window.Kakao.API.request({
+        				url:'/v2/user/me',
+        				success: res => {
+        					const kakao_account = res.kakao_account;
+        					const kEmail = res.kakao_account.email;
+        					const KName = res.properties.nickname;
+        					const kProfile = res.properties.profile_image;
+        					console.log(kEmail);
+        					console.log(KName);
+        					console.log(kProfile);
+        					console.log(kakao_account);
+        				}
+        			});
+        		}
+        	});
+        	
+    	};
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

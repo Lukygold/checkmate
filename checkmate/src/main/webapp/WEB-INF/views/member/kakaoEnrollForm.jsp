@@ -124,9 +124,10 @@
     	<div class="form-group" align="center">
 		<input class="userOriginProfile" type="file" name="profile" id="userOriginProfile" onchange="setThumbnail(this);">
 		</div>		
-    	<br><br>	  
+    	<br><br>
     	
-    	<div class="input-box" align="center">
+    	
+        <div class="input-box" align="center">
             <input id="userId" type="text" name="userId" placeholder="아이디" required>
             <label for="userId">아이디</label>
             <button type="button" id="idBtn" class="checkBtn">중복 확인</button>
@@ -149,7 +150,7 @@
         </div>     
         <div class="input-box">
 	        <span class="pwdCheck2">동일한 비밀번호를 다시 입력해주세요.</span>
-        </div>              
+        </div>
 
         <div class="input-box">
             <input id="userName" type="text" name="userName" placeholder="이름">

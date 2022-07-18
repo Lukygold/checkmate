@@ -77,6 +77,7 @@
   ======================================================== -->
 </head>
 <body>
+
 	<header id="header" class="fixed-top header-inner-pages" >
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -158,27 +159,6 @@
 		</div>
 	</header>
 	
-	<script>
-    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
-    	
-    	function kakaoLogin(){
-        	window.Kakao.Auth.login({
-        		scope:'profile_nickname,profile_image,account_email',
-        		success: function(authObj){
-        			console.log(authObj);
-        			window.Kakao.API.request({
-        				url:'/v2/user/me',
-        				success: res => {
-        					const kakao_account = res.kakao_account;
-        					console.log(kakao_account);
-        				}
-        			});
-        		}
-        	});
-        	
-    	};
-    	
-    
     </script>
 	
 	<!-- 얼럿 -->
@@ -188,6 +168,9 @@
 			</script>
 			<c:remove var="alertMsg" scope="session"/>	
 	</c:if>
+	
+	
 
 </body>
+
 </html>
