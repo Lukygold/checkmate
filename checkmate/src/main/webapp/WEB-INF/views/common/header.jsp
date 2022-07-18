@@ -38,19 +38,14 @@
 	rel="stylesheet">
 <link href="${path}/resources/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
+	
+	
+<!-- 부트스트랩 5.1.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
 
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
-<!-- 로그인 폼 css -->
-<link href="${path}/resources/css/loginForm.css" rel="stylesheet">
-<!-- jQuery 라이브러리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 부트스트랩에서 제공하고 있는 스타일 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
-<!-- JavaScript -->
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 얼럿 CSS -->
@@ -144,7 +139,7 @@
 
 					<c:choose>
 						<c:when test="${ empty loginUser }">
-							<li><a class="nav-link scrollto" data-toggle="modal" data-target="#loginModal">Login</a></li>
+							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
 							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
 						</c:when>
 						<c:otherwise>
@@ -159,7 +154,7 @@
 		</div>
 	</header>
 	
-    </script>
+    
 	
 	<!-- 얼럿 -->
 	<c:if test="${not empty alertMsg}">
@@ -170,6 +165,10 @@
 	</c:if>
 	
 	
+
+	<!-- 부트스트랩 5.1.3 스크립트 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 
 </body>
 

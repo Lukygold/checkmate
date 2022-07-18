@@ -28,7 +28,7 @@
         position:relative;
         display:flex;
         margin:10px 0;
-        margin-left: 29%;
+        margin-left: 27%;
         width: 1000px;
     }
     .input-box > input{

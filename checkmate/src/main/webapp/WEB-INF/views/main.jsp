@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -734,62 +733,9 @@
 
   <jsp:include page="common/footer.jsp"/>
   
-  	<!-- 로그인 모달 -->
-	<div class="modal fade" id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="login.me" method="post">
-                    <!-- Modal body -->
-                    
-	                <div class="login-header">
-	                    <h2>Login</h2>
-	                </div>
-                    <div class="input-box">
-		                <input id="username" type="text" name="userId" placeholder="아이디">
-		                <label for="username">아이디</label>
-		            </div>
-                    <div class="input-box">
-		                <input id="password" type="password" name="userPw" placeholder="비밀번호">
-		                <label for="password">비밀번호</label>	                
-		            <div id="forgot">
-		            <a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
-		            </div>
-                    <button type="submit" id="loginBtn">로그인</button>
-                    <br><br>
-                    <div id="kakao">
-		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  	
     
-    <script>
-    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
-    	
-    	function kakaoLogin(){
-        	window.Kakao.Auth.login({
-        		scope:'profile_nickname,profile_image,account_email',
-        		success: function(authObj){
-        			console.log(authObj);
-        			window.Kakao.API.request({
-        				url:'/v2/user/me',
-        				success: res => {
-        					const kakao_account = res.kakao_account;
-        					const kEmail = res.kakao_account.email;
-        					const KName = res.properties.nickname;
-        					const kProfile = res.properties.profile_image;
-        					console.log(kEmail);
-        					console.log(KName);
-        					console.log(kProfile);
-        					console.log(kakao_account);
-        				}
-        			});
-        		}
-        	});
-        	
-    	};
-
+    
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

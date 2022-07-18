@@ -1,5 +1,11 @@
-@charset "UTF-8";
-.login-header{
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="../common/header.jsp" />
+<style>
+	   .login-header{
            display:flex;
            justify-content: center;
        }
@@ -67,3 +73,33 @@
        	width:100%;
        	height:50px;
        }
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br>
+ 					<div class="login-header">
+	                    <h2>Login</h2>
+	                </div>
+	                <br><br>
+                <form action="login.me" method="post" >
+                    <div class="input-box">
+		                <input id="username" type="text" name="userId" placeholder="아이디">
+		                <label for="username">아이디</label>
+		            </div>
+                    <div class="input-box">
+		                <input id="password" type="password" name="userPw" placeholder="비밀번호">
+		                <label for="password">비밀번호</label>	                
+		            <div id="forgot">
+		            <a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
+		            </div>
+                    <button type="submit" id="loginBtn">로그인</button>
+                    <br><br>
+                    <div id="kakao">
+		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
+                    </div>
+                </form>
+    
+</body>
+</html>
