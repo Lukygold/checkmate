@@ -38,11 +38,19 @@
 	rel="stylesheet">
 <link href="${path}/resources/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
+	
+	
+<!-- 부트스트랩 5.2.0 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!-- 부트스트랩 5.2.0 스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>  	
+	
 
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
 <!-- 로그인 폼 css -->
 <link href="${path}/resources/css/loginForm.css" rel="stylesheet">
+<<<<<<< HEAD
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- 부트스트랩에서 제공하고 있는 스타일 -->
@@ -51,8 +59,25 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>   -->
 <!-- JavaScript -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+=======
+>>>>>>> branch 'main' of https://github.com/Dawn0820/checkmate.git
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<!-- 얼럿 CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/845fa7ca1e.js" crossorigin="anonymous"></script>
+
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <!-- =======================================================
   * Template Name: Hidayah - v4.7.0
@@ -67,7 +92,7 @@
 			class="container d-flex align-items-center justify-content-between">
 
 			<h1 class="logo">
-				<a href="index.html">CHECKMATE</a>
+				<a href="./">CHECKMATE</a>
 			</h1>
 
 			<nav id="navbar" class="navbar">
@@ -124,6 +149,8 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
+
+
 					<c:choose>
 						<c:when test="${ empty loginUser }">
 							<li><a class="nav-link scrollto" data-toggle="modal" data-target="#loginModal">Login</a></li>
@@ -141,7 +168,36 @@
 		</div>
 	</header>
 	
+	<script>
+    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
+    	
+    	function kakaoLogin(){
+        	window.Kakao.Auth.login({
+        		scope:'profile_nickname,profile_image,account_email',
+        		success: function(authObj){
+        			console.log(authObj);
+        			window.Kakao.API.request({
+        				url:'/v2/user/me',
+        				success: res => {
+        					const kakao_account = res.kakao_account;
+        					console.log(kakao_account);
+        				}
+        			});
+        		}
+        	});
+        	
+    	};
+    	
+    
+    </script>
 	
+	<!-- 얼럿 -->
+	<c:if test="${not empty alertMsg}">
+			<script>
+				alertify.alert("서비스 요청 성공 ","${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>	
+	</c:if>
 
 </body>
 </html>
