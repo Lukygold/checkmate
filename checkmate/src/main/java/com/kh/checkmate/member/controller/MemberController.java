@@ -128,6 +128,11 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	@RequestMapping("memberLoginForm.me")
+	public String memberLoginForm() {
+		return "member/memberLoginForm";
+	}
+	
 	public String saveFile(MultipartFile upfile,HttpSession session) {
 		String originName = upfile.getOriginalFilename(); 
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

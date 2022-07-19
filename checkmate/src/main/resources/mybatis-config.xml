@@ -12,7 +12,7 @@
 	</typeAliases>
 				
 	<mappers>
-		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/member/member-mapper.xml"/>
 		<mapper resource="/mappers/sharingInformation-mapper.xml"/>
 	</mappers>
 

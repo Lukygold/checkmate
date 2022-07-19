@@ -45,8 +45,7 @@
 
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
-<!-- 로그인 폼 css -->
-<link href="${path}/resources/css/loginForm.css" rel="stylesheet">
+
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 얼럿 CSS -->
@@ -73,6 +72,7 @@
   ======================================================== -->
 </head>
 <body>
+
 	<header id="header" class="fixed-top header-inner-pages" >
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -139,7 +139,7 @@
 
 					<c:choose>
 						<c:when test="${ empty loginUser }">
-							<li><a class="nav-link scrollto" data-toggle="modal" data-target="#loginModal">Login</a></li>
+							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
 							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
 						</c:when>
 						<c:otherwise>
@@ -154,28 +154,7 @@
 		</div>
 	</header>
 	
-	<script>
-    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
-    	
-    	function kakaoLogin(){
-        	window.Kakao.Auth.login({
-        		scope:'profile_nickname,profile_image,account_email',
-        		success: function(authObj){
-        			console.log(authObj);
-        			window.Kakao.API.request({
-        				url:'/v2/user/me',
-        				success: res => {
-        					const kakao_account = res.kakao_account;
-        					console.log(kakao_account);
-        				}
-        			});
-        		}
-        	});
-        	
-    	};
-    	
     
-    </script>
 	
 	<!-- 얼럿 -->
 	<c:if test="${not empty alertMsg}">
@@ -185,8 +164,12 @@
 			<c:remove var="alertMsg" scope="session"/>	
 	</c:if>
 	
+	
+
 	<!-- 부트스트랩 5.1.3 스크립트 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
 </body>
+
 </html>
