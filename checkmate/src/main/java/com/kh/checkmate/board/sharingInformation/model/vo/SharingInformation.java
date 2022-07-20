@@ -12,15 +12,13 @@ public class SharingInformation {
 	private Date informationDate;	//	INFORMATION_DATE	DATE
 	private int informationView;	//	INFORMATION_VIEW	NUMBER
 	private String informationStatus;	//	INFORMATION_STATUS	VARCHAR2(1 BYTE)
-	private String informationOriginName;
-	private String informationChangeName;
 	public SharingInformation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public SharingInformation(int informationNo, int userNo, String userId, String informationCategory,
 			String informationTitle, String informationContent, Date informationDate, int informationView,
-			String informationStatus, String informationOriginName, String informationChangeName) {
+			String informationStatus) {
 		super();
 		this.informationNo = informationNo;
 		this.userNo = userNo;
@@ -31,8 +29,6 @@ public class SharingInformation {
 		this.informationDate = informationDate;
 		this.informationView = informationView;
 		this.informationStatus = informationStatus;
-		this.informationOriginName = informationOriginName;
-		this.informationChangeName = informationChangeName;
 	}
 	public int getInformationNo() {
 		return informationNo;
@@ -88,27 +84,12 @@ public class SharingInformation {
 	public void setInformationStatus(String informationStatus) {
 		this.informationStatus = informationStatus;
 	}
-	public String getInformationOriginName() {
-		return informationOriginName;
-	}
-	public void setInformationOriginName(String informationOriginName) {
-		this.informationOriginName = informationOriginName;
-	}
-	public String getInformationChangeName() {
-		return informationChangeName;
-	}
-	public void setInformationChangeName(String informationChangeName) {
-		this.informationChangeName = informationChangeName;
-	}
 	@Override
 	public String toString() {
 		return "SharingInformation [informationNo=" + informationNo + ", userNo=" + userNo + ", userId=" + userId
 				+ ", informationCategory=" + informationCategory + ", informationTitle=" + informationTitle
 				+ ", informationContent=" + informationContent + ", informationDate=" + informationDate
-				+ ", informationView=" + informationView + ", informationStatus=" + informationStatus
-				+ ", informationOriginName=" + informationOriginName + ", informationChangeName="
-				+ informationChangeName + "]";
+				+ ", informationView=" + informationView + ", informationStatus=" + informationStatus + "]";
 	}
-	
 	
 }

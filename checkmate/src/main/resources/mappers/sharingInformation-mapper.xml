@@ -36,45 +36,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY INFORMATION_DATE DESC
 	</select>
 	
-	<insert id="insertBoard" parameterType="SharingInformation">
-		INSERT INTO INFORMATION_TB(
-						  INFORMATION_NO
-						 ,INFORMATION_TITLE
-						 ,USER_NO
-						 ,INFORMATION_CONTENT
-						 ,INFORMATION_ORIGIN_NAME
-						 ,INFORMATION_CHANGE_NAME
-						 )
-		VALUES(
-				SEQ_INFORMATION_NO.NEXTVAL
-				,#{informationTitle}
-				,#{userNo}
-				,#{informationContent}
-				,#{informationOriginName}
-				,#{informationChangeName}
-				)
-	</insert>
+<!-- 	<insert id="insertBoard" parameterType="board"> -->
+<!-- 		INSERT INTO BOARD( -->
+<!-- 						  BOARD_NO -->
+<!-- 						 ,BOARD_TITLE -->
+<!-- 						 ,BOARD_WRITER -->
+<!-- 						 ,BOARD_CONTENT -->
+<!-- 						 ,ORIGIN_NAME -->
+<!-- 						 ,CHANGE_NAME -->
+<!-- 						 ) -->
+<!-- 		VALUES( -->
+<!-- 				SEQ_BNO.NEXTVAL -->
+<!-- 				,#{boardTitle} -->
+<!-- 				,#{boardWriter} -->
+<!-- 				,#{boardContent} -->
+<!-- 				,#{originName} -->
+<!-- 				,#{changeName} -->
+<!-- 				) -->
+<!-- 	</insert> -->
 	
 	<update id="increaseCount" parameterType="_int">
-        UPDATE INFORMATION_TB
-		SET INFORMATION_VIEW = INFORMATION_VIEW + 1
-		WHERE INFORMATION_STATUS = 'Y'
-		AND INFORMATION_NO = #{informationNo}
+		UPDATE BOARD
+		SET COUNT = COUNT + 1
+		WHERE STATUS = 'Y'
+		AND BOARD_NO = #{boardNo}
 	</update>
 	
-	<select id="selectBoard" resultMap="siResultSet">
-		SELECT INFORMATION_NO,
-		       USER_NO,
-               USER_ID,
-		       INFORMATION_CATEGORY,
-		       INFORMATION_TITLE,
-		       INFORMATION_CONTENT,
-		       INFORMATION_DATE,
-		       INFORMATION_VIEW
-		FROM INFORMATION_TB
-		JOIN MEMBER M USING(USER_NO)
-		WHERE INFORMATION_NO = #{informationNo}
-	</select>
+<!-- 	<select id="selectBoard" resultMap="boardResultSet"> -->
+<!-- 		SELECT BOARD_NO -->
+<!-- 			  ,BOARD_TITLE -->
+<!-- 			  ,BOARD_WRITER -->
+<!-- 			  ,BOARD_CONTENT -->
+<!-- 			  ,CREATE_DATE -->
+<!-- 			  ,ORIGIN_NAME -->
+<!-- 			  ,CHANGE_NAME -->
+<!-- 		FROM BOARD -->
+<!-- 		WHERE BOARD_NO = #{boardNo} -->
+<!-- 	</select> -->
 	
 <!-- 	<update id="deleteBoard" parameterType="_int"> -->
 <!-- 		UPDATE BOARD -->
@@ -82,14 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 		WHERE BOARD_NO = #{boardNo} -->
 <!-- 	</update> -->
 	
-	<update id="updateBoard" parameterType="SharingInformation">
-		UPDATE INFORMATION_TB
-		SET INFORMATION_TITLE = #{informationTitle}
-			,INFORMATION_CONTENT = #{informationContent}
+<!-- 	<update id="updateBoard" parameterType="board"> -->
+<!-- 		UPDATE BOARD -->
+<!-- 		SET BOARD_TITLE = #{boardTitle} -->
+<!-- 			,BOARD_CONTENT = #{boardContent} -->
 <!-- 			,ORIGIN_NAME = #{originName} -->
 <!-- 			,CHANGE_NAME = #{changeName} -->
-		WHERE INFORMATION_NO = #{informationNo}
-	</update>
+<!-- 		WHERE BOARD_NO = #{boardNo} -->
+<!-- 	</update> -->
 	
 <!-- 	<resultMap type="reply" id="replyResultSet"> -->
 <!-- 		<result column="REPLY_WRITER" property="replyWriter"/> -->

@@ -29,7 +29,6 @@
   <link href="resources/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="resources/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-
   <!-- Template Main CSS File -->
   <link href="resources/css/style.css" rel="stylesheet">
 
@@ -732,10 +731,7 @@
   </main><!-- End #main -->
 
   <jsp:include page="common/footer.jsp"/>
-  
-  	
-    
-    
+
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -752,7 +748,5 @@
   <script src="resources/js/main.js"></script>
 
 </body>
-
-
 
 </html>
