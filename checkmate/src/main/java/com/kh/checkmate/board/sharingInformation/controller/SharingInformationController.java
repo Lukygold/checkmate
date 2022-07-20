@@ -38,7 +38,7 @@ public class SharingInformationController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
 		ArrayList<SharingInformation> list = sharingInformationService.selectList(pi);
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 
