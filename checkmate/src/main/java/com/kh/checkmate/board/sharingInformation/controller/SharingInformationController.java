@@ -29,7 +29,6 @@ public class SharingInformationController {
 
 	@RequestMapping("list.si")
 	public String selectList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
-
 		int listCount = sharingInformationService.selectListCount();
 
 		int pageLimit = 10;
@@ -154,7 +153,6 @@ public class SharingInformationController {
 	}
 	
 	public String saveFile(MultipartFile upfile,HttpSession session) {
-		
 		String originName = upfile.getOriginalFilename();
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		

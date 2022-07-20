@@ -37,7 +37,6 @@
 </head>
 <body style="padding-top: 7rem;">
 	<jsp:include page="../../common/header.jsp" />
-	업데이트
 	<main role="main" class="container back-image">
 		<!-- 		<form name="form" method="POST" action="/bulletin_wr01"> -->
 		<form name="form" method="POST" action="update.si"

@@ -80,7 +80,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link text-dark"
-								href="list.si?information=${pi.currentPage-1 }"
+								href="list.si?cpage=${pi.currentPage-1 }"
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						</c:otherwise>
 					</c:choose>
@@ -89,7 +89,7 @@
 
 					<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 						<li class="page-item"><a class="page-link text-dark"
-							href="list.si?informationNo=${p }">${p }</a></li>
+							href="list.si?cpage=${p }">${p }</a></li>
 					</c:forEach>
 
 					<c:choose>
@@ -100,7 +100,7 @@
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link text-dark"
-								href="list.si?information=${pi.currentPage+1 }"
+								href="list.si?cpage=${pi.currentPage+1 }"
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 
