@@ -39,8 +39,8 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		}else {
-			mv.addObject("errorMsg","로그인 실패");
-			mv.setViewName("common/errorPage");
+			session.setAttribute("alertMsg", "아이디와 비밀번호를 확인해주세요.");
+			mv.setViewName("member/memberLoginForm");
 			
 		}
 		
@@ -93,8 +93,7 @@ public class MemberController {
 			int result = memberService.insertMember2(m);		
 			
 			if(result>0) {
-				
-				session.setAttribute("alertMsg", "회원가입 성공");
+
 				return "redirect:/";
 			}else {
 				
@@ -132,6 +131,39 @@ public class MemberController {
 	public String memberLoginForm() {
 		return "member/memberLoginForm";
 	}
+	
+	@RequestMapping("findId.me")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping("findPwd.me")
+	public String findPwd() {
+		return "member/findPwd";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="findIdForm.me",produces = "text/html; charset=UTF-8")
+	public String findIdForm(String userPhone) {
+		System.out.println(userPhone);
+		String userId = memberService.findId(userPhone);
+		
+		return userId;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="changePwd.me",produces = "text/html; charset=UTF-8")
+	public String changePwd(Member m) {
+		System.out.println(m.getUserPw());
+		System.out.println(m.getUserId());
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPw());		
+		m.setUserPw(encPwd);				
+		int result = memberService.changePwd(m);
+		System.out.println(result);
+		String a = String.valueOf(result);
+		return a;
+	}
+	
 	
 	public String saveFile(MultipartFile upfile,HttpSession session) {
 		String originName = upfile.getOriginalFilename(); 

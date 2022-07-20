@@ -29,6 +29,14 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.nickCheck",userNick);
 	}
 
+	public String findId(SqlSessionTemplate sqlSession, String userPhone) {
+		return sqlSession.selectOne("memberMapper.findId",userPhone);
+	}
+
+	public int changePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.changePwd",m);
+	}
+
 	
 
 }

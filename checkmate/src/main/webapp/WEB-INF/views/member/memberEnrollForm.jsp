@@ -188,7 +188,7 @@
         <input type="hidden" name="userAddress" id="userAddress"/>
         
                 
-         <div class="input-box">
+        <div class="input-box">
             <input id="userPhone" type="text" name="userPhone" placeholder="전화번호(숫자만 입력)">
             <label for="userPhone">전화번호(숫자만 입력)</label>
             <button type='button' id="phoneBtn" class="checkBtn" onclick="userPhoneCheck();">인증번호 보내기</button>

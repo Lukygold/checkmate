@@ -94,7 +94,7 @@
           	<label for="password">비밀번호</label>	
                           
 	    <div id="forgot">
-	      	<a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
+	      	<a href="findId.me" style="color: black">아이디</a>/<a href="findPwd.me" style="color: black">비밀번호 찾기</a>
 	    </div>
         <button type="submit" id="loginBtn">로그인</button>
         <br><br>

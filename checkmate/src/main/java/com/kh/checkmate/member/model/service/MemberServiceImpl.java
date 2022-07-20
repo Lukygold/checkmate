@@ -74,6 +74,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.nickCheck(sqlSession,userNick);
 	}
 
+	@Override
+	public String findId(String userPhone) {
+		return memberDao.findId(sqlSession,userPhone);
+	}
+
+	@Override
+	public int changePwd(Member m) {
+		int result = memberDao.changePwd(sqlSession,m);
+		System.out.println(result);
+		
+		return memberDao.changePwd(sqlSession,m);
+	}
+
 	
 
 

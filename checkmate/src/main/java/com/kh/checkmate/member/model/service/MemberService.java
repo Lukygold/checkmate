@@ -15,5 +15,9 @@ public interface MemberService {
 	int nickCheck(String userNick);
 
 	int insertMember2(Member m);
+
+	String findId(String userPhone);
+
+	int changePwd(Member m);
 	
 }
