@@ -10,23 +10,23 @@ public class MemberDao {
 
 	public Member loginMember(SqlSessionTemplate sqlSession, Member m) {
 		
-		return sqlSession.selectOne("mamberMapper.loginMember",m);
+		return sqlSession.selectOne("memberMapper.loginMember",m);
 	}
 
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.insert("mamberMapper.insertMember",m);
+		return sqlSession.insert("memberMapper.insertMember",m);
 	}
 	
 	public int insertMember2(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.insert("mamberMapper.insertMember2",m);
+		return sqlSession.insert("memberMapper.insertMember2",m);
 	}
 
 	public int idCheck(SqlSessionTemplate sqlSession, String userId) {
-		return sqlSession.selectOne("mamberMapper.idCheck",userId);
+		return sqlSession.selectOne("memberMapper.idCheck",userId);
 	}
 
 	public int nickCheck(SqlSessionTemplate sqlSession, String userNick) {
-		return sqlSession.selectOne("mamberMapper.nickCheck",userNick);
+		return sqlSession.selectOne("memberMapper.nickCheck",userNick);
 	}
 
 	

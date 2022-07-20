@@ -3,17 +3,22 @@
            display:flex;
            justify-content: center;
        }
-       form{
+	   form{
+       	   width:500px
            padding:10px;
+           margin-left:34%;
        }
        .input-box{
            position:relative;
            margin:10px 0;
+           width:50%;
+           
        }
        .input-box > input{
            background:transparent;
            border:none;
            border-bottom: solid 1px #ccc;
+           align: center;
            padding:20px 0px 5px 0px;
            font-size:14pt;
            width:100%;
