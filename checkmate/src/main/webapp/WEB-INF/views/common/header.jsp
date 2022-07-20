@@ -38,9 +38,31 @@
 	rel="stylesheet">
 <link href="${path}/resources/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
+	
+	
+<!-- 부트스트랩 5.1.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
 
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
+
+<!-- 카카오 로그인 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<!-- 얼럿 CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/845fa7ca1e.js" crossorigin="anonymous"></script>
+
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <!-- =======================================================
   * Template Name: Hidayah - v4.7.0
@@ -50,12 +72,13 @@
   ======================================================== -->
 </head>
 <body>
+
 	<header id="header" class="fixed-top header-inner-pages" >
 		<div
 			class="container d-flex align-items-center justify-content-between">
 
 			<h1 class="logo">
-				<a href="index.html">CHECKMATE</a>
+				<a href="./">CHECKMATE</a>
 			</h1>
 
 			<nav id="navbar" class="navbar">
@@ -67,7 +90,7 @@
 							<li class="dropdown"><a href="#"><span>Deep Drop
 										Down</span> <i class="bi bi-chevron-right"></i></a>
 								<ul>
-									<li><a href="calender.ca">달력</a></li>
+									<li><a href="#">Deep Drop Down 1</a></li>
 									<li><a href="#">Deep Drop Down 2</a></li>
 									<li><a href="#">Deep Drop Down 3</a></li>
 									<li><a href="#">Deep Drop Down 4</a></li>
@@ -112,12 +135,41 @@
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
-					<li><a class="nav-link scrollto" href="#">Login</a></li>
-					<li><a class="nav-link scrollto" href="#">Join</a></li>
+
+
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
+							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
+							<li><a class="nav-link scrollto" href="#">마이페이지</a></li>
+							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
 		</div>
 	</header>
+	
+    
+	
+	<!-- 얼럿 -->
+	<c:if test="${not empty alertMsg}">
+			<script>
+				alertify.alert("서비스 요청 성공 ","${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>	
+	</c:if>
+	
+	
+
+	<!-- 부트스트랩 5.1.3 스크립트 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
 </body>
+
 </html>

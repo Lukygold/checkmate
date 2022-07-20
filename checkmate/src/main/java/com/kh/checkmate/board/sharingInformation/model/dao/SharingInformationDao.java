@@ -26,7 +26,20 @@ public class SharingInformationDao {
  		return (ArrayList)sqlSession.selectList("sharingInformationMapper.selectList",null,rowBounds);
 	}
 
-	public int increaseCount(SqlSessionTemplate sqlSession, int sino) {
-		return sqlSession.update("sharingInformationMapper.increaseCount",sino);
+	public int increaseCount(SqlSessionTemplate sqlSession, int informationNo) {
+		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
+//		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
+	}
+
+	public SharingInformation selectBoard(SqlSessionTemplate sqlSession, int informationNo) {
+		return sqlSession.selectOne("sharingInformationMapper.selectBoard",informationNo);
+	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
+		return sqlSession.update("sharingInformationMapper.updateBoard",b);
+	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
+		return sqlSession.insert("sharingInformationMapper.insertBoard",b);
 	}
 }

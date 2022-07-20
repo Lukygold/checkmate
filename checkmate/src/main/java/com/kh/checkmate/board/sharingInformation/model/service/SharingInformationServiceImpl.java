@@ -37,20 +37,17 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 	@Override
 	public int insertBoard(SharingInformation b) {
 		
-//		return sid.insertBoard(sqlSession,b);
-		return 0;
+		return sid.insertBoard(sqlSession,b);
 	}
 
 	@Override
-	public int increaseCount(int sino) {
-		return sid.increaseCount(sqlSession,sino);
+	public int increaseCount(int informationNo) {
+		return sid.increaseCount(sqlSession,informationNo);
 	}
 
 	@Override
-	public SharingInformation selectBoard(int boardNo) {
-		SharingInformation SharingInformation = new SharingInformation();
-//		return sid.selectBoard(sqlSession,boardNo);
-		return SharingInformation;
+	public SharingInformation selectBoard(int informationNo) {
+		return sid.selectBoard(sqlSession,informationNo);
 	}
 
 	@Override
@@ -61,8 +58,7 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 
 	@Override
 	public int updateBoard(SharingInformation b) {
-//		return sid.updateBoard(sqlSession,b);
-		return 0;
+		return sid.updateBoard(sqlSession,b);
 	}
 
 //	@Override

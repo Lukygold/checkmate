@@ -30,6 +30,13 @@
 	crossorigin="anonymous"></script>
 <link href="resources/css/sharingInformation.css" rel="stylesheet"
 	type="text/css" />
+	
+	    <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	    <!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp" />
@@ -44,7 +51,7 @@
 						<li class="nav-item"><a class="nav-link" href="#"
 							style="color: aliceblue;">취업정보공유</a></li>
 					</ul>
-					<table class="table table-light table-hover table-responsive">
+					<table class="table table-light table-hover table-responsive" id="siList">
 						<thead class="thead-light">
 							<tr>
 								<th>글번호</th>
@@ -57,7 +64,7 @@
 						<tbody class="text-dark">
 							<c:forEach var="b" items="${list}">
 								<tr>
-									<td>${b.informationNo}</td>
+									<td id="informationNo">${b.informationNo}</td>
 									<td>${b.informationTitle}</td>
 									<td>${b.userId}</td>
 									<td>${b.informationView}</td>
@@ -68,10 +75,10 @@
 					</table>
 					<script>
 						$(function() {
-							$("#boardList>tbody>tr").click(
+							$("#siList>tbody>tr").click(
 									function() {
-										location.href = 'detail.si?sino='
-												+ $(this).children("#sino")
+										location.href = 'detail.si?informationNo='
+												+ $(this).children("#informationNo")
 														.text();
 									})
 
@@ -105,9 +112,7 @@
 			</nav>
 
 			<div class="btn-group">
-				<a href="enrollForm.si" class="btn btn-secondary">글쓰기</a> <a
-					href="#" class="btn btn-secondary">글수정</a> <a href="#"
-					class="btn btn-secondary">글삭제</a>
+				<a href="enrollForm.si" class="btn btn-secondary">글쓰기</a>
 			</div>
 		</div>
 	</div>
