@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> branch 'kwanghyun' of https://github.com/Dawn0820/checkmate.git
 <mapper namespace="memberMapper">
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'kwanghyun' of https://github.com/Dawn0820/checkmate.git
 	
 	<resultMap type="member" id="memberResultSet">
 		<result column="USER_NO" property="userNo"/>
