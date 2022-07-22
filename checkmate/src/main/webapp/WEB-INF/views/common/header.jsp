@@ -96,7 +96,7 @@
 									<li><a href="#">Deep Drop Down 4</a></li>
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
-							<li><a href="#">Drop Down 2</a></li>
+							<li><a href="reservation.ro">예약</a></li>
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
@@ -144,7 +144,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
-							<li><a class="nav-link scrollto" href="#">마이페이지</a></li>
+							<li><a class="nav-link scrollto" href="myPage.me">마이페이지</a></li>
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
 						</c:otherwise>
 					</c:choose>

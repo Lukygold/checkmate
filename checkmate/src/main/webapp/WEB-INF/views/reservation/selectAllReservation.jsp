@@ -4,6 +4,10 @@
 <html lang="en-US" dir="ltr">
 
   <head>
+  <title>스터디 예약센터</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+	<jsp:include page="../common/header.jsp"/>
   <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
@@ -15,7 +19,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>스터디센터 예약</title>
+    
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
@@ -44,7 +48,7 @@
 
 
   <body>
-
+	<br><br><br><br>
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
@@ -60,12 +64,17 @@
             <div class="col-12 py-8 text-white">
               <div class="d-flex flex-column flex-center">
                 <h2 class="text-white fs-2 fs-md-3">체크메이트</h2>
+                <br><br><br><br>
                 <h1 class="text-white fs-2 fs-sm-4 fs-lg-7 fw-bold">스터디센터 예약</h1>
+                <h2 class="text-white fs-2 fs-md-3">아침 9시부터 저녁 9시까지 운영/여러번 예약 가능/중복 예약 안됨</h2>
               </div>
-              <form class="row gy-2 gx-md-2 gx-lg-4 flex-center my-6" action="centerList.ro" method="post" >
+              <form class="row gy-2 gx-md-2 gx-lg-4 flex-center my-6" action="insertReservation.ro" method="post" id="hidden">
+              <div>
+              
+              </div>
                 <div class="col-6 col-md-3">
                   <label class="visually-hidden" for="inlineFormSelectPref">스터디센터</label>
-                  <select class="form-select" id="inlineFormSelectPref">
+                  <select class="form-select" id="inlineFormSelectPref" name="roomCenterName">
                     <option selected="" >스터디센터</option>
                   <c:forEach var="r" items="${list}"> 
                     <option value="${r.roomCenterName}">${r.roomCenterName}</option>
@@ -74,36 +83,36 @@
                 </div>
                <div class="col-6 col-md-3" id="roomSize">
                   <label class="visually-hidden" for="autoSizingSelect">방크기(인원 수)</label>
-                  <select class="form-select" id="autoSizingSelect">
+                  <select class="form-select" id="autoSizingSelect" name="roomSize">
                     <option selected="">방크기(인원 수)</option>
                      
                   </select>
                 </div> 
                 <div class="col-6 col-md-3" id="roomName">
                   <label class="visually-hidden" for="inlineFormSelectPref2">방이름</label>
-                  <select class="form-select" id="inlineFormSelectPref2">
+                  <select class="form-select" id="inlineFormSelectPref2" name="roomName">
                     <option selected="" >방이름</option>
 
                   </select>
                 </div>
                 <div class="col-6 col-md-3">
-                  <label class="visually-hidden" for="date" placeholder="시작시간">시작시간</label>
-                  <div class="input-group"  placeholder="시작시간">
-                    <input type="text" class="form-control" id="date1" placeholder="시작시간"/>
+                  <label class="visually-hidden" for="date" placeholder="시작시간">날짜</label>
+                  <div class="input-group"  placeholder="날짜">
+                    <input type="text" class="form-control" id="date1" placeholder="날짜" name="reservationDate"/>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
-                <lab9ioel class="visually-hidden" for="autoSizingSelect2">시작시간</label>
-                <select class="form-select" id="autoSizingSelect2">
+                <label class="visually-hidden" for="autoSizingSelect2">시작시간</label>
+                <select class="form-select" id="autoSizingSelect2" name="reservationStartTime">
                   <option selected="">시작시간</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
+                  <c:forEach var="i" begin="9" end="20">
+                  <option value="${i}">${i}</option>
+                  </c:forEach>
                 </select>
                 </div>
                 <div class="col-6 col-md-3">
                   <label class="visually-hidden" for="autoSizingSelect3">사용시간</label>
-                  <select class="form-select" id="autoSizingSelect3">
+                  <select class="form-select" id="autoSizingSelect3" name="reservationUsedTime">
                     <option selected="">사용시간</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -118,80 +127,6 @@
           </div>
         </div>
       </section>
-      <div class="content">
-        <br><br>
-        <div class="innerOuter" style="padding:5% 10%;">
-            <h2 align="center">예약조회</h2>
-            <br>
-            <!-- 로그인 후 상태일 경우만 보여지는 글쓰기 버튼 -->
-            <c:if test="${not empty loginUser}">
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.bo">예약</a>
-            </c:if>
-            <p align="center">단, 예약시간은 시간 단위이며 9시 10시 11시...처럼 정시간에 시작시간과 끝나는 시간을 설정해야합니다.</p>
-            <br>
-            <br>
-            <table id="boardList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>
-                        </th>
-                        <th>스터디센터</th>
-                        <th>예약일</th>
-                        <th>시작시간</th>
-                        <th>마치는시간</th>
-                        <th>방번호</th>
-                        <th>방크기(인원가능)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                          <input type="checkbox">
-                        </td>
-                        <td>강남a센터</td>
-                        <td>2022-07-31</td>
-                        <td>오전9시</td>
-                        <td>오전10시</td>
-                        <td>10a</td>
-                        <td>2명</td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-            <br>
-            <div id="pagingArea">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${pi.currentPage eq 1}">
-                   		 <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    	 <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage-1}">Previous</a></li>		
-                    	</c:otherwise>
-                    </c:choose>
-                    
-                    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}" step="1">
-                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${p}">${p}</a></li>
-                    </c:forEach>
-                    <c:choose>
-                    	<c:when test="${pi.currentPage eq pi.maxPage}">
-                   			 <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    		 <li class="page-item"><a class="page-link" href="list.bo?cpage=${pi.currentPage+1}">Next</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
-
-            <br clear="both"><br>
-
-            <br><br>
-        </div>
-        <br><br>
-
-    </div>
-
 
     </main>
 
@@ -237,8 +172,6 @@
   		$("#autoSizingSelect").change(function(){
   			var temp = $("#inlineFormSelectPref").val();
   			var temp1 = $("#autoSizingSelect").val();
-  			alert(temp);
-  			alert(temp1);
   			
   			$.ajax({
   				url : "reserveRoomName.ro",
@@ -250,10 +183,11 @@
   					var roomNameList ="";
   					console.log(list);
   					for( var i in list){
-  						roomNameList +="<option value='list[i].roomName'>"+ list[i].roomName +"</option>";
+  						roomNameList +="<option value='"+list[i].roomName+"'>"+ list[i].roomName +"</option>";
+  						console.log(list[i].roonNo);
   					}
   					
-  					$("#roomName>select").html(roomNameList);	
+  					$("#roomName>select").html(roomNameList);
   					
   				},
   				error : function(){

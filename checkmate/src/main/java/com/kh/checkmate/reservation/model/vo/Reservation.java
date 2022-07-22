@@ -13,5 +13,8 @@ public class Reservation {
 	private int reservationStartTime;
 	private int reservationUsedTime;
 	private int roomNo;
+	private String roomCenterName;
+	private String roomName;
+	private int roomSize;
 		
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.kh.checkmate.reservation.model.dao.ReservationDao;
 import com.kh.checkmate.reservation.model.vo.Reservation;
-import com.kh.checkmate.reservation.model.vo.Room;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
@@ -18,12 +17,6 @@ public class ReservationServiceImpl implements ReservationService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Reservation> selectAllReservation(Reservation r) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Reservation selectUserReservation(String reservationUser) {
 		// TODO Auto-generated method stub
 		return null;
@@ -31,8 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public int insertReservation(Reservation r) {
-		// TODO Auto-generated method stub
-		return 0;
+		return reservationDao.insertReservation(sqlSession,r);
 	}
 
 	@Override
@@ -42,18 +34,28 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ArrayList<Room> home() {
+	public ArrayList<Reservation> home() {
 		return reservationDao.home(sqlSession);
 	}
 
 	@Override
-	public ArrayList<Room> selectRoomSize(String roomCenterName) {
+	public ArrayList<Reservation> selectRoomSize(String roomCenterName) {
 		return reservationDao.selectRoomSize(sqlSession,roomCenterName) ;
 	}
 
 	@Override
-	public ArrayList<Room> selectRoomName(Room r) {
+	public ArrayList<Reservation> selectRoomName(Reservation r) {
 		return reservationDao.selectRoomName(sqlSession,r);
+	}
+
+	@Override
+	public int selectRoomNo(Reservation r) {
+		return reservationDao.selectRoomNo(sqlSession,r);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectReservationList(Reservation r) {
+		return reservationDao.selectReservationList(sqlSession,r);
 	}
 
 }

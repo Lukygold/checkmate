@@ -73,6 +73,25 @@ public class MemberServiceImpl implements MemberService {
 	public int nickCheck(String userNick) {
 		return memberDao.nickCheck(sqlSession,userNick);
 	}
+	@Override
+	public int updateMember(Member m) {
+		return  memberDao.updateMember(sqlSession,m);
+	}
+
+	@Override
+	public int deleteMember(String userId) {
+		return memberDao.deleteMember(sqlSession,userId);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return  memberDao.updatePwd(sqlSession,m);	
+	}
+
+	@Override
+	public int updateMember2(Member m) {
+		return memberDao.updateMember2(sqlSession, m);
+	}
 
 	
 

@@ -9,7 +9,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.checkmate.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation" alias="SharingInformation"/>
-		<typeAlias type="com.kh.checkmate.reservation.model.vo.Room" alias="room"/>
+		<typeAlias type="com.kh.checkmate.reservation.model.vo.Reservation" alias="reservation"/>
 	</typeAliases>
 				
 	<mappers>

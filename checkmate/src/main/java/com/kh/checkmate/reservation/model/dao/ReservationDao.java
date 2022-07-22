@@ -2,26 +2,39 @@ package com.kh.checkmate.reservation.model.dao;
 
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.checkmate.reservation.model.vo.Room;
+import com.kh.checkmate.reservation.model.vo.Reservation;
 
 @Repository
 public class ReservationDao {
 
-	public ArrayList<Room> home(SqlSessionTemplate sqlSession) {
+	public ArrayList<Reservation> home(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("reservationMapper.home");
 	}
 
-	public ArrayList<Room> selectRoomSize(SqlSessionTemplate sqlSession, String roomCenterName) {
+	public ArrayList<Reservation> selectRoomSize(SqlSessionTemplate sqlSession, String roomCenterName) {
 		return (ArrayList)sqlSession.selectList("reservationMapper.selectRoomSize",roomCenterName);
 	}
 
-	public ArrayList<Room> selectRoomName(SqlSessionTemplate sqlSession,Room r) {
+	public ArrayList<Reservation> selectRoomName(SqlSessionTemplate sqlSession,Reservation r) {
 		return (ArrayList)sqlSession.selectList("reservationMapper.selectRoomName",r);
+	}
+
+	public int insertReservation(SqlSessionTemplate sqlSession,Reservation r) {
+		return sqlSession.insert("reservationMapper.insertReservation",r);
+	}
+
+	public int selectRoomNo(SqlSessionTemplate sqlSession, Reservation r) {
+		return sqlSession.selectOne("reservationMapper.selectRoomNo",r);
+	}
+
+	public ArrayList<Reservation> selectReservationList(SqlSessionTemplate sqlSession, Reservation r) {
+		return (ArrayList)sqlSession.selectList("reservationMapper.selectReservationList",r);
 	}
 
 
