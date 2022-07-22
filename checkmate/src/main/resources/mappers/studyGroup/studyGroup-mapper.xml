@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="studyGroupMapper">
+	
+	<select id="nameCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM STUDYGROUP
+		WHERE SG_NAME = #{sgName}
+	</select>
+	
+	<insert id="insertStudyGroup" parameterType="studyGroup">
+		INSERT INTO STUDYGROUP
+						(
+						SG_NO,
+						SG_NAME,
+						SG_GOAL,
+						SG_CONTENT,
+						SG_OWNER_NICK,
+						SG_MEMBER_NICK,
+						SG_MAX,
+						SG_CATEGORY,
+						SG_LOCATION
+						)
+					VALUES
+						(
+						SEQ_SG_NO.NEXTVAL,
+						#{sgName},
+						#{sgGoal},
+						#{sgContent},
+						#{sgOwnerNick},
+						#{sgOwnerNick},
+						#{sgMax},
+						#{sgCategory},
+						#{sgLocation}
+						)
+	</insert>
+	
+	
+</mapper>
