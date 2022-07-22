@@ -9,6 +9,6 @@ public class userTrackerController {
 	@RequestMapping("api.si")
 	public String selectList() {
 
-		return "board/sharingInformation/test";
+		return "board/sharingInformation/test2";
 	}
 }

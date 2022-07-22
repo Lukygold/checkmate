@@ -20,7 +20,8 @@ public class SharingInformationDao {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
-		
+		System.out.println("offset : " + offset);
+		System.out.println("limit : " + limit);
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
  		return (ArrayList)sqlSession.selectList("sharingInformationMapper.selectList",null,rowBounds);
