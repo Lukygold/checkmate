@@ -117,6 +117,8 @@
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
+						
+					<!-- 로그인 처리 해줘야함 -->
 					<li class="dropdown"><a href="#"><span>스터디그룹</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
