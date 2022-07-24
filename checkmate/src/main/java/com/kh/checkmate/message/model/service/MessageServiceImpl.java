@@ -66,4 +66,9 @@ public class MessageServiceImpl implements MessageService {
 		return messageDao.messageSendList(map, pi);
 	}
 
+	@Override
+	public int selectSendListCount(Map<String, Object> map) {
+		return messageDao.selectSendListCount(map, sqlSession);
+	}
+
 }
