@@ -80,6 +80,11 @@
 				</tbody>
 			</table>
 			<br>
+
+			<form id="postForm" action="" method="post">
+				<input type="hidden" id="reply" name="reply" value="${message.msgSend}">
+			</form>
+
 			<div class="">
 				<button type="button" class="btn btn-secondary" onclick="reply();">답장</button>
 				<button type="button" class="btn btn-secondary"
@@ -92,6 +97,10 @@
 	</div>
 
 	<script>
+		function reply(){
+			$("#postForm").attr("action","messageReply.msg").submit();
+		}
+	
 		function messageList() {
 			location.href = "messageList.msg";
 		}
