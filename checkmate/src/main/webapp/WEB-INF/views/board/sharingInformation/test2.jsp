@@ -19,6 +19,8 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3f45fd6556e4b0a7225188bb3e36ea29&libraries=clusterer"></script>
 <script>
+
+
     var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
         center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
         level : 14 // 지도의 확대 레벨 
@@ -41,7 +43,6 @@
                 position : new kakao.maps.LatLng(position.lat, position.lng)
             });
         });
-
         // 클러스터러에 마커들을 추가합니다
         clusterer.addMarkers(markers);
     });
@@ -51,7 +52,7 @@
     	function(position) {
     		var positionLat = position.coords.latitude;
     		var positionLon = position.coords.longitude;
-    	}, 
+    	},
     	);
     })();
 </script>

@@ -38,16 +38,13 @@
 	rel="stylesheet">
 <link href="${path}/resources/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
-
-<!-- 부트스트랩 5.2.0 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-<!-- 부트스트랩 5.2.0 스크립트 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>  	
+	
+<!-- 부트스트랩 5.1.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
 
 <!-- Template Main CSS File -->
 <link href="${path}/resources/css/style.css" rel="stylesheet">
-<!-- 로그인 폼 css -->
-<link href="${path}/resources/css/loginForm.css" rel="stylesheet">
+
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 얼럿 CSS -->
@@ -74,6 +71,7 @@
   ======================================================== -->
 </head>
 <body>
+
 	<header id="header" class="fixed-top header-inner-pages" >
 		<div
 			class="container d-flex align-items-center justify-content-between">
@@ -97,7 +95,7 @@
 									<li><a href="#">Deep Drop Down 4</a></li>
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
-							<li><a href="api.si">지도 테스트</a></li>
+							<li><a href="locationMap.lo">지도 테스트</a></li>
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
@@ -118,32 +116,33 @@
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
+						
+					<!-- 로그인 처리 해줘야함 -->
+					<li class="dropdown"><a href="#"><span>스터디그룹</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="#">Drop Down 1</a></li>
-							<li class="dropdown"><a href="#"><span>Deep Drop
-										Down</span> <i class="bi bi-chevron-right"></i></a>
+							<li><a href="studyGroupExploration.sg">둘러보기</a></li>
+							<li class="dropdown"><a href="studyGroupList.sg"><span>나의 스터디</span> <i class="bi bi-chevron-right"></i></a>
 								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
+									<li><a href="#">나의스터디1</a></li>
+									<li><a href="#">나의스터디2</a></li>
+									<li><a href="#">나의스터디3</a></li>
+									<li><a href="#">나의스터디4</a></li>
+									<li><a href="#">나의스터디5</a></li>
 								</ul></li>
-							<li><a href="#">Drop Down 2</a></li>
-							<li><a href="#">Drop Down 3</a></li>
-							<li><a href="#">Drop Down 4</a></li>
+							<li><a href="studyGroupEnrollForm.sg">스터디 생성</a></li>
 						</ul></li>
 					<li><div style="padding: 0 70px;"></div></li>
 
 
 					<c:choose>
 						<c:when test="${ empty loginUser }">
-							<li><a class="nav-link scrollto" data-toggle="modal" data-target="#loginModal">Login</a></li>
+							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
+							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
 							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
 						</c:when>
 						<c:otherwise>
+							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
 							<li><a class="nav-link scrollto" href="#">마이페이지</a></li>
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
@@ -155,28 +154,7 @@
 		</div>
 	</header>
 	
-	<script>
-    	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
-    	
-    	function kakaoLogin(){
-        	window.Kakao.Auth.login({
-        		scope:'profile_nickname,profile_image,account_email',
-        		success: function(authObj){
-        			console.log(authObj);
-        			window.Kakao.API.request({
-        				url:'/v2/user/me',
-        				success: res => {
-        					const kakao_account = res.kakao_account;
-        					console.log(kakao_account);
-        				}
-        			});
-        		}
-        	});
-        	
-    	};
-    	
     
-    </script>
 	
 	<!-- 얼럿 -->
 	<c:if test="${not empty alertMsg}">
@@ -185,6 +163,13 @@
 			</script>
 			<c:remove var="alertMsg" scope="session"/>	
 	</c:if>
+	
+	
+
+	<!-- 부트스트랩 5.1.3 스크립트 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 
 </body>
+
 </html>

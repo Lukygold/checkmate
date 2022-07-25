@@ -733,34 +733,9 @@
 
   <jsp:include page="common/footer.jsp"/>
   
-  	<!-- 로그인 모달 -->
-	<div class="modal fade" id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="login.me" method="post">
-                    <!-- Modal body -->
-                    
-	                <div class="login-header">
-	                    <h2>Login</h2>
-	                </div>
-                    <div class="input-box">
-		                <input id="username" type="text" name="userId" placeholder="아이디">
-		                <label for="username">아이디</label>
-		            </div>
-                    <div class="input-box">
-		                <input id="password" type="password" name="userPw" placeholder="비밀번호">
-		                <label for="password">비밀번호</label>	                
-		            <div id="forgot">
-		            <a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
-		            </div>
-                    <button type="submit" id="loginBtn">로그인</button>
-                    <br><br>
-		            <a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
-                </form>
-            </div>
-        </div>
-    </div>
-
+  	
+    
+    
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -775,7 +750,36 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+  
+  <c:choose>
+	  <c:when test="${not empty loginUser }">
+		  <script>
+		  (function location(){
+		  	navigator.geolocation.getCurrentPosition(
+		  	function(position) {
+		  		var positionLat = position.coords.latitude;
+		  		var positionLon = position.coords.longitude;
+				    
+		  		$.ajax({
+		  			url : "location.lo",
+		  			data : {
+		  				locationLatitude : positionLat,
+		  				locationLongitude : positionLon,
+		  				userNo : ${loginUser.userNo}
+		  			},
+		  			success : function(result){
+						
+		  			},
+		  			error : function(){
+		  				console.log("통신실패");
+		  			}
+		  		})
+		  	},
+		  	);
+		  })();
+		  </script>
+	  </c:when>
+  </c:choose>
 </body>
 
 
