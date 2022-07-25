@@ -153,7 +153,7 @@ public class MessageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userNick", member.getUserNick());
 
-		int listCount = messageService.selectListCount(map);
+		int listCount = messageService.selectSendListCount(map);
 		int pageLimit = 10;
 		int boardLimit = 10;
 
@@ -167,6 +167,16 @@ public class MessageController {
 		System.out.println();
 
 		return "message/messageSendList";
+	}
+
+	@RequestMapping("messageReply.msg")
+	public String replyMessage(@RequestParam(value = "reply") String reply, Message message, MultipartFile upfile, HttpSession session, Model model) {
+		Member member = (Member) session.getAttribute("loginUser");
+		Map<String, Object> map = new HashMap<>();
+		map.put("userNick", member.getUserNick());
+		model.addAttribute("reply", reply);
+		
+		return "message/messageReplyEnroll";
 	}
 
 	@RequestMapping("messageSendDetail.msg")

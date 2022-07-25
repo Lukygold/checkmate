@@ -10,6 +10,13 @@
 		MESSAGE
 		WHERE MSG_RECV = #{userNick} AND MSG_STATUS = 'Y'
 	</select>
+	
+		<select id="selectSendListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		MESSAGE
+		WHERE MSG_SEND = #{userNick} AND MSG_STATUS = 'Y'
+	</select>
 
 	<select id="messageList" resultType="message">
 		SELECT MSG_NO, MSG_SEND, MSG_RECV, TO_CHAR(MSG_SENDTIME, 'YY/MM/DD HH24:MI:SS') AS MSG_SENDTIME, MSG_CONTENT, MSG_ORIGIN_NAME, MSG_CHANGE_NAME, MSG_STATUS

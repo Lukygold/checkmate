@@ -29,6 +29,8 @@ public interface MessageDao {
 
 	List<Message> messageSendList(Map<String, Object> map, PageInfo pi);
 
+	int selectSendListCount(Map<String, Object> map, SqlSessionTemplate sqlSession);
+
 	
 
 }
