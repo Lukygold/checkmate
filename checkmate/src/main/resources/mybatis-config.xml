@@ -14,7 +14,7 @@
 	</typeAliases>
 		
 	<mappers>
-		<mapper resource="/mappers/member/member-mapper.xml"/>
+		<mapper resource="/mappers/member/member-mapper.xml"/> 
 		<mapper resource="/mappers/sharingInformation-mapper.xml"/>
 		<mapper resource="/mappers/studyGroup/studyGroup-mapper.xml"/>
 		<mapper resource="/mappers/chat/chat-mapper.xml"/>
