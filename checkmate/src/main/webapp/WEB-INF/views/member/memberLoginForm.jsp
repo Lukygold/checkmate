@@ -13,7 +13,7 @@
 	   form{
        	   width:500px
            padding:10px;
-           margin-left:34%;
+           margin-left: 34%;
        }
        .input-box{
            position:relative;
@@ -163,9 +163,10 @@
         			});
         		}
         	});
-        	
     	};
+    	
     </script>
     
 </body>
+<jsp:include page="../common/footer.jsp" />
 </html>
