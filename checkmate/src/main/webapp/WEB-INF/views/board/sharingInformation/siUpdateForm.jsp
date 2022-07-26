@@ -76,7 +76,7 @@
 
 
 			<div class="mb-3">
-				<input class="form-control" type="file" id="formFileMultiple"
+				<input class="form-control" type="file" id="formFileMultiple" name="upfile"
 					multiple>
 				<c:if test="${not empty b.informationOriginName }">
                             	현재 업로드된 파일 : 

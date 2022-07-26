@@ -103,8 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE INFORMATION_TB
 		SET INFORMATION_TITLE = #{informationTitle}
 			,INFORMATION_CONTENT = #{informationContent}
-<!-- 			,ORIGIN_NAME = #{originName} -->
-<!-- 			,CHANGE_NAME = #{changeName} -->
+			,INFORMATION_ORIGIN_NAME = #{informationOriginName}
+			,INFORMATION_CHANGE_NAME = #{informationChangeName}
 		WHERE INFORMATION_NO = #{informationNo}
 	</update>
 	
