@@ -33,6 +33,12 @@ public interface MessageService {
 
 	List<Message> messageSendList(Map<String, Object> map, PageInfo pi);
 
+	int selectSendListCount(Map<String, Object> map);
+
+	int sendAcceptMessage(Map<String, Object> map);
+
+	int sendRejectMessage(Map<String, Object> map);
+
 	
 
 	

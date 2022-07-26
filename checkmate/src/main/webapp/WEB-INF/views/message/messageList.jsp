@@ -257,7 +257,8 @@
 		</div>
 
 		<div id="pagingArea" class="">
-			<ul class="pagination justify-content-center" style="margin-top : 10px;">
+			<ul class="pagination justify-content-center"
+				style="margin-top: 10px;">
 				<c:choose>
 					<c:when test="${ pi.currentPage eq 1 }">
 						<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
