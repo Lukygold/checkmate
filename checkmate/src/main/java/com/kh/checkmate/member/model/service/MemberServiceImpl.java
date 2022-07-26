@@ -87,6 +87,21 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.changePwd(sqlSession,m);
 	}
 
+	@Override
+	public Member NaverloginMember(String userId) {
+		return memberDao.naverLogin(sqlSession,userId);
+	}
+
+	@Override
+	public Member KakaologinMember(String userEmail) {
+		return memberDao.kakaoLogin(sqlSession,userEmail);
+	}
+
+	@Override
+	public int emailCheck(String userEmail) {
+		return memberDao.emailCheck(sqlSession,userEmail);
+	}
+
 	
 
 

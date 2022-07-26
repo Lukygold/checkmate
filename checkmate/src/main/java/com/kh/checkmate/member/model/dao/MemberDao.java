@@ -37,6 +37,18 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.changePwd",m);
 	}
 
+	public Member naverLogin(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("memberMapper.naverLogin",userId);
+	}
+
+	public Member kakaoLogin(SqlSessionTemplate sqlSession, String userEmail) {
+		return sqlSession.selectOne("memberMapper.kakaoLogin",userEmail);
+	}
+
+	public int emailCheck(SqlSessionTemplate sqlSession, String userEmail) {
+		return sqlSession.selectOne("memberMapper.emailCheck",userEmail);
+	}
+
 	
 
 }

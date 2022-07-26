@@ -19,5 +19,13 @@ public interface MemberService {
 	String findId(String userPhone);
 
 	int changePwd(Member m);
+
+	Member NaverloginMember(String userId);
+
+	Member KakaologinMember(String userEmail);
+
+	int emailCheck(String userEmail);
+
+	
 	
 }
