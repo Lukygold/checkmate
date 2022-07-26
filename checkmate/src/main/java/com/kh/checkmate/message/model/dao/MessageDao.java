@@ -31,6 +31,10 @@ public interface MessageDao {
 
 	int selectSendListCount(Map<String, Object> map, SqlSessionTemplate sqlSession);
 
+	int sendAcceptMessage(Map<String, Object> map, SqlSessionTemplate sqlSession);
+
+	int sendRejectMessage(Map<String, Object> map, SqlSessionTemplate sqlSession);
+
 	
 
 }

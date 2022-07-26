@@ -78,4 +78,14 @@ public class MessageDaoImpl implements MessageDao {
 		return sqlSession.selectOne("message.selectSendListCount", map);
 	}
 
+	@Override
+	public int sendAcceptMessage(Map<String, Object> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("message.sendAcceptMessage", map);
+	}
+
+	@Override
+	public int sendRejectMessage(Map<String, Object> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("message.sendRejectMessage", map);
+	}
+
 }

@@ -64,13 +64,14 @@
 						<tr>
 							<th style="width: 250px"><label for="recv">받는사람</label></th>
 							<td style="width: 500px"><input type="text"
-								style="width: 700px" id="recv" name="msgRecv" value="${reply}" readonly
-								style="align:center;"></td>
+								style="width: 700px" id="recv" name="msgRecv" value="${reply}"
+								readonly style="align:center;"></td>
 						</tr>
 						<tr>
 							<th><label for="content">내용</label></th>
-							<td align="center"><textarea id="content" style="width: 700px"
-									class="form-control" rows="10" cols="55" name="msgContent" required></textarea></td>
+							<td align="center"><textarea id="content"
+									style="width: 700px" class="form-control" rows="10" cols="55"
+									name="msgContent" required></textarea></td>
 						</tr>
 						<tr>
 							<th><label for="upfile">첨부파일</label></th>
@@ -87,6 +88,11 @@
 			</form>
 		</div>
 		<br> <br>
+		<script>
+			function messageList() {
+				location.href = "messageList.msg";
+			}
+		</script>
 
 	</div>
 
