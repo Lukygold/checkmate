@@ -119,32 +119,42 @@
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="#">Drop Down 1</a></li>
-							<li class="dropdown"><a href="#"><span>Deep Drop
-										Down</span> <i class="bi bi-chevron-right"></i></a>
-								<ul>
-									<li><a href="#">Deep Drop Down 1</a></li>
-									<li><a href="#">Deep Drop Down 2</a></li>
-									<li><a href="#">Deep Drop Down 3</a></li>
-									<li><a href="#">Deep Drop Down 4</a></li>
-									<li><a href="#">Deep Drop Down 5</a></li>
-								</ul></li>
-							<li><a href="#">Drop Down 2</a></li>
-							<li><a href="#">Drop Down 3</a></li>
-							<li><a href="#">Drop Down 4</a></li>
-						</ul></li>
-					<li><div style="padding: 0 70px;"></div></li>
-
-
+						
 					<c:choose>
 						<c:when test="${ empty loginUser }">
+							<li class="dropdown"><a href="#"><span>스터디그룹</span> <i class="bi bi-chevron-down"></i></a>
+								<ul>
+									<li><a href="studyGroupExploration.sg">둘러보기</a></li>
+								</ul>
+							</li>
+							<li><div style="padding: 0 70px;"></div></li>
+						</c:when>
+						<c:otherwise>
+							<li class="dropdown"><a href="#"><span>스터디그룹</span> <i class="bi bi-chevron-down"></i></a>
+								<ul>
+									<li><a href="studyGroupExploration.sg">둘러보기</a></li>
+									<li class="dropdown"><a href="studyGroupList.sg"><span>나의 스터디</span> <i class="bi bi-chevron-right"></i></a>
+										<ul>
+											<li><a href="#">나의스터디1</a></li>
+											<li><a href="#">나의스터디2</a></li>
+											<li><a href="#">나의스터디3</a></li>
+											<li><a href="#">나의스터디4</a></li>
+											<li><a href="#">나의스터디5</a></li>
+										</ul></li>
+									<li><a href="studyGroupEnrollForm.sg">스터디 생성</a></li>
+								</ul></li>
+							<li><div style="padding: 0 70px;"></div></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
 							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
 						</c:when>
 						<c:otherwise>
+							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
 							<li><a class="nav-link scrollto" href="#">마이페이지</a></li>
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
