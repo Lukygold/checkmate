@@ -35,6 +35,10 @@ public interface MessageService {
 
 	int selectSendListCount(Map<String, Object> map);
 
+	int sendAcceptMessage(Map<String, Object> map);
+
+	int sendRejectMessage(Map<String, Object> map);
+
 	
 
 	
