@@ -1,71 +1,222 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
-<link href="resources/css/sharingInformation.css" rel="stylesheet"
-	type="text/css" />
-<link rel="stylesheet" href="resource/alertify.core.css" />
-<link rel="stylesheet" href="resource/alertify.default.css"
-	id="toggleCSS" />
-<script src="resource/alertify.min.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Blog Post - Start Bootstrap Template</title>
+<!-- Favicon-->
+<link rel="icon" type="image/x-icon" href="resources/assets/favicon.ico" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="resources/css/styles.css" rel="stylesheet" />
+<style>
+ul{
+   list-style:none;
+   width: 100%;
+   text-align: left;
+ }
+
+</style>
 </head>
-<body style="padding-top: 7rem;">
+<body style="padding-top: 3rem;">
 	<jsp:include page="../../common/header.jsp" />
-	<main role="main" class="container back-image">
-		<form name="form" method="POST" action="/bulletin_wr01">
-			<div class="input-group">
-				<input type="text" aria-label="First name" class="form-control text-center" value="작성자 : ${b.userId}" >
-				<input type="text" aria-label="First name" class="form-control text-center" value="조회수 : ${b.informationView}">
-				<input type="text" aria-label="Last name" class="form-control text-center" value="등록일 : ${b.informationDate}">
+
+	<!-- Page content-->
+	<div class="container mt-5" align="center">
+		<div class="row">
+			<div class="col-lg-8">
+				<!-- Post content-->
+				<article>
+					<!-- Post header-->
+					<header class="mb-4">
+						<!-- Post title-->
+						<h1 class="fw-bolder mb-1">${b.informationTitle}</h1>
+						<!-- Post meta content-->
+						<div class="text-muted fst-italic mb-2"
+							style="word-break: break-all;">Writer : ${b.userId} | Views
+							: ${b.informationView} | Date : ${b.informationDate}</div>
+						<div class="text-muted fst-italic mb-2"
+							style="word-break: break-all;">
+							첨부파일 : <a href="${b.informationChangeName }"
+								download="${b.informationOriginName }">${b.informationOriginName }</a>
+						</div>
+						<!-- Post categories-->
+						<!--                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a> -->
+						<!--                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> -->
+					</header>
+					<!-- Post content-->
+					<section class="mb-5" style="padding: 10px;">
+						<p class="fs-5 mb-4">${b.informationContent}</p>
+					</section>
+					<div class="btn-group">
+						<a class="btn btn-secondary" onclick="postFormSubmit(1)">글수정</a> <a
+							class="btn btn-secondary" onclick="postFormSubmit(2)">글삭제</a>
+					</div>
+				</article>
+				<form id="postForm" method="post">
+					<input type="hidden" name="informationNo"
+						value="${b.informationNo}"> <input type="hidden"
+						name="filePath" value="${b.informationChangeName }">
+				</form>
+
+				<script>
+					function postFormSubmit(num) {
+						if (num == 1) {
+							$("#postForm").attr("action", "updateForm.si")
+									.submit();
+						} else {
+							if (confirm("정말 삭제하시겠습니까??") == true) {
+								$("#postForm").attr("action", "delete.si")
+										.submit();
+							} else {
+								return false;
+							}
+						}
+
+					}
+				</script>
+
+
+				<!-- Comments section-->
+				<section class="mb-5">
+					<div class="card bg-light">
+						<div class="card-body">
+							<!-- Comment form-->
+							<form class="mb-4">
+								<div class="input-group mb-3">
+									<input type="text" class="form-control"
+										placeholder="댓글을 입력 해주세요." aria-label="Recipient's username"
+										aria-describedby="button-addon2">
+									<button class="btn btn-outline-secondary" type="button"
+										id="button-addon2">등록</button>
+								</div>
+							</form>
+							<div id="reply">
+							
+							</div>
+						</div>
+					</div>
+				</section>
 			</div>
-			<div class="pt-1"></div>
-			<input type="text" name="title" placeholder="제목을 입력하세요."
-				value="${b.informationTitle}"
-				style="border-radius: 5px; width: 100%; padding: 5px;" readonly>
-			<br>
-			<div class="mb-3 form-control" style="height: 500px; width: 100%;">
-				${b.informationContent}</div>
+			
+			<script>
+		    	$(function(){
+		    		selectReplyList();
+		    	})
+		    	
+		    	
+		    	function selectReplyList(){ //댓글 전부를 불러오는 처리 
+		    		$.ajax({
+		    			url : "rlist.si",
+		    			data : {
+		    				informationNo : ${b.informationNo}
+		    			},
+		    			success : function(result){
+		    				console.log(result);
+							
+							var resultStr="";
+							
+							for(var i=0; i<result.length;i++){
+								
+							resultStr+= "<div class=\"d-flex\">" +
+											"<div class=\"flex-shrink-0\">" + 
+												"<img class=\"rounded-circle\" src=\"https://dummyimage.com/50x50/ced4da/6c757d.jpg\" alt=\"...\" />" +
+											"</div>" + 
+											
+											"<ul>" +
+											"<li>" +
+											
+											"<div style=\"width:100%; height:30px;\">" +
+												"<div class=\"fw-bold\" style=\"float:left\">" + result[i].replyWriter + "</div>" +
+												"<div  style=\"font-size:2px; float:right; padding-right:20px;\">" +
+												"Date :" + result[i].replyDate +
+												"</div>" +
+											"</div>" +
+											
+											"</li>" +
+											"<li>" +
+												"<span id=\"content\"> " + result[i].replyContent + "</span>" +
+											
+												"</li>" +
+												"</ul>" +
+												
+										"</div>" +
+										"<br>"
+							}
+						
+		    				$("#reply").html(resultStr);
+		    			},
+		    			error : function(){
+		    				console.log("통신실패");
+		    			}
+		    		})
+		    	}
+		    </script>
 
-			<div class="mb-3">
-				첨부파일 : <a href="${b.informationChangeName }"
-					download="${b.informationOriginName }">${b.informationOriginName }</a>
+
+
+
+			<!-- Side widgets-->
+			<div class="col-lg-4">
+				<!-- Search widget-->
+				<div class="card mb-4">
+					<div class="card-header">Search</div>
+					<div class="card-body">
+						<div class="input-group">
+							<input class="form-control" type="text"
+								placeholder="Enter search term..."
+								aria-label="Enter search term..."
+								aria-describedby="button-search" />
+							<button class="btn btn-primary" id="button-search" type="button">Go!</button>
+						</div>
+					</div>
+				</div>
+				<!-- Categories widget-->
+				<div class="card mb-4">
+					<div class="card-header">Categories</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<ul class="list-unstyled mb-0">
+									<li><a href="#!">Web Design</a></li>
+									<li><a href="#!">HTML</a></li>
+									<li><a href="#!">Freebies</a></li>
+								</ul>
+							</div>
+							<div class="col-sm-6">
+								<ul class="list-unstyled mb-0">
+									<li><a href="#!">JavaScript</a></li>
+									<li><a href="#!">CSS</a></li>
+									<li><a href="#!">Tutorials</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
+	</div>
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2022</p>
+		</div>
+	</footer>
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="resources/js/scripts.js"></script>
+</body>
 
-			<div class="btn-group">
-				<a class="btn btn-secondary" onclick="postFormSubmit(1)">글수정</a> <a
-					class="btn btn-secondary" onclick="postFormSubmit(2)">글삭제</a>
-			</div>
-		</form>
-	</main>
-
-	<form id="postForm" method="post">
-		<input type="hidden" name="informationNo" value="${b.informationNo}">
-		<input type="hidden" name="filePath"
-			value="${b.informationChangeName }">
-	</form>
-
-	<script>
-		function postFormSubmit(num) {
-			if (num == 1) {
-				$("#postForm").attr("action", "updateForm.si").submit();
-			} else {
-				if (confirm("정말 삭제하시겠습니까??") == true) {
-					$("#postForm").attr("action", "delete.si").submit();
-				} else {
-					return false;
-				}
-			}
-
-		}
-	</script>
-
-	<jsp:include page="../../common/footer.jsp" />
+<jsp:include page="../../common/footer.jsp" />
 </body>
 </html>

@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.checkmate.board.sharingInformation.model.service.SharingInformationService;
+import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
@@ -173,6 +176,31 @@ public class SharingInformationController {
 		}
 		
 		return changeName;
+	}
+	
+	@RequestMapping(value="rlist.si",produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String selectReplyList(int informationNo) {
+		
+		ArrayList<Reply> list = sharingInformationService.selectReplyList(informationNo);
+		System.out.println(list);
+		return new Gson().toJson(list);
+	}
+	
+	@RequestMapping(value="rinsert.si",produces="html/text; charset=UTF-8")
+	@ResponseBody
+	public String insertReply(Reply r) {
+
+		int result = sharingInformationService.insertReply(r);
+		
+		String ans="";
+		
+		if(result>0) { //성공
+			ans="Y";
+		}else {//실패 
+			ans="N";
+		}
+		return ans;
 	}
 
 }

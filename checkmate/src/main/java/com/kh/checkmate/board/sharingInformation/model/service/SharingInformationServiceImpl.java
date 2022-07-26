@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.checkmate.board.sharingInformation.model.dao.SharingInformationDao;
+import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
 
@@ -61,17 +62,15 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 	public ArrayList<SharingInformation> searchList(PageInfo pi, SharingInformation b) {
 		return sid.searchList(sqlSession, pi, b);
 	}
-	
-	
 
-//	@Override
-//	public ArrayList<Reply> selectReplyList(int boardNo) {
-//		return sid.selectReplyList(sqlSession,boardNo);
-//	}
-//
-//	@Override
-//	public int insertReply(Reply r) {
-//		return sid.insertReply(sqlSession,r);
-//	}
+	@Override
+	public ArrayList<Reply> selectReplyList(int informationNo) {
+		return sid.selectReplyList(sqlSession,informationNo);
+	}
+
+	@Override
+	public int insertReply(Reply r) {
+		return sid.insertReply(sqlSession,r);
+	}
 
 }
