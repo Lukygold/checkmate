@@ -33,14 +33,14 @@ public class SharingInformationController {
 	@RequestMapping("list.si")
 	public String selectList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 		int listCount = sharingInformationService.selectListCount();
-
+		
 		int pageLimit = 10;
 		int boardLimit = 15;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
 		ArrayList<SharingInformation> list = sharingInformationService.selectList(pi);
-
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 
@@ -54,7 +54,6 @@ public class SharingInformationController {
 	
 	@RequestMapping("insert.si")
 	public String insertBoard(SharingInformation b, MultipartFile upfile, HttpSession session, Model model) {
-		
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(upfile,session);
 			b.setInformationOriginName(upfile.getOriginalFilename());
@@ -183,14 +182,14 @@ public class SharingInformationController {
 	public String selectReplyList(int informationNo) {
 		
 		ArrayList<Reply> list = sharingInformationService.selectReplyList(informationNo);
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	
 	@RequestMapping(value="rinsert.si",produces="html/text; charset=UTF-8")
 	@ResponseBody
 	public String insertReply(Reply r) {
-
+		Reply checkNo = sharingInformationService.checkNo(r);
+		r.setRefUno(checkNo.getRefUno());
 		int result = sharingInformationService.insertReply(r);
 		
 		String ans="";

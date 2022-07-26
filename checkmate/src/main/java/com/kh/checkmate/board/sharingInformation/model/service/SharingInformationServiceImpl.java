@@ -73,4 +73,11 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 		return sid.insertReply(sqlSession,r);
 	}
 
+	@Override
+	public Reply checkNo(Reply r) {
+		return sid.checkNo(sqlSession,r);
+	}
+	
+	
+
 }

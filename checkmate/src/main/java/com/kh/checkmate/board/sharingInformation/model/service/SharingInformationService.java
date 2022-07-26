@@ -42,4 +42,5 @@ public interface SharingInformationService {
 //	
 //	//게시글 top5 조회
 //	ArrayList<Board> selectTopList();
+	Reply checkNo(Reply r);
 }

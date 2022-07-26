@@ -20,6 +20,7 @@
 	<main role="main" class="container back-image">
 		<form name="form" method="POST" action="insert.si"
 			enctype="multipart/form-data">
+			<input type="hidden" name="userNo" value="${loginUser.userNo}">
 			<input type="hidden" name="informationCategory" value="정보공유">
 			<input class="form-control col-3 text-center" type="text"
 				value="정보공유 게시판" aria-label="readonly input example" readonly>

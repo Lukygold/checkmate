@@ -40,7 +40,7 @@ ul{
 						<h1 class="fw-bolder mb-1">${b.informationTitle}</h1>
 						<!-- Post meta content-->
 						<div class="text-muted fst-italic mb-2"
-							style="word-break: break-all;">Writer : ${b.userId} | Views
+							style="word-break: break-all;">Writer : ${b.userNick} | Views
 							: ${b.informationView} | Date : ${b.informationDate}</div>
 						<div class="text-muted fst-italic mb-2"
 							style="word-break: break-all;">
@@ -55,10 +55,13 @@ ul{
 					<section class="mb-5" style="padding: 10px;">
 						<p class="fs-5 mb-4">${b.informationContent}</p>
 					</section>
+					
+					<c:if test="${loginUser.userId eq b.userId}">
 					<div class="btn-group">
 						<a class="btn btn-secondary" onclick="postFormSubmit(1)">글수정</a> <a
 							class="btn btn-secondary" onclick="postFormSubmit(2)">글삭제</a>
 					</div>
+					</c:if>
 				</article>
 				<form id="postForm" method="post">
 					<input type="hidden" name="informationNo"
@@ -91,11 +94,22 @@ ul{
 							<!-- Comment form-->
 							<form class="mb-4">
 								<div class="input-group mb-3">
-									<input type="text" class="form-control"
+									<c:choose>
+  						  				<c:when test="${ not empty loginUser }">
+									<input type="text" class="form-control" id="insertContent"
 										placeholder="댓글을 입력 해주세요." aria-label="Recipient's username"
 										aria-describedby="button-addon2">
 									<button class="btn btn-outline-secondary" type="button"
-										id="button-addon2">등록</button>
+										id="button-addon2" onclick="addReply()">등록</button>
+									</c:when>
+  						  				<c:otherwise>	
+									<input type="text" class="form-control" id="insertContent"
+										placeholder="로그인이 필요합니다." aria-label="Recipient's username"
+										aria-describedby="button-addon2">
+									<button class="btn btn-outline-secondary disabled" type="button"
+										id="button-addon2" onclick="addReply()">등록</button>
+  						  				</c:otherwise>
+									</c:choose>
 								</div>
 							</form>
 							<div id="reply">
@@ -110,6 +124,32 @@ ul{
 		    	$(function(){
 		    		selectReplyList();
 		    	})
+		    	
+		    	function addReply(){
+    		
+	    		if($("#insertContent").val().trim().length != 0){
+	    			$.ajax({
+	        			url : "rinsert.si",
+	        			data : {
+	        				refBno : ${b.informationNo},
+	        				replyContent : $("#insertContent").val(),
+	        				replyWriter : '${loginUser.userId}'
+	        			},
+	        			success : function(result){
+	        				if(result=="Y"){
+	        				selectReplyList();
+							$("#insertContent").val("");        				
+	        				}
+	        			},
+	        			error : function(){
+	        				console.log("통신 실패")
+	        			}
+	        		})
+		    		}else{
+		    			$("#insertContent").val("");
+		    			alertify.alert("댓글을 입력해주세요.")
+		    		}
+		    	}
 		    	
 		    	
 		    	function selectReplyList(){ //댓글 전부를 불러오는 처리 
@@ -136,7 +176,7 @@ ul{
 											"<div style=\"width:100%; height:30px;\">" +
 												"<div class=\"fw-bold\" style=\"float:left\">" + result[i].replyWriter + "</div>" +
 												"<div  style=\"font-size:2px; float:right; padding-right:20px;\">" +
-												"Date :" + result[i].replyDate +
+												result[i].replyDate +
 												"</div>" +
 											"</div>" +
 											
@@ -152,6 +192,7 @@ ul{
 							}
 						
 		    				$("#reply").html(resultStr);
+		    				$("#rcount").text(result.length);
 		    			},
 		    			error : function(){
 		    				console.log("통신실패");

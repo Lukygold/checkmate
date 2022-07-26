@@ -28,7 +28,7 @@
 							<tr>
 								<th>글번호</th>
 								<th>제목</th>
-								<th>아이디</th>
+								<th>닉네임</th>
 								<th>조회수</th>
 								<th>작성일</th>
 							</tr>
@@ -38,7 +38,7 @@
 								<tr>
 									<td id="informationNo">${b.informationNo}</td>
 									<td>${b.informationTitle}</td>
-									<td>${b.userId}</td>
+									<td>${b.userNick}</td>
 									<td>${b.informationView}</td>
 									<td>${b.informationDate}</td>
 								</tr>
@@ -110,10 +110,12 @@
 					</c:choose>
 				</ul>
 			</nav>
-
-			<div class="btn-group">
-				<a href="enrollForm.si" class="btn btn-secondary">글쓰기</a>
-			</div>
+			
+			<c:if test="${ not empty loginUser }">
+				<div class="btn-group">
+					<a href="enrollForm.si" class="btn btn-secondary">글쓰기</a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 

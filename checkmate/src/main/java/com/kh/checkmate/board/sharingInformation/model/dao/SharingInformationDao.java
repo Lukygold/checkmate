@@ -59,7 +59,12 @@ public class SharingInformationDao {
 		return (ArrayList)sqlSession.selectList("sharingInformationMapper.selectReplyList",informationNo);
 	}
 
+	public Reply checkNo(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.selectOne("sharingInformationMapper.checkNo", r);
+	}
+
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
 		return sqlSession.insert("sharingInformationMapper.insertReply",r);
 	}
+
 }
