@@ -17,10 +17,9 @@
 			<div class="row justify-content-center">
 				<div class="col-12">
 					<ul class="nav nav-tabs">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="list.si">정보공유</a></li>
-						<li class="nav-item"><a class="nav-link" href="jobList.si"
-							style="color: #747980;">취업정보공유</a></li>
+						<li class="nav-item"><a class="nav-link"
+							style="color: #747980;" href="list.si">정보공유</a></li>
+						<li class="nav-item"><a class="nav-link active" href="jobList.si">취업정보공유</a></li>
 					</ul>
 					<table class="table table-light table-hover table-responsive"
 						id="siList">
@@ -50,7 +49,7 @@
 							$("#siList>tbody>tr")
 									.click(
 											function() {
-												location.href = 'detail.si?informationNo='
+												location.href = 'jobDetail.si?informationNo='
 														+ $(this)
 																.children(
 																		"#informationNo")
@@ -61,7 +60,7 @@
 					</script>
 				</div>
 			</div>
-			<form class="row g-3 justify-content-center" action="search.si" method="get">
+			<form class="row g-3 justify-content-center" action="jobSearch.si" method="get">
 				<div class="col-3" style="float: center;">
 					<input type="text" class="form-control" id="searchContent" name="searchContent"
 						placeholder="검색할 내용을 입력 해주세요.">
@@ -113,7 +112,7 @@
 			
 			<c:if test="${ not empty loginUser }">
 				<div class="btn-group">
-					<a href="enrollForm.si" class="btn btn-secondary">글쓰기</a>
+					<a href="jobEnrollForm.si" class="btn btn-secondary">글쓰기</a>
 				</div>
 			</c:if>
 		</div>

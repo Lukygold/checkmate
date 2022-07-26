@@ -95,8 +95,8 @@
 									<li><a href="#">Deep Drop Down 4</a></li>
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
+							<li><a href="jobList.si">취업정보공유</a></li>
 							<li><a href="locationMap.lo">지도 테스트</a></li>
-							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
