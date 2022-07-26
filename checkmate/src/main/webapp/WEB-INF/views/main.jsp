@@ -750,7 +750,36 @@
 
   <!-- Template Main JS File -->
   <script src="resources/js/main.js"></script>
-
+  
+  <c:choose>
+	  <c:when test="${not empty loginUser }">
+		  <script>
+		  (function location(){
+		  	navigator.geolocation.getCurrentPosition(
+		  	function(position) {
+		  		var positionLat = position.coords.latitude;
+		  		var positionLon = position.coords.longitude;
+				    
+		  		$.ajax({
+		  			url : "location.lo",
+		  			data : {
+		  				locationLatitude : positionLat,
+		  				locationLongitude : positionLon,
+		  				userNo : ${loginUser.userNo}
+		  			},
+		  			success : function(result){
+						
+		  			},
+		  			error : function(){
+		  				console.log("통신실패");
+		  			}
+		  		})
+		  	},
+		  	);
+		  })();
+		  </script>
+	  </c:when>
+  </c:choose>
 </body>
 
 
