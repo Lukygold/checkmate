@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 	   form{
        	   width:500px
            padding:10px;
-           margin-left:34%;
+           margin-left: 34%;
        }
        .input-box{
            position:relative;
@@ -60,7 +61,7 @@
            border:none;
            color:white;
            border-radius: 5px;
-           width:100%;
+           width:70%;
            height:50px;
            font-size: 14pt;
            margin-top:20px;
@@ -69,9 +70,15 @@
            text-align: right;
            margin:10px 0px;
        }
-       #kakaoBtn{
-       	width:100%;
+       #socialBtn{
+       	width:70%;
        	height:50px;
+       }
+       #socialLogin{
+       	width:100%;	      
+       }
+       #socialA{
+       	width:100%;
        }
 </style>
 <meta charset="UTF-8">
@@ -92,22 +99,29 @@
         <div class="input-box">
           	<input id="password" type="password" name="userPw" placeholder="비밀번호">
           	<label for="password">비밀번호</label>	
-                          
+                         
 	    <div id="forgot">
-	      	<a href="" style="color: black">아이디</a>/<a href="" style="color: black">비밀번호 찾기</a>
+	      	<a href="findId.me" style="color: black">아이디</a>/<a href="findPwd.me" style="color: black">비밀번호 찾기</a>
 	    </div>
+	    <div align="center">
         <button type="submit" id="loginBtn">로그인</button>
-        <br><br>
-        <div id="kakao">
-      		<a href="javascript:kakaoLogin();"><img id="kakaoBtn" src="./resources/images/kakao_login_medium_wide.png"/></a>                      
+	    </div>
+        <br>
+        <div id="socialLogin" align="center">
+      		<a href="javascript:kakaoLogin();" id="socialA"><img id="socialBtn" src="./resources/images/kakao_login_medium_wide.png"/></a> 
+      		<br><br> 
+      		<a href="${urlNaver}"><img id="socialBtn" src="./resources/images/btnG_완성형.png"/></a> 
+      		 		               
          </div>
-         </div>
+         </div> 
+
     </form>
                 
     <script>
     	window.Kakao.init('25def9456817be2bd9d449ded95b8362');
     	
     	function kakaoLogin(){
+    		
         	window.Kakao.Auth.login({
         		scope:'profile_nickname,profile_image,account_email',
         		success: function(authObj){
@@ -123,6 +137,28 @@
         					console.log(KName);
         					console.log(kProfile);
         					console.log(kakao_account);
+        					$.ajax({
+                                url : "kakaoLogin.me",
+                                data : {
+                                	userEmail : kEmail
+                                },
+                                success: function(result){
+                                	console.log(result)
+                                	if(result=="Y"){
+                                		window.location.href='/checkmate';
+                                	}else{
+                                		alert("추가 정보 입력이 필요합니다");
+                                		location.href='kakaoEnrollForm.me';
+                                	}
+                                    console.log("성공");
+                                },
+                                error : function(){
+                                	console.log(result)
+                                    console.log("실패");
+                                }
+                            });
+        							
+        					
         				}
         			});
         		}
@@ -132,4 +168,5 @@
     </script>
     
 </body>
+
 </html>

@@ -32,6 +32,28 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateMember",m);
 	}
 
+
+	public String findId(SqlSessionTemplate sqlSession, String userPhone) {
+		return sqlSession.selectOne("memberMapper.findId",userPhone);
+	}
+
+	public int changePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.changePwd",m);
+	}
+
+	public Member naverLogin(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.selectOne("memberMapper.naverLogin",userId);
+	}
+
+	public Member kakaoLogin(SqlSessionTemplate sqlSession, String userEmail) {
+		return sqlSession.selectOne("memberMapper.kakaoLogin",userEmail);
+	}
+
+	public int emailCheck(SqlSessionTemplate sqlSession, String userEmail) {
+		return sqlSession.selectOne("memberMapper.emailCheck",userEmail);
+	}
+
+
 	public int deleteMember(SqlSessionTemplate sqlSession, String userId) {
 		return sqlSession.update("memberMapper.deleteMember",userId);
 	}
@@ -47,6 +69,7 @@ public class MemberDao {
 	public Member myPage(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.myPage",m);
 	}
+
 	
 
 }

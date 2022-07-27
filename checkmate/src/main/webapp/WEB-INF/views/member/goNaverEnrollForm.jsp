@@ -5,12 +5,8 @@
 <head>
 <!--주소.js-->    
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<!-- jQuery -->
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <meta charset="UTF-8">
-<title>CHECKMATE 회원가입</title>
+<title>Insert title here</title>
 <jsp:include page="../common/header.jsp" />
 <style>
     #logonEnrollHeader{
@@ -28,7 +24,7 @@
         position:relative;
         display:flex;
         margin:10px 0;
-        margin-left: 29%;
+        margin-left: 27%;
         width: 1000px;
     }
     .input-box > input{
@@ -108,15 +104,12 @@
         height: 200px;
         border-radius: 100px;
     }
-
-
 </style>
 </head>
 <body>
-
-    <br><br><br><br><br>
-    
-    <form action="naverInsert.me" method="post" enctype="multipart/form-data">
+	<br><br><br><br><br>
+	<form action="naverInsert.me" method="post" enctype="multipart/form-data">
+    	<input type="hidden" name="userId" value="${userId}">
     	<input type="hidden" name="userEmail" value="${userEmail}">
     	<div align="center"><H3>프로필 사진</H3></div>
     	<div id="image_container" align="center"><img id="userProfile" src="./resources/images/basic.jpg"></div>
@@ -124,7 +117,9 @@
     	<div class="form-group" align="center">
 		<input class="userOriginProfile" type="file" name="profile" id="userOriginProfile" onchange="setThumbnail(this);">
 		</div>		
-    	<br><br>
+    	<br><br>	  
+    	              
+
         <div class="input-box">
             <input id="userName" type="text" name="userName" placeholder="이름">
             <label for="userName">이름</label>
@@ -138,8 +133,6 @@
         <div class="input-box">
 	        <span class="nickCheck">3~10자를 사용하세요.</span>
         </div>
-
-
 
         <div class="input-box" align="center">
             <input id="addr1" type="text" readonly="readonly" placeholder="우편번호">
@@ -156,17 +149,17 @@
             <input placeholder="상세주소"  id="addr3" type="text"/>
             <label for="addr3">상세주소</label>           
         </div>
-        <input type="hidden" name="userAddress" id="userAddress"/>        
+        <input type="hidden" name="userAddress" id="userAddress"/>
         
         <div align="center">
             <input type="submit" value="가입" id="confirmBtn"/>
         </div>
             
     </form>
-
-
-
-<script>	
+	
+	
+	
+	<script>
 	//프로필 파트
 	function setThumbnail(inputFile){
 		
@@ -184,7 +177,6 @@
 	
 	};
 	
-
 	//닉네임파트
 	$("#userNick").on('keyup',function(){
 		console.log("실행");
@@ -260,10 +252,7 @@
         }).open();
     };
     
-    
-    //최종 회원가입 파트
     $("#confirmBtn").click(function(){
-
         if($("#userNick").prop("readonly")==false){
             alert("닉네임 중복확인을 해주세요.");
             return false;
@@ -283,6 +272,6 @@
         	return true;
         }
     });
-</script>
+	</script>
 </body>
 </html>

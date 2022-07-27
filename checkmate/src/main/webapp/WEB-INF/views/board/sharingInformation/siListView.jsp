@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="resources/css/sharingInformation.css" rel="stylesheet"
-	type="text/css" />
+<!-- <link href="resources/css/sharingInformation.css" rel="stylesheet" -->
+<!-- 	type="text/css" /> -->
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp" />
