@@ -22,31 +22,29 @@ import com.kh.checkmate.studyGroupMember.model.service.StudyGroupMemberService;
 
 @Controller
 public class StudyGroupApplyController {
-	
+
 	@Autowired
 	private StudyGroupApplyService studyGroupApplyService;
-	
+
 	@Autowired
 	private StudyGroupService studyGroupService;
-	
+
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private StudyGroupMemberService studyGroupMemberService;
-	
+
 	@Autowired
 	private StudyGroupController studyGroupController;
 
 	@RequestMapping("studyGroupApply.sga")
-	public String studyGroupApply(StudyGroupApply studyGroupApply, HttpSession session,
-			Model model) {
+	public String studyGroupApply(StudyGroupApply studyGroupApply, HttpSession session, Model model) {
 		Member member = (Member) session.getAttribute("loginUser");
 		Map<String, Object> map = new HashMap<>();
 		map.put("userNick", member.getUserNick());
-		
-		int result = studyGroupApplyService.insertStudyGroupApply(studyGroupApply);
 
+		int result = studyGroupApplyService.insertStudyGroupApply(studyGroupApply);
 
 		if (result > 0) {
 			session.setAttribute("alertMsg", "스터디그룹 지원 성공");
@@ -56,44 +54,47 @@ public class StudyGroupApplyController {
 			return studyGroupController.studyGroupList(1, model);
 		}
 	}
-	
+
 	@RequestMapping("acceptStudyGroup.sga")
 	@ResponseBody
-	public int acceptStudyGroup(@RequestParam(value = "sgaApplyNo") int sgaApplyNo, @RequestParam(value = "sgNo") int sgNo, HttpSession session) {
+	public int acceptStudyGroup(@RequestParam(value = "sgaApplyNo") int sgaApplyNo,
+			@RequestParam(value = "sgNo") int sgNo, HttpSession session) {
 		Member member = (Member) session.getAttribute("loginUser");
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("sgaApplyNo", sgaApplyNo);
 		map.put("sgNo", sgNo);
-		
-		//SG_APPLY_STATUS = 'Y'로 변경
+
+		// SG_APPLY_STATUS = 'Y'로 변경
 		int result = studyGroupApplyService.acceptStudyGroup(map);
-		
-		//StudyGroupMember에 추가
+
+		// StudyGroupMember에 추가
 		int result1 = studyGroupMemberService.insertStudyGroupMember(map);
-		
-		//메세지 전송
+
+		// 메세지 전송
 		int message = messageService.sendAcceptMessage(map);
 
 		return result;
 	}
-	
+
 	@RequestMapping("rejectStudyGroup.sga")
 	@ResponseBody
-	public int rejectStudyGroup(@RequestParam(value = "sgaApplyNo") int sgaApplyNo, HttpSession session) {
+	public int rejectStudyGroup(@RequestParam(value = "sgaApplyNo") int sgaApplyNo,
+			@RequestParam(value = "sgNo") int sgNo, HttpSession session) {
 		Member member = (Member) session.getAttribute("loginUser");
 
 		Map<String, Object> map = new HashMap<>();
 
 		map.put("sgaApplyNo", sgaApplyNo);
+		map.put("sgNo", sgNo);
 
-		//SG_APPLY_STATUS = 'N'로 변경
+		// SG_APPLY_STATUS = 'N'로 변경
 		int result = studyGroupApplyService.rejectStudyGroup(map);
-		
-		//메세지 전송
+
+		// 메세지 전송
 		int message = messageService.sendRejectMessage(map);
 
 		return result;
 	}
-	
+
 }

@@ -204,13 +204,13 @@
 										<c:choose>
 											<c:when test="${memberCount == studyGroup.sgMax}">
 												<td width="70"><button type="button"
-														class="btn btn-secondary" onclick="reject();">거절</button></td>
+														class="btn btn-secondary" name="reject">거절</button></td>
 											</c:when>
 											<c:otherwise>
 												<td width="70"><button type="button"
 														class="btn btn-secondary" name="accept">수락</button></td>
 												<td width="70"><button type="button"
-														class="btn btn-secondary" onclick="reject();">거절</button></td>
+														class="btn btn-secondary" name="reject">거절</button></td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
@@ -408,19 +408,19 @@
 			$("#applyList>tbody>tr>td>button[name=reject]").click(
 					function() {
 						var sgNo = ${studyGroup.sgNo}
-						var sgaApplyNo = $(this).parent().parent().children("#sgaApplyNo").val();
+						var sgaApplyNo = $(this).parent().parent().children().children("#sgaApplyNo").val();
 						
-							if (confirm("선택하실 멤버를 수락하시겠습니까?")) {
+							if (confirm("선택하실 멤버를 거절하시겠습니까?")) {
 								$.ajax({
 									type : "POST",
-									url : "${pageContext.request.contextPath}/acceptStudyGroup.sga",
+									url : "${pageContext.request.contextPath}/rejectStudyGroup.sga",
 									data : {
 										sgaApplyNo, sgNo
 									},
 									dataType : "json",
 									success : function(data) {
 										if (data > 0) {
-											alert("수락완료");
+											alert("거절완료");
 											window.location = "${pageContext.request.contextPath}/studyGroupDetail.sg?sgNo=${studyGroup.sgNo}";
 										}
 									},
