@@ -88,7 +88,7 @@ public class StudyGroupApplyController {
 		map.put("sgaApplyNo", sgaApplyNo);
 		map.put("sgNo", sgNo);
 
-		// SG_APPLY_STATUS = 'N'로 변경
+		// SG_APPLY_STATUS = 'N'로 변경 
 		int result = studyGroupApplyService.rejectStudyGroup(map);
 
 		// 메세지 전송

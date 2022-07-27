@@ -297,7 +297,7 @@
 
 							<input type="hidden" value="${studyGroup.sgNo}" name="sgNo">
 							<input type="hidden" id="send" name="msgSend"
-								value="${loginUser.userNick}">
+								value="${loginUser.userNick }">
 							<table class="table table-dark" style="text-align: center;">
 								<thead>
 									<tr>
