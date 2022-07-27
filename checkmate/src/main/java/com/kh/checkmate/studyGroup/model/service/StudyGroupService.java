@@ -20,5 +20,5 @@ public interface StudyGroupService {
 
 	ArrayList<StudyGroup> studyGroupList(PageInfo pi);
 
-	int addNickToStudyGroup(Map<String, Object> map);
+	StudyGroup studyGroupNoSelect(StudyGroup sg);
 }

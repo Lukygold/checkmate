@@ -1,8 +1,6 @@
 package com.kh.checkmate.studyGroupApply.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.message.model.service.MessageService;
+import com.kh.checkmate.studyGroup.controller.StudyGroupController;
 import com.kh.checkmate.studyGroup.model.service.StudyGroupService;
 import com.kh.checkmate.studyGroupApply.model.service.StudyGroupApplyService;
 import com.kh.checkmate.studyGroupApply.model.vo.StudyGroupApply;
@@ -35,6 +34,9 @@ public class StudyGroupApplyController {
 	
 	@Autowired
 	private StudyGroupMemberService studyGroupMemberService;
+	
+	@Autowired
+	private StudyGroupController studyGroupController;
 
 	@RequestMapping("studyGroupApply.sga")
 	public String studyGroupApply(StudyGroupApply studyGroupApply, HttpSession session,
@@ -48,10 +50,10 @@ public class StudyGroupApplyController {
 
 		if (result > 0) {
 			session.setAttribute("alertMsg", "스터디그룹 지원 성공");
-			return "studyGroup/studyGroupList";
+			return studyGroupController.studyGroupList(1, model);
 		} else {
 			model.addAttribute("alertMsg", "스터디그룹 지원 실패");
-			return "studyGroup/studyGroupList";
+			return studyGroupController.studyGroupList(1, model);
 		}
 	}
 	
@@ -63,8 +65,6 @@ public class StudyGroupApplyController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("sgaApplyNo", sgaApplyNo);
 		map.put("sgNo", sgNo);
-		
-		System.out.println(map);
 		
 		//SG_APPLY_STATUS = 'Y'로 변경
 		int result = studyGroupApplyService.acceptStudyGroup(map);

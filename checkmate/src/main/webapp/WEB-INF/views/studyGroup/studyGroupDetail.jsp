@@ -53,7 +53,7 @@
 		class="container mt-3 detail">
 		<input type="hidden" id="sgNo" value="${studyGroup.sgNo}">
 
-		<table class="table table-dark">
+		<table id="detailMain" class="table table-dark">
 			<thead>
 				<tr>
 					<th colspan="2">${studyGroup.sgName}</th>
@@ -66,7 +66,23 @@
 				</tr>
 				<tr>
 					<td>모집인원</td>
-					<td>${studyGroup.sgMax}</td>
+					<td>${studyGroup.sgMax}명</td>
+				</tr>
+				<tr>
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<td>현재인원</td>
+							<td>${memberCount}명</td>
+						</c:when>
+						<c:otherwise>
+							<td>현재인원</td>
+							<td><w>${memberCount}명</w></td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<tr>
+					<td>현재지원자</td>
+					<td>${applyCount}명</td>
 				</tr>
 				<tr>
 					<td>카테고리</td>
@@ -98,7 +114,13 @@
 			</c:when>
 			<c:when test="${ studyGroup.sgOwnerNick == loginUser.userNick }">
 				<button type="button" class="btn btn-secondary"
-					data-bs-toggle="modal" data-bs-target="#sgApplyList">신청자 목록보기</button>
+					data-bs-toggle="modal" data-bs-target="#sgApplyList">신청자
+					목록보기</button>
+				<button type="button" class="btn btn-secondary"
+					onclick="studyGroupList();">목록</button>
+			</c:when>
+			<c:when test="${memberCount == studyGroup.sgMax}">
+				<button type="button" class="btn btn-secondary" onclick="finish();">신청마감</button>
 				<button type="button" class="btn btn-secondary"
 					onclick="studyGroupList();">목록</button>
 			</c:when>
@@ -181,10 +203,18 @@
 												<td>${StudyGroupApply.sgApplyContent}</td>
 											</c:otherwise>
 										</c:choose>
-										<td width="70"><button type="button"
-												class="btn btn-secondary" name="accept">수락</button></td>
-										<td width="70"><button type="button"
-												class="btn btn-secondary" onclick="reject();">거절</button></td>
+										<c:choose>
+											<c:when test="${memberCount == studyGroup.sgMax}">
+												<td width="70"><button type="button"
+														class="btn btn-secondary" onclick="reject();">거절</button></td>
+											</c:when>
+											<c:otherwise>
+												<td width="70"><button type="button"
+														class="btn btn-secondary" name="accept">수락</button></td>
+												<td width="70"><button type="button"
+														class="btn btn-secondary" onclick="reject();">거절</button></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:forEach>
 
@@ -201,16 +231,152 @@
 				</div>
 			</div>
 		</div>
+
+
+
+		<!-- 스터디그룹 멤버 리스트 -->
+		<div class="modal" id="sgMemberList">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">스터디그룹 멤버</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<table id="memberList" class="table table-dark table-hover">
+							<thead>
+								<tr>
+									<th>닉네임</th>
+									<th>메세지보내기</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${studyGroupMember}" var="StudyGroupMemeber">
+									<tr>
+										<td id="test"><input type="hidden" id="recvNick"
+											value="${StudyGroupMemeber.sgmNick}">${StudyGroupMemeber.sgmNick}</td>
+										<td width=""><button type="button"
+												class="btn btn-secondary" data-bs-toggle="modal"
+												data-bs-target="#sendMessage" name="messageToMember">메세지전송</button></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 메세지 전송 기능 -->
+		<div class="modal" id="sendMessage">
+			<div class="modal-dialog  modal-xl">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">메세지 전송</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<form id="enrollForm" method="post"
+							action="sgDetailMessageInsert.msg" enctype="multipart/form-data">
+
+							<input type="hidden" value="${studyGroup.sgNo}" name="sgNo">
+							<input type="hidden" id="send" name="msgSend"
+								value="${loginUser.userNick}">
+							<table class="table table-dark" style="text-align: center;">
+								<thead>
+									<tr>
+										<th colspan="2">메세지 전송</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th style="width: 250px"><label for="recv">받는사람</label></th>
+										<td style="width: 500px"><input type="text"
+											style="width: 700px" id="recvPush" name="msgRecv" value=""
+											readonly style="align:center;"></td>
+									</tr>
+									<tr>
+										<th><label for="content">내용</label></th>
+										<td align="center"><textarea id="content"
+												style="width: 700px" class="form-control" rows="10"
+												cols="55" name="msgContent" required></textarea></td>
+									</tr>
+									<tr>
+										<th><label for="upfile">첨부파일</label></th>
+										<td><input type="file" style="width: 700px" id="upfile"
+											class="form-control-file border" name="upfile"></td>
+									</tr>
+								</tbody>
+							</table>
+							<br>
+							<div align="center">
+								<button type="submit" class="btn btn-secondary">보내기</button>
+								<button type="button" class="btn btn-danger"
+									data-bs-dismiss="modal">취소</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 
 	<script>
 		function studyGroupList() {
 			location.href = "studyGroupList.sg";
 		}
+		
+		function finish() {
+			alert("신청이 마감되었습니다. 다른 스터디에 지원해주세요.")
+		}
+		
+		function already() {
+			alert("이미 신청한 스터디입니다.")
+		}
+
 
 		function apply() {
 			$("#postForm").attr("action", "studyGroupApply.sga").submit();
 		}
+		
+		$(function(){
+			$('#detailMain>tbody>tr>td>w').click(
+					function(){						
+					        $('#sgMemberList').modal('show');
+					        });
+					})
+					
+					
+					
+		$(function() {
+			$("#memberList>tbody>tr>td>button[name=messageToMember]").click(
+					function() {
+						var recv = $(this).parent().parent().children().children("#recvNick").val();
+						
+						$("#recvPush").attr("value", recv);
+					})
+		})
+		
+		
+
 		
 		$(function() {
 			$("#applyList>tbody>tr>td>button[name=accept]").click(
@@ -229,7 +395,7 @@
 									success : function(data) {
 										if (data > 0) {
 											alert("수락완료");
-											window.location = "${pageContext.request.contextPath}/studyGroupDetail.sg?sgNo=${studyGroup.sgNo}";
+											window.location = "";
 										}
 									},
 									error : function() {
@@ -244,7 +410,7 @@
 			$("#applyList>tbody>tr>td>button[name=reject]").click(
 					function() {
 						var sgNo = ${studyGroup.sgNo}
-						var sgaApplyNo = $(this).parent().parent().children().children("#sgaApplyNo").val();
+						var sgaApplyNo = $(this).parent().parent().children("#sgaApplyNo").val();
 						
 							if (confirm("선택하실 멤버를 수락하시겠습니까?")) {
 								$.ajax({
