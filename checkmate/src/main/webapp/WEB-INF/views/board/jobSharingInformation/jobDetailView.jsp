@@ -72,11 +72,11 @@ ul{
 				<script>
 					function postFormSubmit(num) {
 						if (num == 1) {
-							$("#postForm").attr("action", "updateForm.si")
+							$("#postForm").attr("action", "jobUpdateForm.si")
 									.submit();
 						} else {
 							if (confirm("정말 삭제하시겠습니까??") == true) {
-								$("#postForm").attr("action", "delete.si")
+								$("#postForm").attr("action", "jobDelete.si")
 										.submit();
 							} else {
 								return false;
@@ -129,7 +129,7 @@ ul{
     		
 	    		if($("#insertContent").val().trim().length != 0){
 	    			$.ajax({
-	        			url : "rinsert.si",
+	        			url : "jobrinsert.si",
 	        			data : {
 	        				refBno : ${b.informationNo},
 	        				replyContent : $("#insertContent").val(),
@@ -154,7 +154,7 @@ ul{
 		    	
 		    	function selectReplyList(){ //댓글 전부를 불러오는 처리 
 		    		$.ajax({
-		    			url : "rlist.si",
+		    			url : "jobrlist.si",
 		    			data : {
 		    				informationNo : ${b.informationNo}
 		    			},
