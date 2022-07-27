@@ -15,4 +15,6 @@ public interface StudyGroupApplyService {
 
 	int rejectStudyGroup(Map<String, Object> map);
 
+	int applyCount(int sgNo);
+
 }

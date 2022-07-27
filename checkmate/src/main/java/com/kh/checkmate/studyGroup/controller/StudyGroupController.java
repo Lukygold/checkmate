@@ -1,7 +1,9 @@
 package com.kh.checkmate.studyGroup.controller;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
@@ -21,6 +22,9 @@ import com.kh.checkmate.studyGroup.model.service.StudyGroupService;
 import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 import com.kh.checkmate.studyGroupApply.model.service.StudyGroupApplyService;
 import com.kh.checkmate.studyGroupApply.model.vo.StudyGroupApply;
+import com.kh.checkmate.studyGroupMember.controller.StudyGroupMemberController;
+import com.kh.checkmate.studyGroupMember.model.service.StudyGroupMemberService;
+import com.kh.checkmate.studyGroupMember.model.vo.StudyGroupMember;
 
 @Controller
 public class StudyGroupController {
@@ -30,6 +34,12 @@ public class StudyGroupController {
 	
 	@Autowired
 	private StudyGroupApplyService studyGroupApplyService;
+	
+	@Autowired
+	private StudyGroupMemberService studyGroupMemberService;
+	
+	@Autowired
+	private StudyGroupMemberController studyGroupMemeberController;
 
 	@RequestMapping("studyGroupExploration.sg")
 	public String studyGroupExploration() {
@@ -56,12 +66,12 @@ public class StudyGroupController {
 
 	@RequestMapping("insert.sg")
 	public String insertStudyGroup(StudyGroup sg, HttpSession session, Model model) {
-
+		
 		int result = studyGroupService.insertStudyGroup(sg);
 
 		if (result > 0) {
 			session.setAttribute("alertMsg", "스터디그룹 생성 성공");
-			return "redirect:/";
+			return studyGroupMemeberController.insertOwner(sg, session, model);
 		} else {
 			model.addAttribute("errorMsg", "스터디그룹 생성 실패");
 			return "common/errorPage";
@@ -72,14 +82,22 @@ public class StudyGroupController {
 	// 구대영
 	@RequestMapping("studyGroupDetail.sg")
 	public String studyGroupDetail(int sgNo, HttpSession session, Model model) {
+		
 		Member member = (Member)session.getAttribute("loginUser");
 
 		ArrayList<StudyGroupApply> studyGroupApplyList = studyGroupApplyService.studyGroupApplyList(sgNo);
 		model.addAttribute("studyGroupApplyList", studyGroupApplyList);
+		int applyCount = studyGroupApplyService.applyCount(sgNo);
+		model.addAttribute("applyCount", applyCount);
 		
 		StudyGroup studyGroup = studyGroupService.studyGroupDetail(sgNo);
 		model.addAttribute("studyGroup", studyGroup);
 		
+		ArrayList<StudyGroupMember> studyGroupMember = studyGroupMemberService.memberList(sgNo);
+		int memberCount = studyGroupMemberService.memberCount(sgNo);
+		model.addAttribute("studyGroupMember", studyGroupMember);
+		model.addAttribute("memberCount", memberCount);
+	
 		return "studyGroup/studyGroupDetail";
 	}
 	

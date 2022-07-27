@@ -59,18 +59,10 @@
 		ORDER BY SG_ENROLLDATE DESC
 	</select>
 
-	<update id="addNickToStudyGroup">
-		UPDATE STUDYGROUP
-		SET SG_MEMBER_NICK = SG_MEMBER_NICK||','||
-		(SELECT SG_APPLY_NICK
-		FROM STUDYGROUPAPPLY
-		WHERE SG_APPLY_NO IN 
-		<foreach collection="arr" item="item" index="index"
-			separator="," open="(" close=")">
-			#{item}
-		</foreach>
-		)
-		WHERE SG_NO = #{sgNo}
-	</update>
+	<select id="studyGroupNoSelect" resultType="studyGroup">
+		SELECT SG_NO
+		FROM STUDYGROUP
+		WHERE SG_NAME = #{sgName}
+	</select>
 
 </mapper>

@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +25,16 @@ import com.kh.checkmate.common.template.Pagination;
 import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.message.model.service.MessageService;
 import com.kh.checkmate.message.model.vo.Message;
+import com.kh.checkmate.studyGroup.controller.StudyGroupController;
 
 @Controller
 public class MessageController {
 
 	@Autowired
 	private MessageService messageService;
+	
+	@Autowired
+	private StudyGroupController studyGroupController;
 
 	@RequestMapping("messageList.msg")
 	public String messageList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, HttpSession session,
@@ -88,6 +91,24 @@ public class MessageController {
 
 		return "redirect:messageList.msg";
 	}
+	
+	@RequestMapping("sgDetailMessageInsert.msg")
+	public String sgDetailMessageInsert(int sgNo, Message message, MultipartFile upfile, HttpSession session, Model model) {
+
+		if (!upfile.getOriginalFilename().equals("")) {
+
+			String changeName = saveFile(upfile, session);
+
+			message.setMsgOriginName(upfile.getOriginalFilename());
+			message.setMsgChangeName("resources/uploadFiles/" + changeName);
+		}
+		
+		int result = messageService.insertMessage(message);
+
+		return studyGroupController.studyGroupDetail(sgNo, session, model);
+	}
+	
+	
 
 	@RequestMapping(value = "messageDelete.msg", method = RequestMethod.POST)
 	@ResponseBody

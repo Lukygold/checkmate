@@ -28,4 +28,13 @@ public interface MemberService {
 
 	
 	
+	int updateMember(Member m);
+	
+	int updateMember2(Member m);
+	
+	int deleteMember(String userId);
+
+	int updatePwd(Member m);	
+	
+	Member myPage(Member m);
 }
