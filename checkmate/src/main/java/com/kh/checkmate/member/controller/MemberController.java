@@ -97,7 +97,7 @@ public class MemberController {
 		session.setAttribute("userProfile", userProfile);
 		System.out.println(apiResult);
 		Member loginUser = memberService.NaverloginMember(userId);
-			
+			System.out.println(loginUser);
 		if(loginUser!=null) {
 			session.setAttribute("loginUser", loginUser);
 			return "redirect:/";
