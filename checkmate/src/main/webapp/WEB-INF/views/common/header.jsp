@@ -39,7 +39,6 @@
 <link href="${path}/resources/vendor/swiper/swiper-bundle.min.css"
 	rel="stylesheet">
 	
-	
 <!-- 부트스트랩 5.1.3 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
 
@@ -96,7 +95,11 @@
 									<li><a href="#">Deep Drop Down 4</a></li>
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
+
 							<li><a href="reservation.ro">예약</a></li>
+
+							<li><a href="locationMap.lo">지도 테스트</a></li>
+
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
@@ -117,23 +120,34 @@
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
-					<li class="dropdown"><a href="#"><span>스터디그룹</span> <i
-							class="bi bi-chevron-down"></i></a>
-						<ul>
-							<li><a href="studyGroupExploration.sg">둘러보기</a></li>
-							<li class="dropdown"><a href="studyGroupList.sg"><span>나의 스터디</span> <i class="bi bi-chevron-right"></i></a>
+						
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<li class="dropdown"><a href="#"><span>스터디그룹</span> <i class="bi bi-chevron-down"></i></a>
 								<ul>
-									<li><a href="#">나의스터디1</a></li>
-									<li><a href="#">나의스터디2</a></li>
-									<li><a href="#">나의스터디3</a></li>
-									<li><a href="#">나의스터디4</a></li>
-									<li><a href="#">나의스터디5</a></li>
+									<li><a href="studyGroupExploration.sg">둘러보기</a></li>
+								</ul>
+							</li>
+							<li><div style="padding: 0 70px;"></div></li>
+						</c:when>
+						<c:otherwise>
+							<li class="dropdown"><a href="#"><span>스터디그룹</span> <i class="bi bi-chevron-down"></i></a>
+								<ul>
+									<li><a href="studyGroupExploration.sg">둘러보기</a></li>
+									<li class="dropdown"><a href="studyGroupList.sg"><span>나의 스터디</span> <i class="bi bi-chevron-right"></i></a>
+										<ul>
+											<li><a href="#">나의스터디1</a></li>
+											<li><a href="#">나의스터디2</a></li>
+											<li><a href="#">나의스터디3</a></li>
+											<li><a href="#">나의스터디4</a></li>
+											<li><a href="#">나의스터디5</a></li>
+										</ul></li>
+									<li><a href="studyGroupEnrollForm.sg">스터디 생성</a></li>
 								</ul></li>
-							<li><a href="studyGroupEnrollForm.sg">스터디 생성</a></li>
-						</ul></li>
-					<li><div style="padding: 0 70px;"></div></li>
-
-
+							<li><div style="padding: 0 70px;"></div></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<c:choose>
 						<c:when test="${ empty loginUser }">
 							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>

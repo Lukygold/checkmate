@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
 
@@ -17,10 +18,9 @@ public class SharingInformationDao {
 	}
 
 	public ArrayList<SharingInformation> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
-
+		
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
  		return (ArrayList)sqlSession.selectList("sharingInformationMapper.selectList",null,rowBounds);
@@ -28,7 +28,6 @@ public class SharingInformationDao {
 
 	public int increaseCount(SqlSessionTemplate sqlSession, int informationNo) {
 		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
-//		return sqlSession.update("sharingInformationMapper.increaseCount",informationNo);
 	}
 
 	public SharingInformation selectBoard(SqlSessionTemplate sqlSession, int informationNo) {
@@ -42,4 +41,30 @@ public class SharingInformationDao {
 	public int insertBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
 		return sqlSession.insert("sharingInformationMapper.insertBoard",b);
 	}
+
+	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("sharingInformationMapper.deleteBoard",boardNo);
+	}
+
+	public ArrayList<SharingInformation> searchList(SqlSessionTemplate sqlSession, PageInfo pi, SharingInformation b) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+ 		return (ArrayList)sqlSession.selectList("sharingInformationMapper.searchList",b,rowBounds);
+	}
+
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int informationNo) {
+		return (ArrayList)sqlSession.selectList("sharingInformationMapper.selectReplyList",informationNo);
+	}
+
+	public Reply checkNo(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.selectOne("sharingInformationMapper.checkNo", r);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("sharingInformationMapper.insertReply",r);
+	}
+
 }
