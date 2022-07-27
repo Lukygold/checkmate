@@ -42,10 +42,7 @@
 <body>
 
 	<jsp:include page="../common/header.jsp" />
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br><br><br><br>
 	
 	<jsp:include page="../chat/chat.jsp" />
 		
