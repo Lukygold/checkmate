@@ -28,4 +28,8 @@ public class StudyGroupApplyDao {
 		return sqlSession.update("studyGroupApplyMapper.rejectStudyGroup", map);
 	}
 
+	public int applyCount(SqlSessionTemplate sqlSession, int sgNo) {
+		return sqlSession.selectOne("studyGroupApplyMapper.applyCount", sgNo);
+	}
+
 }

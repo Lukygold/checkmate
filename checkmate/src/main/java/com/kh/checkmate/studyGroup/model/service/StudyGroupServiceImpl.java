@@ -47,8 +47,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 	@Override
-	public int addNickToStudyGroup(Map<String, Object> map) {
-		return studyGroupDao.addNickToStudyGroup(sqlSession, map);
+	public StudyGroup studyGroupNoSelect(StudyGroup sg) {
+		return studyGroupDao.studyGroupNoSelect(sqlSession, sg);
 	}
 
 }

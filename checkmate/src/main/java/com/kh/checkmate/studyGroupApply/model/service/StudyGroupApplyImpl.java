@@ -39,4 +39,9 @@ public class StudyGroupApplyImpl implements StudyGroupApplyService {
 		return studyGroupApplyDao.rejectStudyGroup(sqlSession,map);
 	}
 
+	@Override
+	public int applyCount(int sgNo) {
+		return studyGroupApplyDao.applyCount(sqlSession,sgNo);
+	}
+
 }
