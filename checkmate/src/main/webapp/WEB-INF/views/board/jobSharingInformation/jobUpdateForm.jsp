@@ -39,7 +39,7 @@
 	<jsp:include page="../../common/header.jsp" />
 	<main role="main" class="container back-image">
 		<!-- 		<form name="form" method="POST" action="/bulletin_wr01"> -->
-		<form name="form" method="POST" action="update.si"
+		<form name="form" method="POST" action="jobUpdate.si"
 			enctype="multipart/form-data">
 			<input type="hidden" name="informationNo" value="${b.informationNo }">
 			<input class="form-control col-4 text-center float-left" type="text"
