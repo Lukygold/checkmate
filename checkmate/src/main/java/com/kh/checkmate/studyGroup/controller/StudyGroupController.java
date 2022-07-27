@@ -2,6 +2,7 @@ package com.kh.checkmate.studyGroup.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,7 @@ public class StudyGroupController {
 	
 	@Autowired
 	private StudyGroupApplyService studyGroupApplyService;
+	
 
 	@RequestMapping("studyGroupExploration.sg")
 	public String studyGroupExploration() {
@@ -72,6 +74,7 @@ public class StudyGroupController {
 	// 구대영
 	@RequestMapping("studyGroupDetail.sg")
 	public String studyGroupDetail(int sgNo, HttpSession session, Model model) {
+		
 		Member member = (Member)session.getAttribute("loginUser");
 
 		ArrayList<StudyGroupApply> studyGroupApplyList = studyGroupApplyService.studyGroupApplyList(sgNo);

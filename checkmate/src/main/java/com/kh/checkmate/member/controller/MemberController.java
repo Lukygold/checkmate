@@ -35,8 +35,12 @@ public class MemberController {
 		
 		Member loginUser = memberService.loginMember(m);
 		
+		String userNick = loginUser.getUserNick();
+
+		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPw(), loginUser.getUserPw())) {
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("userNick", userNick);
 			mv.setViewName("redirect:/");
 		}else {
 			mv.addObject("errorMsg","로그인 실패");
