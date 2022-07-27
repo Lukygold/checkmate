@@ -28,6 +28,7 @@ public class Member {
 	private Date enrollDate;
 	private String status;
 	private String userAddress;
+	private String userAddressDetail;
 	private String userOriginProfile;
 	private String userChangeProfile;
 }

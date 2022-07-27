@@ -39,8 +39,18 @@ public interface SharingInformationService {
 	
 	//댓글 작성
 	public abstract int insertReply(Reply r);
-//	
-//	//게시글 top5 조회
-//	ArrayList<Board> selectTopList();
 	Reply checkNo(Reply r);
+	
+	
+	// 취업지원정보공유 게시판
+	int jobSelectListCount();
+	ArrayList<SharingInformation> jobSelectList(PageInfo pi);
+	int jobInsertBoard(SharingInformation b);
+	int jobIncreaseCount(int informationNo);
+	SharingInformation jobSelectBoard(int informationNo);
+	int jobDeleteBoard(int informationNo);
+	int jobUpdateBoard(SharingInformation b);
+	ArrayList<SharingInformation> jobSearchList(PageInfo pi, SharingInformation b);
+	ArrayList<Reply> jobSelectReplyList(int informationNo);
+	int jobInsertReply(Reply r);
 }

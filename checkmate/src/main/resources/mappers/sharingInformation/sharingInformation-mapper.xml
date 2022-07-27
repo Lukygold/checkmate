@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*)
 		FROM INFORMATION_TB
 		WHERE INFORMATION_STATUS = 'Y'
+		AND INFORMATION_CATEGORY = '정보공유'
 	</select>
 	
 	<resultMap type="SharingInformation" id="siResultSet">
@@ -37,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM INFORMATION_TB
         JOIN MEMBER M USING(USER_NO)
 		WHERE INFORMATION_STATUS = 'Y'
+		AND INFORMATION_CATEGORY = '정보공유'
 		ORDER BY INFORMATION_DATE DESC
 	</select>
 	
@@ -101,8 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE INFORMATION_TB
 		SET INFORMATION_TITLE = #{informationTitle}
 			,INFORMATION_CONTENT = #{informationContent}
-<!-- 			,ORIGIN_NAME = #{originName} -->
-<!-- 			,CHANGE_NAME = #{changeName} -->
+			,INFORMATION_ORIGIN_NAME = #{informationOriginName}
+			,INFORMATION_CHANGE_NAME = #{informationChangeName}
 		WHERE INFORMATION_NO = #{informationNo}
 	</update>
 	
@@ -119,6 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM INFORMATION_TB
         JOIN MEMBER M USING(USER_NO)
 		WHERE INFORMATION_STATUS = 'Y'
+        AND INFORMATION_CATEGORY = '정보공유'
         AND INFORMATION_TITLE LIKE '%'||#{searchContent}||'%'
 		ORDER BY INFORMATION_DATE DESC
 	</select>
@@ -147,6 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN MEMBER ON (USER_NO=REF_UNO)
 		WHERE REF_BNO = #{informationNo}
 		AND REPLY_STATUS = 'Y'
+		
 		ORDER BY REPLY_DATE
 	</select>
 	

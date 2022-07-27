@@ -19,8 +19,8 @@
 					<ul class="nav nav-tabs">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="list.si">정보공유</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"
-							style="color: aliceblue;">취업정보공유</a></li>
+						<li class="nav-item"><a class="nav-link" href="jobList.si"
+							style="color: #747980;">취업정보공유</a></li>
 					</ul>
 					<table class="table table-light table-hover table-responsive"
 						id="siList">

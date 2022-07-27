@@ -77,6 +77,60 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 	public Reply checkNo(Reply r) {
 		return sid.checkNo(sqlSession,r);
 	}
+
+	
+	// 취업정보공유 게시판
+	@Override
+	public int jobSelectListCount() {
+		return sid.jobSelectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<SharingInformation> jobSelectList(PageInfo pi) {
+		return sid.jobSelectList(sqlSession,pi);
+	}
+
+	@Override
+	public int jobInsertBoard(SharingInformation b) {
+		return sid.jobInsertBoard(sqlSession,b);
+	}
+
+	@Override
+	public int jobIncreaseCount(int informationNo) {
+		return sid.jobIncreaseCount(sqlSession,informationNo);
+	}
+
+	@Override
+	public SharingInformation jobSelectBoard(int informationNo) {
+		return sid.jobSelectBoard(sqlSession,informationNo);
+	}
+
+	@Override
+	public int jobDeleteBoard(int informationNo) {
+		return sid.jobDeleteBoard(sqlSession,informationNo);
+	}
+
+	@Override
+	public int jobUpdateBoard(SharingInformation b) {
+		return sid.jobUpdateBoard(sqlSession,b);
+	}
+
+	@Override
+	public ArrayList<SharingInformation> jobSearchList(PageInfo pi, SharingInformation b) {
+		return sid.jobSearchList(sqlSession, pi, b);
+	}
+
+	@Override
+	public ArrayList<Reply> jobSelectReplyList(int informationNo) {
+		return sid.jobSelectReplyList(sqlSession,informationNo);
+	}
+
+	@Override
+	public int jobInsertReply(Reply r) {
+		return sid.jobInsertReply(sqlSession,r);
+	}
+	
+	
 	
 	
 

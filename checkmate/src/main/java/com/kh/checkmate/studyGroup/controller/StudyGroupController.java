@@ -2,6 +2,10 @@ package com.kh.checkmate.studyGroup.controller;
 
 import java.util.ArrayList;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +82,7 @@ public class StudyGroupController {
 	// 구대영
 	@RequestMapping("studyGroupDetail.sg")
 	public String studyGroupDetail(int sgNo, HttpSession session, Model model) {
+		
 		Member member = (Member)session.getAttribute("loginUser");
 
 		ArrayList<StudyGroupApply> studyGroupApplyList = studyGroupApplyService.studyGroupApplyList(sgNo);

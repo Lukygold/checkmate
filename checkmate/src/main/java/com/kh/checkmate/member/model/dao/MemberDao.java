@@ -28,7 +28,25 @@ public class MemberDao {
 	public int nickCheck(SqlSessionTemplate sqlSession, String userNick) {
 		return sqlSession.selectOne("memberMapper.nickCheck",userNick);
 	}
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember",m);
+	}
 
+	public int deleteMember(SqlSessionTemplate sqlSession, String userId) {
+		return sqlSession.update("memberMapper.deleteMember",userId);
+	}
+
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd",m);
+	}
+
+	public int updateMember2(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember2",m);
+	}
+
+	public Member myPage(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.myPage",m);
+	}
 	
 
 }

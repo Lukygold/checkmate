@@ -46,7 +46,9 @@
 	<br>
 	<br>
 	<br>
-
+	
+	<jsp:include page="../chat/chat.jsp" />
+		
 	<div style="margin-top: 200px; margin-bottom: 200px;"
 		class="container mt-3 detail">
 		<input type="hidden" id="sgNo" value="${studyGroup.sgNo}">

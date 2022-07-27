@@ -317,41 +317,41 @@
 	});
 		
 	//휴대전화 파트
-// 	var code2 = "";
-// 	function userPhoneCheck(){
-// 		var phone = $("#userPhone").val();
-// 		$.ajax({
-// 			type:"GET",
-// 			url:"phoneCheck?phone="+phone,
-// 			cache : false,
-// 			success : function(data){
-// 				console.log(data);
-// 				if(data == "error"){
-// 					alert("휴대폰 번호가 올바르지 않습니다.")
-// 					$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-// 					$(".successPhoneChk").css("color","red");
-// 					$("#userPhone").attr("autofocus",true);
-// 				}else{
-// 					alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호를 확인 해주세요.");
-// 					$("#phoneCheck").attr("disabled",false);        		
-// 	        		$(".successPhoneChk").text("인증번호가 발송되었습니다. 본인인증을 해주세요.");
-// 	        		$(".successPhoneChk").css("color","green");
-// 	        		$("#userPhone").attr("readonly",true);
-// 	        		code2 = data;
-// 				}
-// 			}
-// 		});
-// 	};
+	var code2 = "";
+	function userPhoneCheck(){
+		var phone = $("#userPhone").val();
+		$.ajax({
+			type:"GET",
+			url:"phoneCheck?phone="+phone,
+			cache : false,
+			success : function(data){
+				console.log(data);
+				if(data == "error"){
+					alert("휴대폰 번호가 올바르지 않습니다.")
+					$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+					$(".successPhoneChk").css("color","red");
+					$("#userPhone").attr("autofocus",true);
+				}else{
+					alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호를 확인 해주세요.");
+					$("#phoneCheck").attr("disabled",false);        		
+	        		$(".successPhoneChk").text("인증번호가 발송되었습니다. 본인인증을 해주세요.");
+	        		$(".successPhoneChk").css("color","green");
+	        		$("#userPhone").attr("readonly",true);
+	        		code2 = data;
+				}
+			}
+		});
+	};
 	
-// 	$("#phoneBtn2").click(function(){
-// 		if($("#phoneCheck").val() == code2){
-// 			alert("인증번호가 일치합니다.");
-// 			$("#phoneCheck").attr("readonly",true);
-// 		}else{
-// 			alert("인증번호를 다시 확인해주세요.").css("color","red");
-// 			$("#phoneCheck").attr("autofocus",true);
-// 		}
-// 	});
+	$("#phoneBtn2").click(function(){
+		if($("#phoneCheck").val() == code2){
+			alert("인증번호가 일치합니다.");
+			$("#phoneCheck").attr("readonly",true);
+		}else{
+			alert("인증번호를 다시 확인해주세요.").css("color","red");
+			$("#phoneCheck").attr("autofocus",true);
+		}
+	});
 	
 	//닉네임파트
 	$("#userNick").on('keyup',function(){
@@ -451,13 +451,13 @@
         	alert("주소를 다시 확인해주세요.");
         	return false;
         }
-//         else if($("#phoneCheck").prop("readonly")==false){
-//             alert("휴대폰 인증이 필요합니다.");       
-//             return false;
-//         }else if($("#userPhone").prop("readonly")==false){
-//         	alert("휴대폰 인증이 필요합니다.");       
-//             return false;
-//         }
+        else if($("#phoneCheck").prop("readonly")==false){
+            alert("휴대폰 인증이 필요합니다.");       
+            return false;
+        }else if($("#userPhone").prop("readonly")==false){
+        	alert("휴대폰 인증이 필요합니다.");       
+            return false;
+        }
         else{
         	alert("환영합니다.");    
         	var address = $('#userAddress').val();
