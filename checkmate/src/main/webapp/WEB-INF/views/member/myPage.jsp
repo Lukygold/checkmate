@@ -334,9 +334,9 @@
     
     function validatePwd(){
 
-    	if($("input[name=userPw]").val()!= $("#pwd2").val()){ // 변경할 비밀번호와 비밀번화 확인 value값이 같지 않으면 전송하지마
+    	if($("#pwd1").val()!= $("#pwd2").val()){ // 변경할 비밀번호와 비밀번화 확인 value값이 같지 않으면 전송하지마
 
-	        alert("변경할 비밀번호와 입력한 비밀번호가 일치하지 않습니다.")
+	        alert("변경할 비밀번호와 변경할 비밀번호확인과 같지 않습니다.")
 	    	
 	        return false;	
     	}

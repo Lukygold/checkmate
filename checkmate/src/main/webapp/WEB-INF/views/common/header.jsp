@@ -85,7 +85,7 @@
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-<<<<<<< HEAD
+
 							<li><a href="list.si">정보공유</a></li>
 							<li class="dropdown"><a href="#"><span>Deep Drop
 										Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -107,8 +107,7 @@
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-=======
->>>>>>> refs/remotes/origin/main
+
 							<li><a href="#">Drop Down 1</a></li>
 							<li class="dropdown"><a href="#"><span>Deep Drop
 										Down</span> <i class="bi bi-chevron-right"></i></a>
