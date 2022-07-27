@@ -37,6 +37,23 @@ public class ReservationDao {
 		return (ArrayList)sqlSession.selectList("reservationMapper.selectReservationList",r);
 	}
 
+	public ArrayList<Reservation> selectMyReservation(SqlSessionTemplate sqlSession, Reservation r) {
+		return (ArrayList)sqlSession.selectList("reservationMapper.selectMyReservationList",r);
+	}
+
+	public int selectListCount(SqlSessionTemplate sqlSession, Reservation r) {
+		return sqlSession.selectOne("reservationMapper.selectListCount",r);
+	}
+
+	public int deleteReservation(SqlSessionTemplate sqlSession, int[] reservationNoDelete) {
+		
+		int result =0;
+		for(int i=0; i<reservationNoDelete.length; i++) {
+			result += sqlSession.delete("reservationMapper.deleteReservation", reservationNoDelete[i]);			
+		}		
+		return result;
+	}
+
 
 
 	

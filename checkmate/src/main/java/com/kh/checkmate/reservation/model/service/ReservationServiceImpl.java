@@ -17,9 +17,8 @@ public class ReservationServiceImpl implements ReservationService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public Reservation selectUserReservation(String reservationUser) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Reservation> selectMyReservation(Reservation r) {
+		return reservationDao.selectMyReservation(sqlSession,r);
 	}
 
 	@Override
@@ -28,9 +27,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public int deleteReservation(String reservationUser) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReservation(int[] ReservationNoDelete) {
+		return reservationDao.deleteReservation(sqlSession,ReservationNoDelete);
 	}
 
 	@Override
@@ -56,6 +54,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public ArrayList<Reservation> selectReservationList(Reservation r) {
 		return reservationDao.selectReservationList(sqlSession,r);
+	}
+
+	@Override
+	public int selectListCount(Reservation r) {
+		return reservationDao.selectListCount(sqlSession,r);
 	}
 
 }

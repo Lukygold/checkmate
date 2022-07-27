@@ -17,11 +17,11 @@ public interface ReservationService {
 	//방번호 조회
 	int selectRoomNo(Reservation r);
 	//전체 조회
-	ArrayList<Reservation> selectReservationList(Reservation r);
-	
+	ArrayList<Reservation> selectReservationList(Reservation r);	
 	//유저 예약조회
-	Reservation selectUserReservation(String reservationUser);
-	
+	ArrayList<Reservation> selectMyReservation(Reservation r);
+	//유저 예약갯수조회
+	int selectListCount(Reservation r);
 	//예약취소
-	int deleteReservation(String reservationUser);
+	int deleteReservation(int[] reservationNoDelete);
 }

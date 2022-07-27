@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +89,7 @@
         }
         .image-upload > input
 		{
-		    display: none;
+ 		    display: none; 
 		}
 		
 		.image-upload img
@@ -96,6 +97,7 @@
 		    width: 80px;
 		    cursor: pointer;
 		}
+		
     </style>
 </head>
 <body>
@@ -113,8 +115,7 @@
             <div class="content_1" style="background-color: #E0E0E0">
                 <br><br><br>
                 <ul id="navi">
-                    <li><a href="">예약조회</a></li>
-                    <li><a href="">예약취소</a></li>
+                    <li><a href="myPage.me">예약조회/취소</a></li>
                     <li><a type="button" data-toggle="modal" data-target="#myModal">정보수정</a></li>
                     <li><a type="button" data-toggle="modal" data-target="#myModal2">회원탈퇴</a></li>
                     <li><a type="button" data-toggle="modal" data-target="#myModal3">비밀번호 변경</a></li>
@@ -123,17 +124,48 @@
             </div>
             <div class="content_2">
                 <div class="content_2_1">
-                    <span class="inline-block"><img src=".${request.getContextPath()}/${loginUser.userChangeProfile}" style="width: 70px; height: 60px;"></span>
+                    <span class="inline-block"><img src=".${request.getContextPath()}/${loginUser.userChangeProfile}" style="width: 100px; height: 80px;"></span>
                     <span class="inline-block"><h3>${loginUser.userName} 안녕하세요</h3></span>
                 </div>
                 <div class="content_2_2">
                     <br>
-                    <h2 style="margin-left: 100px;">예약조회<span class="badge">3</span></h2>
+                    <h2 style="margin-left: 100px;">예약조회<span class="badge">${listCount}</span></h2>
                     <br>
-                    <hr>
+                    <hr style="height: 3px; background-color: black;">
                 </div>
-                
-                </div>    
+                <div class="innerOuter" style="padding:5% 5%;">
+                	<div style="float:right;">
+                	<a class="btn btn-secondary" style="margin-right: 3px;" href="selectMyReservation.ro">예약조회</a>
+                	<a class="btn btn-dark" style="margin-left: 3px;" id="deleting">예약취소</a>
+                	</div>
+                	<table id="boardList" class="table table-hover" style="float:right;" >
+		                <thead align="center">
+		                    <tr>
+		                    	<th></th>
+		                        <th>스터디센터</th>
+		                        <th>예약일</th>
+		                        <th>시작시간</th>
+		                        <th>마치는시간</th>
+		                        <th>방이름</th>
+		                        <th>방크기(인원가능)</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                	<c:forEach var="r" items="${myList}">
+		                    <tr>
+		                    	<th><input type="checkbox" name="deletes" value="${r.reservationNo}"></th>
+		                        <td>${r.roomCenterName}</td>
+		                        <td>${r.reservationDate}</td>
+		                        <td>${r.reservationStartTime}시</td>
+		                        <td>${r.reservationUsedTime+r.reservationStartTime}시</td>
+		                        <td>${r.roomName}</td>
+		                        <td>${r.roomSize}명</td>
+		                    </tr>
+		                    </c:forEach>  
+                		</tbody>
+           			 </table>	
+                </div>
+            </div>    
                   <!-- Modal -->
                 <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
@@ -146,9 +178,11 @@
                         <div class="modal-header">
                             <h2 class="modal-title" align="center">정보수정</h2>
                         </div>
-                        <form action="update.me" method="post">
+                        <form action="update.me" method="post" enctype="multipart/form-data">
                         	<div class="modal-body">
-                            	<img id="userProfile" src=".${request.getContextPath()}/${loginUser.userChangeProfile}" style="width: 70px; height: 60px; margin: auto; display:block">
+                        		<div id="image_container" align="center">
+                            		<img id="userProfile" src=".${request.getContextPath()}/${loginUser.userChangeProfile}" style="width: 100px; height: 80px; margin: auto; display:block">
+                            	</div>
                             	<div class="image-upload" align="center">
 							        <label for="userOriginProfile">
 							            <img src="https://www.svgrepo.com/show/904/photo-camera.svg" style="width: 15px; height: 12px;"/>
@@ -181,10 +215,10 @@
                                     <br>
                                     
                                     <label for="address"> &nbsp; 주소 : </label>
-                                    <input type="text" class="form-control" id="address_kakao" readonly placeholder="주소"> <br>
+                                    <input type="text" class="form-control" id="address_kakao" value="${addressKakao}" readonly placeholder="주소"> <br>
                                     
                                     <label for="address"> &nbsp; 상세주소 : </label>
-                                    <input type="text" class="form-control" id="address_detail" value="${loginUser.userAddress}" placeholder="상세주소"> <br>
+                                    <input type="text" class="form-control" id="address_detail" value="${addressDetail}" placeholder="상세주소"> <br>
                                     <input type="hidden" name="userAddress" id="userAddress"/>
 
                                 </div> 
@@ -441,7 +475,30 @@
 			return true;
 		}
 	})
-	
+	$(function(){
+		$("#deleting").click(function(){
+			
+			var temp = $("input[name=deletes]:checked");
+			
+			var values=[];
+			for(var i=0;i<temp.length;i++){
+				values.push(temp[i].value);
+			}
+			
+			$.ajax({
+				url: "deleting.ro",
+				traditional : true,
+				data : {values:values},
+				success: function(result){			
+						alert("예약취소성공");
+						window.location.replace=("myPage.me");	
+				},
+				error:function(){		
+					alertify.alert("예약취소실패");
+				},
+			})
+		})
+	})
     </script>
 </body>
 </html>

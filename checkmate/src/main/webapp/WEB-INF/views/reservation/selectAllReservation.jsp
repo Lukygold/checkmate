@@ -114,13 +114,15 @@
                   <label class="visually-hidden" for="autoSizingSelect3">사용시간</label>
                   <select class="form-select" id="autoSizingSelect3" name="reservationUsedTime">
                     <option selected="">사용시간</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <c:forEach var="r" begin="1" end="12">
+                    <option value="${r}">${r}</option>
+					</c:forEach>
                   </select>
                   </div>
                 <div class="col-6 col-md-auto">
-                  <button class="btn btn-lg btn-primary" type="submit">예약</button>
+                  <c:if test="${not empty loginUser}">
+                  <button class="btn btn-lg btn-primary" type="submit" id="confirmBtn">예약</button>
+                  </c:if>
                 </div>
               </form>
             </div>
@@ -197,6 +199,29 @@
   			
   		})
   	})
+  	$("#confirmBtn").click(function(){
+        if(!$("#inlineFormSelectPref").children("option:selected").attr("value")){
+            alert("스터디센터를 선택해주세요");
+            return false;
+        }else if(!$("#autoSizingSelect").children("option:selected").attr("value")){
+        	alert("방크기를 선택해주세요");
+        	return false;
+        }else if(!$("#inlineFormSelectPref2").children("option:selected").attr("value")){
+        	alert("방을 선택해주세요");
+        	return false;
+        }else if($("#date1").val().length<1){
+        	alert("날짜를 선택해주세요");
+        	return false;
+        }else if(!$("#autoSizingSelect2").children("option:selected").attr("value")){
+        	alert("시작시간을 선택해주세요");
+        	return false;
+        }else if(!$("#autoSizingSelect3").children("option:selected").attr("value")){
+        	alert("사용시간을 선택해주세요");
+        	return false;
+        }else{
+        	return true;
+        }
+  	});
   </script>
 
 

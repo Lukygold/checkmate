@@ -93,6 +93,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updateMember2(sqlSession, m);
 	}
 
+	@Override
+	public Member myPage(Member m) {
+		return  memberDao.myPage(sqlSession,m);
+	}
+
 	
 
 

@@ -43,6 +43,10 @@ public class MemberDao {
 	public int updateMember2(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember2",m);
 	}
+
+	public Member myPage(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.myPage",m);
+	}
 	
 
 }

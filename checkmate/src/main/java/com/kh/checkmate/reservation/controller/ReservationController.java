@@ -99,6 +99,34 @@ public class ReservationController {
 			return "redirect:reservation.ro";
 		}
 	}
+	@RequestMapping("selectMyReservation.ro")
+	public String selectMyReservation (Reservation r,HttpSession session) {
+	
+		int userNo=((Member)session.getAttribute("loginUser")).getUserNo();
+		r.setReservationUser(userNo);
+		
+		ArrayList <Reservation> myList = reservationService.selectMyReservation(r);
+		int  listCount = reservationService.selectListCount(r); 
+		
+		session.setAttribute("myList", myList);
+		session.setAttribute("listCount", listCount);
+		return "redirect:myPage.me";
+	}
+	@ResponseBody
+	@RequestMapping(value="deleting.ro",produces="application/json; charset=UTF-8")
+	public String deleteReservation (String [] values) {
+		
+		int[] reservationNoDelete = new int [values.length];
+		
+		for(int i=0; i<values.length; i++) {
+			reservationNoDelete[i]=Integer.parseInt(values[i]);
+		}
+		
+		int result = reservationService.deleteReservation(reservationNoDelete);
+		
+		return new Gson().toJson(result);
+	}
+	
 }
 
 

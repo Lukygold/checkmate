@@ -16,5 +16,5 @@ public class Reservation {
 	private String roomCenterName;
 	private String roomName;
 	private int roomSize;
-		
+	private int[] reservationNoDelete;	
 }

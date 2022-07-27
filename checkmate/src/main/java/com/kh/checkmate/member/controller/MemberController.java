@@ -173,13 +173,22 @@ public class MemberController {
 				
 	}
 	@RequestMapping("myPage.me")
-	public String myPage() {
+	public String myPage(HttpSession session,Model model) {
+		
+		Member	m	 =(Member)session.getAttribute("loginUser");
+		Member updateMem1 =memberService.myPage(m);	
+		String [] address=updateMem1.getUserAddress().split(",");
+		String addressKakao = address[0];
+		String addressDetail = address[1];
+						
+		model.addAttribute("addressKakao", addressKakao);
+		model.addAttribute("addressDetail", addressDetail);
+		
 		return "member/myPage";
 	}
 	@RequestMapping("update.me")
 	public String updateMember(Member m,MultipartFile profile,HttpSession session,Model model) {
 		
-		System.out.println(profile.getOriginalFilename());
 		if(!profile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(profile,session);
 			m.setUserOriginProfile(profile.getOriginalFilename());
@@ -190,8 +199,8 @@ public class MemberController {
 			if(result>0) {
 				
 				Member updateMem =memberService.loginMember(m);
-				session.setAttribute("loginUser", updateMem);
-				
+					
+				session.setAttribute("loginUser", updateMem);							
 				session.setAttribute("alertMsg", "회원 정보수정 성공");
 				return "redirect:myPage.me";
 			}else {
@@ -204,13 +213,12 @@ public class MemberController {
 		
 			int result =memberService.updateMember(m);
 			
-			if(result>0) {
-				
+			if(result>0) {				
 				Member updateMem =memberService.loginMember(m);
-				session.setAttribute("loginUser", updateMem);
-				
+
+				session.setAttribute("loginUser", updateMem);					
 				session.setAttribute("alertMsg", "회원 정보수정 성공");
-				return "redirect : myPage.me";
+				return "redirect:myPage.me";
 			}else {
 				model.addAttribute("errorMsg","회원 정보 수정실패");
 				return "common/errorPage";

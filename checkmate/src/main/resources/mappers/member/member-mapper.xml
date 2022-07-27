@@ -117,6 +117,11 @@
 		SET USER_PW= #{userPw}
 		WHERE USER_ID= #{userId} 
   	</update>
-	
+	<select id="myPage" resultMap="memberResultSet">
+		SELECT USER_ADDRESS
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		AND USER_STATUS = 'Y'		
+	</select>
 	
 </mapper>
