@@ -25,69 +25,67 @@ import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
 
 @Controller
-public class SharingInformationController {
-
+public class JobSharingInformationController {
 	@Autowired
 	private SharingInformationService sharingInformationService;
 
-	@RequestMapping("list.si")
-	public String selectList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
-		int listCount = sharingInformationService.selectListCount();
+	@RequestMapping("jobList.si")
+	public String jobSelectList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
+		int listCount = sharingInformationService.jobSelectListCount();
 		
 		int pageLimit = 10;
 		int boardLimit = 15;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-		ArrayList<SharingInformation> list = sharingInformationService.selectList(pi);
+		ArrayList<SharingInformation> list = sharingInformationService.jobSelectList(pi);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 
-		return "board/sharingInformation/siListView";
+		return "board/jobSharingInformation/jobListView";
 	}
 
-	@RequestMapping("enrollForm.si")
-	public String siEnrollForm() {
-		return "board/sharingInformation/siEnrollForm";
+	@RequestMapping("jobEnrollForm.si")
+	public String jobEnrollForm() {
+		return "board/jobSharingInformation/jobEnrollForm";
 	}
 	
-	@RequestMapping("insert.si")
-	public String insertBoard(SharingInformation b, MultipartFile upfile, HttpSession session, Model model) {
+	@RequestMapping("jobInsert.si")
+	public String jobInsertBoard(SharingInformation b, MultipartFile upfile, HttpSession session, Model model) {
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(upfile,session);
 			b.setInformationOriginName(upfile.getOriginalFilename());
 			b.setInformationChangeName("resources/uploadFiles/"+changeName);
 		}
 		
-		int result = sharingInformationService.insertBoard(b);
+		int result = sharingInformationService.jobInsertBoard(b);
 		if(result>0) {
 			session.setAttribute("alertMsg", "게시글을 작성하셨습니다.");
-			return "redirect:list.si";
+			return "redirect:jobList.si";
 		}else { 
 			model.addAttribute("errorMsg", "게시글 작성 실패");
 			return "common/errorPage";
 		}
-		
 	}
 
-	@RequestMapping("detail.si")
-	public ModelAndView selectBoard(int informationNo, ModelAndView mv) {
-		int result = sharingInformationService.increaseCount(informationNo);
+	@RequestMapping("jobDetail.si")
+	public ModelAndView jobSelectBoard(int informationNo, ModelAndView mv) {
+		int result = sharingInformationService.jobIncreaseCount(informationNo);
 		
 		if (result > 0) {
-			SharingInformation b = sharingInformationService.selectBoard(informationNo);
-			mv.addObject("b", b).setViewName("board/sharingInformation/siDetailView");
+			SharingInformation b = sharingInformationService.jobSelectBoard(informationNo);
+			mv.addObject("b", b).setViewName("board/jobSharingInformation/jobDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
 	
-	@RequestMapping("delete.si")
-	public ModelAndView deleteBoard(ModelAndView mv, int informationNo, String filePath, HttpSession session) {
+	@RequestMapping("jobDelete.si")
+	public ModelAndView jobDeleteBoard(ModelAndView mv, int informationNo, String filePath, HttpSession session) {
 		
-		int result = sharingInformationService.deleteBoard(informationNo);
+		int result = sharingInformationService.jobDeleteBoard(informationNo);
 		
 		if(result>0) {
 			if(!filePath.equals("")) {
@@ -96,7 +94,7 @@ public class SharingInformationController {
 			}
 			
 			session.setAttribute("alertMsg", "게시글 삭제 성공");
-			mv.setViewName("redirect:list.si");
+			mv.setViewName("redirect:jobList.si");
 		}else {
 			mv.addObject("errorMsg", "게시글 삭제 실패").setViewName("common/errorPage");
 		}
@@ -104,17 +102,17 @@ public class SharingInformationController {
 		return mv;
 	}
 	
-	@RequestMapping("updateForm.si")
-	public String updateForm(int informationNo, Model model) {
-		SharingInformation b = sharingInformationService.selectBoard(informationNo);
+	@RequestMapping("jobUpdateForm.si")
+	public String jobUpdateForm(int informationNo, Model model) {
+		SharingInformation b = sharingInformationService.jobSelectBoard(informationNo);
 		
 		model.addAttribute("b", b);
 		
-		return "board/sharingInformation/siUpdateForm";
+		return "board/jobSharingInformation/jobUpdateForm";
 	}
 	
-	@RequestMapping("update.si")
-	public ModelAndView updateBoard(ModelAndView mv, MultipartFile upfile, SharingInformation b, HttpSession session) {
+	@RequestMapping("jobUpdate.si")
+	public ModelAndView jobUpdateBoard(ModelAndView mv, MultipartFile upfile, SharingInformation b, HttpSession session) {
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			if(!b.getInformationOriginName().equals("")) {
@@ -126,32 +124,33 @@ public class SharingInformationController {
 			b.setInformationOriginName(upfile.getOriginalFilename());
 			b.setInformationChangeName("resources/uploadFiles/"+changeName);
 		}
-		int result = sharingInformationService.updateBoard(b);
+		
+		int result = sharingInformationService.jobUpdateBoard(b);
 		
 		if(result>0) {
 			session.setAttribute("alertMsg", "게시글 수정 성공");
-			mv.setViewName("redirect:detail.si?informationNo="+b.getInformationNo());
+			mv.setViewName("redirect:jobDetail.si?informationNo="+b.getInformationNo());
 		}else {
 			mv.addObject("errorMsg","게시글 수정 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
 	
-	@RequestMapping("search.si")
-	public String searchList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model, SharingInformation b) {
-		int listCount = sharingInformationService.selectListCount();
+	@RequestMapping("jobSearch.si")
+	public String jobSearchList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model, SharingInformation b) {
+		int listCount = sharingInformationService.jobSelectListCount();
 
 		int pageLimit = 10;
 		int boardLimit = 15;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
-		ArrayList<SharingInformation> list = sharingInformationService.searchList(pi, b);
+		ArrayList<SharingInformation> list = sharingInformationService.jobSearchList(pi, b);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 
-		return "board/sharingInformation/siListView";
+		return "board/jobSharingInformation/jobListView";
 	}
 	
 	public String saveFile(MultipartFile upfile,HttpSession session) {
@@ -177,20 +176,20 @@ public class SharingInformationController {
 		return changeName;
 	}
 	
-	@RequestMapping(value="rlist.si",produces="application/json; charset=UTF-8")
+	@RequestMapping(value="jobrlist.si",produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String selectReplyList(int informationNo) {
+	public String jobSelectReplyList(int informationNo) {
 		
-		ArrayList<Reply> list = sharingInformationService.selectReplyList(informationNo);
+		ArrayList<Reply> list = sharingInformationService.jobSelectReplyList(informationNo);
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping(value="rinsert.si",produces="html/text; charset=UTF-8")
+	@RequestMapping(value="jobrinsert.si",produces="html/text; charset=UTF-8")
 	@ResponseBody
-	public String insertReply(Reply r) {
+	public String jobInsertReply(Reply r) {
 		Reply checkNo = sharingInformationService.checkNo(r);
 		r.setRefUno(checkNo.getRefUno());
-		int result = sharingInformationService.insertReply(r);
+		int result = sharingInformationService.jobInsertReply(r);
 		
 		String ans="";
 		
@@ -201,5 +200,4 @@ public class SharingInformationController {
 		}
 		return ans;
 	}
-
 }

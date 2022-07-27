@@ -66,5 +66,57 @@ public class SharingInformationDao {
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
 		return sqlSession.insert("sharingInformationMapper.insertReply",r);
 	}
+	
+	
+	// 취업정보공유 게시판
+	public int jobSelectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("jobSharingInformationMapper.jobSelectListCount");
+	}
+
+	public ArrayList<SharingInformation> jobSelectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		return (ArrayList)sqlSession.selectList("jobSharingInformationMapper.jobSelectList",null,rowBounds);
+	}
+
+	public int jobInsertBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
+		return sqlSession.insert("jobSharingInformationMapper.jobInsertBoard",b);
+	}
+
+	public int jobIncreaseCount(SqlSessionTemplate sqlSession, int informationNo) {
+		return sqlSession.update("jobSharingInformationMapper.jobIncreaseCount",informationNo);
+	}
+
+	public SharingInformation jobSelectBoard(SqlSessionTemplate sqlSession, int informationNo) {
+		return sqlSession.selectOne("jobSharingInformationMapper.jobSelectBoard",informationNo);
+	}
+
+	public int jobDeleteBoard(SqlSessionTemplate sqlSession, int informationNo) {
+		return sqlSession.update("jobSharingInformationMapper.jobDeleteBoard",informationNo);
+	}
+
+	public int jobUpdateBoard(SqlSessionTemplate sqlSession, SharingInformation b) {
+		return sqlSession.update("jobSharingInformationMapper.jobUpdateBoard",b);
+	}
+
+	public ArrayList<SharingInformation> jobSearchList(SqlSessionTemplate sqlSession, PageInfo pi,
+			SharingInformation b) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+ 		return (ArrayList)sqlSession.selectList("jobSharingInformationMapper.jobSearchList",b,rowBounds);
+	}
+
+	public ArrayList<Reply> jobSelectReplyList(SqlSessionTemplate sqlSession, int informationNo) {
+		return (ArrayList)sqlSession.selectList("jobSharingInformationMapper.jobSelectReplyList",informationNo);
+	}
+
+	public int jobInsertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("jobSharingInformationMapper.jobInsertReply",r);
+	}
 
 }
