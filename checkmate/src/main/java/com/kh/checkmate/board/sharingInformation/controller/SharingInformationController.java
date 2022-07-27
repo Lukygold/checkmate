@@ -116,16 +116,16 @@ public class SharingInformationController {
 	@RequestMapping("update.si")
 	public ModelAndView updateBoard(ModelAndView mv, MultipartFile upfile, SharingInformation b, HttpSession session) {
 		
-//		if(!upfile.getOriginalFilename().equals("")) {
-//			if(!b.getOriginName().equals("")) {
-//				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
-//			}
-//			
-//			String changeName = saveFile(upfile,session);
-//			
-//			b.setOriginName(upfile.getOriginalFilename());
-//			b.setChangeName("resources/uploadFiles/"+changeName);
-//		}
+		if(!upfile.getOriginalFilename().equals("")) {
+			if(!b.getInformationOriginName().equals("")) {
+				new File(session.getServletContext().getRealPath(b.getInformationChangeName())).delete();
+			}
+			
+			String changeName = saveFile(upfile,session);
+			
+			b.setInformationOriginName(upfile.getOriginalFilename());
+			b.setInformationChangeName("resources/uploadFiles/"+changeName);
+		}
 		int result = sharingInformationService.updateBoard(b);
 		
 		if(result>0) {

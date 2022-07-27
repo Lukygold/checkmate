@@ -35,8 +35,12 @@ public class MemberController {
 		
 		Member loginUser = memberService.loginMember(m);
 		
+		String userNick = loginUser.getUserNick();
+
+		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPw(), loginUser.getUserPw())) {
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("userNick", userNick);
 			mv.setViewName("redirect:/");
 		}else {
 			mv.addObject("errorMsg","로그인 실패");
@@ -81,6 +85,8 @@ public class MemberController {
 	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m,MultipartFile profile,HttpSession session,Model model) {
+		
+		System.out.println(profile.getOriginalFilename());
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPw());		
 		m.setUserPw(encPwd);
@@ -170,4 +176,112 @@ public class MemberController {
 		}
 				
 	}
+	@RequestMapping("myPage.me")
+	public String myPage(HttpSession session,Model model) {
+		
+		Member	m	 =(Member)session.getAttribute("loginUser");
+		Member updateMem1 =memberService.myPage(m);	
+		String [] address=updateMem1.getUserAddress().split(",");
+		String addressKakao = address[0];
+		String addressDetail = address[1];
+						
+		model.addAttribute("addressKakao", addressKakao);
+		model.addAttribute("addressDetail", addressDetail);
+		
+		return "member/myPage";
+	}
+	@RequestMapping("update.me")
+	public String updateMember(Member m,MultipartFile profile,HttpSession session,Model model) {
+		
+		if(!profile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(profile,session);
+			m.setUserOriginProfile(profile.getOriginalFilename());
+			m.setUserChangeProfile("resources/uploadFiles/"+changeName);
+			
+			int result = memberService.updateMember2(m);
+			
+			if(result>0) {
+				
+				Member updateMem =memberService.loginMember(m);
+					
+				session.setAttribute("loginUser", updateMem);							
+				session.setAttribute("alertMsg", "회원 정보수정 성공");
+				return "redirect:myPage.me";
+			}else {
+				model.addAttribute("errorMsg","회원 정보 수정실패");
+				return "common/errorPage";
+				
+			}
+					
+		}else {
+		
+			int result =memberService.updateMember(m);
+			
+			if(result>0) {				
+				Member updateMem =memberService.loginMember(m);
+
+				session.setAttribute("loginUser", updateMem);					
+				session.setAttribute("alertMsg", "회원 정보수정 성공");
+				return "redirect:myPage.me";
+			}else {
+				model.addAttribute("errorMsg","회원 정보 수정실패");
+				return "common/errorPage";
+			}
+		}
+	}
+	@RequestMapping("delete.me")
+	public String deleteMember(String userPw,HttpSession session,Model model) {
+		
+		String encPwd = ((Member)session.getAttribute("loginUser")).getUserPw();
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		if(bcryptPasswordEncoder.matches(userPw, encPwd)) {
+			
+			int result = memberService.deleteMember(userId);
+			
+			if(result>0) {
+				session.removeAttribute("loginUser");
+				
+				session.setAttribute("alertMsg", "이용해주셔서 감사합니다");
+				return "redirect:/";
+			}else {
+				model.addAttribute("errorMsg","회원탈퇴실패");
+				return "common/errorPage";
+			}
+			
+		}else {
+			session.setAttribute("alertMsg", "비밀번호를 잘못 입력하셨습니다.");
+			return "redirect:/";
+		}
+	}
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(Member m,String nowPw, HttpSession session,Model model) {
+		
+			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+			String userPwd =((Member)session.getAttribute("loginUser")).getUserPw();
+			String encUpdatePw =bcryptPasswordEncoder.encode(m.getUserPw());
+			
+			if(bcryptPasswordEncoder.matches(nowPw,userPwd)){
+			
+			m.setUserPw(encUpdatePw);
+			m.setUserId(userId);
+			
+			int result = memberService.updatePwd(m);
+			
+			if(result>0) {
+				Member updateMem =memberService.loginMember(m);
+				session.setAttribute("loginUser", updateMem);
+				
+				session.setAttribute("alertMsg", "회원 정보수정 성공");
+				return "redirect:myPage.me";
+			}else {
+				model.addAttribute("errorMsg","회원 정보 수정실패");
+				return "common/errorPage";
+			}
+			
+			}else {
+				session.setAttribute("alertMsg","비밀번호가 올바르지 않습니다.");
+				return "redirect:myPage.me";
+			}
+	}		
 }

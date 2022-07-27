@@ -16,4 +16,13 @@ public interface MemberService {
 
 	int insertMember2(Member m);
 	
+	int updateMember(Member m);
+	
+	int updateMember2(Member m);
+	
+	int deleteMember(String userId);
+
+	int updatePwd(Member m);	
+	
+	Member myPage(Member m);
 }

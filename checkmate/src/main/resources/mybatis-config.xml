@@ -14,15 +14,18 @@
 		<typeAlias type="com.kh.checkmate.studyGroup.model.vo.StudyGroup" alias="studyGroup" />
 		<typeAlias type="com.kh.checkmate.studyGroupApply.model.vo.StudyGroupApply" alias="studyGroupApply" />
 		<typeAlias type="com.kh.checkmate.studyGroupMember.model.vo.StudyGroupMember" alias="studyGroupMember" />
+		<typeAlias type="com.kh.checkmate.reservation.model.vo.Reservation" alias="reservation"/>
 	</typeAliases>
-
+			
 	<mappers>
 		<mapper resource="/mappers/message/message-mapper.xml" />
 		<mapper resource="/mappers/member/member-mapper.xml" />
 		<mapper resource="/mappers/sharingInformation/sharingInformation-mapper.xml" />
+		<mapper resource="/mappers/jobSharingInformation/jobSharingInformation-mapper.xml" />
 		<mapper resource="/mappers/location/location-mapper.xml" />
-		<mapper resource="/mappers/studyGroup/studyGroup-mapper.xml" />
+		<mapper resource="/mappers/studyGroup/studyGroup-mapper.xml"/>
 		<mapper resource="/mappers/studyGroupApply/studyGroupApply-mapper.xml" />
 		<mapper resource="/mappers/studyGroupMember/studyGroupMember-mapper.xml" />
+		<mapper resource="/mappers/reservation/reservation-mapper.xml"/>
 	</mappers>
 </configuration>

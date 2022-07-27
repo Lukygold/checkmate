@@ -85,6 +85,7 @@
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
+
 							<li><a href="list.si">정보공유</a></li>
 							<li class="dropdown"><a href="#"><span>Deep Drop
 										Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -95,13 +96,18 @@
 									<li><a href="#">Deep Drop Down 4</a></li>
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
+
+							<li><a href="reservation.ro">예약</a></li>
+
 							<li><a href="locationMap.lo">지도 테스트</a></li>
+
 							<li><a href="#">Drop Down 3</a></li>
 							<li><a href="#">Drop Down 4</a></li>
 						</ul></li>
 					<li class="dropdown"><a href="#"><span>Drop Down</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
+
 							<li><a href="#">Drop Down 1</a></li>
 							<li class="dropdown"><a href="#"><span>Deep Drop
 										Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -113,8 +119,15 @@
 									<li><a href="#">Deep Drop Down 5</a></li>
 								</ul></li>
 							<li><a href="#">Drop Down 2</a></li>
-							<li><a href="#">Drop Down 3</a></li>
+							<li><a href="#">지도 테스트</a></li>
 							<li><a href="#">Drop Down 4</a></li>
+						</ul></li>
+					<li class="dropdown"><a href="#"><span>커뮤니티</span> <i
+							class="bi bi-chevron-down"></i></a>
+						<ul>
+							<li><a href="list.si">정보공유 게시판</a></li>
+							<li><a href="jobList.si">취업정보 게시판</a></li>
+							<li><a href="locationMap.lo">내 주변 사용자 보기</a></li>
 						</ul></li>
 						
 					<c:choose>
@@ -153,7 +166,7 @@
 						<c:otherwise>
 							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
-							<li><a class="nav-link scrollto" href="#">마이페이지</a></li>
+							<li><a class="nav-link scrollto" href="myPage.me">마이페이지</a></li>
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
 						</c:otherwise>
 					</c:choose>
