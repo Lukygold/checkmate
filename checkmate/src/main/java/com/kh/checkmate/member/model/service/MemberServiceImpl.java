@@ -23,13 +23,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
-		String api_key = "NCSS3PFWUTYR1WSM";
-	    String api_secret = "BB1TZC8GCDKKBEFLUWHPA54WF1QURPKB";
+		String api_key = "NCSSZNNQFRT0D0FJ ";
+	    String api_secret = "IXQZU1KOYI3WAPAFMEVP0PESUDT4WCTN ";
 	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    HashMap<String,String> params = new HashMap<String,String>();
 	    params.put("to", userPhoneNumber);
-	    params.put("from", "01045915084");
+	    params.put("from", "01076755923 ");
 	    params.put("type", "SMS");
 	    params.put("text", "[CHECKMATE] 인증번호는" + "["+randomNumber+"]" + "입니다."); // 문자 내용 입력
 	    params.put("app_version", "test app 1.2");
@@ -72,6 +72,30 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int nickCheck(String userNick) {
 		return memberDao.nickCheck(sqlSession,userNick);
+	}
+	@Override
+	public int updateMember(Member m) {
+		return  memberDao.updateMember(sqlSession,m);
+	}
+
+	@Override
+	public int deleteMember(String userId) {
+		return memberDao.deleteMember(sqlSession,userId);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return  memberDao.updatePwd(sqlSession,m);	
+	}
+
+	@Override
+	public int updateMember2(Member m) {
+		return memberDao.updateMember2(sqlSession, m);
+	}
+
+	@Override
+	public Member myPage(Member m) {
+		return  memberDao.myPage(sqlSession,m);
 	}
 
 	
