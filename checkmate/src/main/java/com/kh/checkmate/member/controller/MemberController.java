@@ -210,9 +210,9 @@ public class MemberController {
 			}			
 		}else {
 			int result = memberService.insertMember(m);		
-			System.out.println(m);
+			
 			if(result>0) {				
-				session.setAttribute("alertMsg", "회원가입 성공");
+				
 				return "redirect:/";
 			}else {				
 				model.addAttribute("errorMsg","회원가입 실패");
