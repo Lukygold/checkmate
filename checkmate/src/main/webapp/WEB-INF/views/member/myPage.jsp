@@ -64,7 +64,7 @@
         #navi a{
             color: grey;
             text-decoration: none;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: bold;
             display: flex;
             height: 100%;
@@ -73,7 +73,7 @@
             margin: 0 auto; 
         }
         #navi a:hover{
-            font-size: 27px;
+            font-size: 25px;
             color: black;
         }
         .inline-block{
@@ -124,6 +124,7 @@
                     <li><a type="button" data-toggle="modal" data-target="#myModal3" onclick="return checkPWD();">비밀번호 변경</a></li>
                     </c:if>
                     <li><a href="">고객센터</a></li>
+                    <li><a type="button" data-toggle="modal" data-target="#myModal4">나의 스터디그룹</a></li>
                 </ul>
             </div>
             <div class="content_2">
@@ -298,6 +299,56 @@
                         <div class="modal-footer" style="text-align: center;">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
                             <button type="submit" class="btn btn-success" onclick="return validatePwd();" >비밀번호 변경</button>
+                        </div>
+                    </form>  
+                </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal4" role="dialog">
+                <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                   	<div align="right">
+                   		<button type="button" class="close" data-dismiss="modal">&times;</button>
+                   	</div>
+                    <div class="modal-header">  
+                    	<h2 class="modal-title" align="center">나의 스터디그룹</h2>
+                    </div>
+                      <form action="" method="post">  
+                        <div class="modal-body" align="center">	
+							<table id="boardList" class="table table-hover" style="float:right;" >
+				                <thead align="center">
+				                    <tr>
+				                    	<th>스터디그룹명</th>
+				                        <th>목표</th>
+				                        <th>지역</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+				                	<c:choose>
+				                	<c:when test="">
+				                		<tr>
+				                			<td>속한 스터디 그룹이 없습니다.</td>
+				                		</tr>	
+				                	</c:when>
+				                	<c:otherwise>
+<%-- 				                	<c:forEach var="r" items=""> --%>
+				                    <tr>
+				                    	<td></td>
+				                        <td></td>
+				                        <td></td>
+				                    </tr>
+<%-- 				                    </c:forEach>   --%>
+									</c:otherwise>	
+									</c:choose>
+		                		</tbody>
+           			 		</table>
+                			<br>
+                        </div>
+                        <div class="modal-footer" style="text-align: center;">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-success" >??</button>
                         </div>
                     </form>  
                 </div>
