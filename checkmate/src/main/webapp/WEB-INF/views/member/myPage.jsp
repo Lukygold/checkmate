@@ -117,8 +117,12 @@
                 <ul id="navi">
                     <li><a href="myPage.me">예약조회/취소</a></li>
                     <li><a type="button" data-toggle="modal" data-target="#myModal">정보수정</a></li>
+                    <c:if test="${not empty loginUser.userPw && not empty loginUser.userId}">
                     <li><a type="button" data-toggle="modal" data-target="#myModal2">회원탈퇴</a></li>
-                    <li><a type="button" data-toggle="modal" data-target="#myModal3">비밀번호 변경</a></li>
+                    </c:if>
+                    <c:if test="${not empty loginUser.userPw && not empty loginUser.userId}">
+                    <li><a type="button" data-toggle="modal" data-target="#myModal3" onclick="return checkPWD();">비밀번호 변경</a></li>
+                    </c:if>
                     <li><a href="">고객센터</a></li>
                 </ul>
             </div>
@@ -169,7 +173,6 @@
                   <!-- Modal -->
                 <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
-                    
                     <!-- Modal content-->
                     <div class="modal-content"> 
                     	<div align="right" >
@@ -190,9 +193,10 @@
 							        <input class="userOriginProfile" type="file" name="profile" id="userOriginProfile" onchange="setThumbnail(this);">
 							    </div>    
                                 <div class="form-group">
+                                	<c:if test="${not empty loginUser.userPw && not empty loginUser.userId}">
                                     <label for="userId">* 아이디 : </label>
                                     <input type="text" class="form-control" id="userId" value="${loginUser.userId}" name="userId" readonly > <br>
-                
+                					</c:if>
                                     <label for="userName">* 이름 : </label>
                                     <input type="text" class="form-control" id="userName" value="${loginUser.userName}" name="userName" required readonly> <br>
                                     
@@ -200,13 +204,17 @@
                                     <input type="text" class="form-control" id="userNick" value="${loginUser.userNick}" name="userNick" placeholder="아이디"> 
                                     <button type="button" id="nickBtn" class="checkBtn">중복 확인</button> 
                                     <span class="nickCheck">3~10자를 사용하세요.</span> <br>
-                
+                					
+                					<c:if test="${not empty loginUser.userPw && not empty loginUser.userId}">
                                     <label for="email"> &nbsp; 이메일 : </label>
                                     <input type="text" class="form-control" id="userEmail" value="${loginUser.userEmail}" name="userEmail" placeholder="이메일"> <br>
-                
+                                    </c:if>
+                                    
+                					<c:if test="${not empty loginUser.userPw && not empty loginUser.userId}">
                                     <label for="phone"> &nbsp; 전화번호(숫자만 입력)</label>
                                     <input type="text" class="form-control" id="userPhone" value="${loginUser.userPhone}" name="userPhone" placeholder="전화번호(숫자만 입력)">
                                     <br>
+                                    </c:if>
                                     
                                     <label for="address"> &nbsp; 주소 : </label>
                                     <input type="text" class="form-control" id="address_kakao" value="${addressKakao}" readonly placeholder="주소"> <br>
@@ -230,7 +238,6 @@
                         <!-- Modal -->
             <div class="modal fade" id="myModal2" role="dialog">
                 <div class="modal-dialog">
-                
                 <!-- Modal content-->
                 <div class="modal-content">
                    	<div align="right" >
@@ -254,14 +261,12 @@
                         </div>
                     </form>  
                 </div>
-                
                 </div>
             </div>
             
             <!-- Modal -->
             <div class="modal fade" id="myModal3" role="dialog">
                 <div class="modal-dialog">
-                
                 <!-- Modal content-->
                 <div class="modal-content">
                    	<div align="right">
@@ -296,7 +301,6 @@
                         </div>
                     </form>  
                 </div>
-                
                 </div>
             </div>
         </div>
