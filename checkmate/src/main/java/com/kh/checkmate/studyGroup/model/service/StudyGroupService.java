@@ -13,6 +13,8 @@ public interface StudyGroupService {
 
 	int insertStudyGroup(StudyGroup sg);
 	
+	int updateStudyGroup(StudyGroup sg);
+	
 	//구대영
 	StudyGroup studyGroupDetail(int sgNo);
 
@@ -21,4 +23,6 @@ public interface StudyGroupService {
 	ArrayList<StudyGroup> studyGroupList(PageInfo pi);
 
 	StudyGroup studyGroupNoSelect(StudyGroup sg);
+
+	
 }

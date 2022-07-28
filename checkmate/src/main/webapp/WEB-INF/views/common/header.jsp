@@ -160,12 +160,10 @@
 					
 					<c:choose>
 						<c:when test="${ empty loginUser }">
-							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="memberLoginForm.me">Login</a></li>
 							<li><a class="nav-link scrollto" href="memberEnrollForm.me">Join</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="nav-link scrollto" href="chat.do">채팅테스트</a></li>
 							<li><a class="nav-link scrollto" href="#">${loginUser.userNick}</a></li>
 							<li><a class="nav-link scrollto" href="myPage.me">마이페이지</a></li>
 							<li><a class="nav-link scrollto" href="logout.me">LOGOUT</a></li>
