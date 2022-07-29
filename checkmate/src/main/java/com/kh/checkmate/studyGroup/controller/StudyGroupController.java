@@ -124,11 +124,20 @@ public class StudyGroupController {
 	}
 	
 	@RequestMapping("studyGroupExploration.sg")
-	public String exStudyGroupList(Model model) {
+	public String exStudyGroupList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 		
-		ArrayList<StudyGroup> onestudyGroupList = studyGroupService.oneStudyGroupList();
+		int listCount = studyGroupService.selectListCount();
+
+		int pageLimit = 10;
+		int boardLimit = 10;
 		
-		model.addAttribute("onestudyGroupList", onestudyGroupList);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<StudyGroup> studyGroupList = studyGroupService.studyGroupList(pi);
+		ArrayList<StudyGroup> oneStudyGroupList = studyGroupService.oneStudyGroupList();
+		
+		model.addAttribute("oneStudyGroupList", oneStudyGroupList);
+		model.addAttribute("studyGroupList", studyGroupList);
 		
 		return "studyGroup/studyGroupExploration";
 		
