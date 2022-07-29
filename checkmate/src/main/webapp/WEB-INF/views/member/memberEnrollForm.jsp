@@ -485,13 +485,13 @@
         	alert("주소를 다시 확인해주세요.");
         	return false;
         }
-        else if($("#phoneCheck").prop("readonly")==false){
-            alert("휴대폰 인증이 필요합니다.");       
-            return false;
-        }else if($("#userPhone").prop("readonly")==false){
-        	alert("휴대폰 인증이 필요합니다.");       
-            return false;
-        }
+//         else if($("#phoneCheck").prop("readonly")==false){
+//             alert("휴대폰 인증이 필요합니다.");       
+//             return false;
+//         }else if($("#userPhone").prop("readonly")==false){
+//         	alert("휴대폰 인증이 필요합니다.");       
+//             return false;
+//         }
         else{
         	alert("환영합니다.");    
         	var address = $('#userAddress').val();

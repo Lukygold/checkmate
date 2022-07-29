@@ -34,6 +34,16 @@
 		#{sgLocation}
 		)
 	</insert>
+	
+	<update id="updateStudyGroup" parameterType="studyGroup">
+		UPDATE STUDYGROUP
+		SET SG_GOAL = #{sgGoal},
+			SG_CONTENT = #{sgContent},
+			SG_MAX = #{sgMax},
+			SG_CATEGORY = #{sgCategory},
+			SG_LOCATION = #{sgLocation}
+		WHERE SG_NAME = #{sgName}
+	</update>
 
 	<!-- 구대영 추가 -->
 	<select id="studyGroupDetail" resultType="studyGroup">

@@ -14,6 +14,8 @@ public interface StudyGroupService {
 
 	int insertStudyGroup(StudyGroup sg);
 	
+	int updateStudyGroup(StudyGroup sg);
+	
 	//구대영
 	StudyGroup studyGroupDetail(int sgNo);
 
