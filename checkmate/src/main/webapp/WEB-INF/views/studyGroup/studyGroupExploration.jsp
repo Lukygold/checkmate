@@ -25,7 +25,7 @@
 		<h1><mark>한 자리 남았어요☝️</mark></h1>
 		<br>
 		<div class="row row-cols-1 row-cols-md-3">
-		  
+		   
 			<div class="col">
 			<form action="studyGroupDetail.sg">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
