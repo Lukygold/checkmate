@@ -16,7 +16,6 @@ public class StudyGroup {
 	private String sgGoal;					//	SG_GOAL	VARCHAR2(100 BYTE)
 	private String sgContent;				//	SG_CONTENT	VARCHAR2(2000 BYTE)
 	private String sgOwnerNick;				//	SG_OWNER_NICK	VARCHAR2(100 BYTE)
-	private String sgMemberNick;			//	SG_MEMBER_NICK	VARCHAR2(1000 BYTE)
 	private int sgMax;						//	SG_MAX	NUMBER
 	private Date sgEnrollDate;				//	SG_ENROLLDATE	DATE
 	private String sgCategory;				//	SG_CATEGORY	VARCHAR2(100 BYTE)

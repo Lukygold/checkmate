@@ -65,16 +65,20 @@ public class StudyGroupApplyController {
 		map.put("sgaApplyNo", sgaApplyNo);
 		map.put("sgNo", sgNo);
 
-		// SG_APPLY_STATUS = 'Y'로 변경
-		int result = studyGroupApplyService.acceptStudyGroup(map);
-
-		// StudyGroupMember에 추가
-		int result1 = studyGroupMemberService.insertStudyGroupMember(map);
-
-		// 메세지 전송
-		int message = messageService.sendAcceptMessage(map);
-
-		return result;
+		int max = studyGroupService.max(sgNo);
+		int currentMember = studyGroupMemberService.memberCount(sgNo);
+		
+		if(max >= currentMember) {
+			// SG_APPLY_STATUS = 'Y'로 변경
+			int result = studyGroupApplyService.acceptStudyGroup(map);
+			// StudyGroupMember에 추가
+			int result1 = studyGroupMemberService.insertStudyGroupMember(map);
+			// 메세지 전송
+			int message = messageService.sendAcceptMessage(map);
+			return result;
+		} else {
+			return 0;
+		}
 	}
 
 	@RequestMapping("rejectStudyGroup.sga")
@@ -88,7 +92,7 @@ public class StudyGroupApplyController {
 		map.put("sgaApplyNo", sgaApplyNo);
 		map.put("sgNo", sgNo);
 
-		// SG_APPLY_STATUS = 'N'로 변경 
+		// SG_APPLY_STATUS = 'N'로 변경
 		int result = studyGroupApplyService.rejectStudyGroup(map);
 
 		// 메세지 전송

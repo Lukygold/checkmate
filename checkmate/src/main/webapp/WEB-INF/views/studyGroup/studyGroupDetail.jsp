@@ -46,6 +46,7 @@
 	<br>
 	<br>
 	<br>
+
 	<br>
 	<br>
 	<br>
@@ -65,7 +66,7 @@
 			<tbody>
 				<tr>
 					<td>팀장</td>
-					<td>${studyGroup.sgOwnerNick}</td>
+					<td><on>${studyGroup.sgOwnerNick}</on></td>
 				</tr>
 				<tr>
 					<td>모집인원</td>
@@ -120,6 +121,8 @@
 					data-bs-toggle="modal" data-bs-target="#sgApplyList">신청자
 					목록보기</button>
 				<button type="button" class="btn btn-secondary"
+					onclick="studyGroupList();">수정</button>
+				<button type="button" class="btn btn-danger" onclick="deleteSg();">삭제</button>
 					data-bs-toggle="modal" data-bs-target="#sgUpdate">수정</button>
 				<button type="button" class="btn btn-secondary"
 					onclick="studyGroupList();">목록</button>
@@ -398,7 +401,7 @@
 
 							<input type="hidden" value="${studyGroup.sgNo}" name="sgNo">
 							<input type="hidden" id="send" name="msgSend"
-								value="${loginUser.userNick }">
+								value="${loginUser.userNick}">
 							<table class="table table-dark" style="text-align: center;">
 								<thead>
 									<tr>
@@ -438,11 +441,90 @@
 		</div>
 
 
+		<!-- 김승현 -->
+		<!-- 프로필 조회 -->
+		<div class="modal" id="userProfileModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div align="center">
+							<h3>프로필</h3>
+						</div>
+						<br>
+						<div id="image_container" align="center">
+							<img id="userProfile" src="${member2.userChangeProfile}">
+						</div>
+						<br> <br>
+						<div align="center">${member2.userNick}</div>
+						<br>
+						<div align="center">${member2.userAddress }</div>
+						<br>
+						<div align="center">
+							<button type="button" class="btn btn-secondary"
+								data-bs-toggle="modal" data-bs-target="#sendMessage"
+								name="messageToMember">메세지전송</button>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
 	</div>
 
 	<script>
+	$(function(){
+		$('#detailMain>tbody>tr>td>on').click(
+				function(){						
+				        $('#userProfileModal').modal('show');
+				        
+var recv = "${studyGroup.sgOwnerNick}";
+						
+						$("#recvPush").attr("value", recv);
+				        
+				        });
+				})
+	
 		function studyGroupList() {
 			location.href = "studyGroupList.sg";
+		}
+		
+		function studyGroupUpdate() {
+			location.href = "studyGroupList.sg";
+		}
+		
+		function deleteSg() {
+			console.log("로그인유저 = " + "${loginUser.userNick}");
+			console.log("스터디그룹장 = " + "${studyGroup.sgOwnerNick}");
+			
+			if("${loginUser.userNick}" == "${studyGroup.sgOwnerNick}"){
+			
+						var sgNo = ${studyGroup.sgNo}
+						
+							if (confirm("스터디그룹을 삭제하시겠습니까?")) {
+								$.ajax({
+									type : "POST",
+									url : "${pageContext.request.contextPath}/deleteStudyGroup.sg",
+									data : {
+										sgNo
+									},
+									dataType : "json",
+									success : function(data) {
+										if (data > 0) {
+											alert("삭제완료");
+											window.location = "${pageContext.request.contextPath}/studyGroupList.sg";
+										}
+									},
+									error : function() {
+										alert("서버통신 오류");
+									}
+								});
+							}
+			}
 		}
 		
 		function finish() {

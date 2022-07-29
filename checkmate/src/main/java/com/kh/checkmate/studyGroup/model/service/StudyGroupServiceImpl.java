@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.checkmate.common.model.vo.PageInfo;
+import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.studyGroup.model.dao.StudyGroupDao;
 import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
@@ -54,6 +55,26 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	@Override
 	public StudyGroup studyGroupNoSelect(StudyGroup sg) {
 		return studyGroupDao.studyGroupNoSelect(sqlSession, sg);
+	}
+
+	@Override
+	public int searchListCount(String searchContent) {
+		return studyGroupDao.searchListCount(sqlSession, searchContent);
+	}
+
+	@Override
+	public ArrayList<StudyGroup> sgSearchList(PageInfo pi, String searchContent) {
+		return studyGroupDao.sgSearchList(sqlSession, pi, searchContent);
+	}
+
+	@Override
+	public int max(int sgNo) {
+		return studyGroupDao.max(sqlSession, sgNo);
+	}
+
+	@Override
+	public int deleteStudyGroup(Map<String, Object> map) {
+		return studyGroupDao.deleteStudyGroup(sqlSession, map);
 	}
 
 }

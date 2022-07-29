@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.checkmate.common.model.vo.PageInfo;
+import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 @Repository
@@ -45,6 +46,28 @@ public class StudyGroupDao {
 
 	public StudyGroup studyGroupNoSelect(SqlSessionTemplate sqlSession, StudyGroup sg) {
 		return sqlSession.selectOne("studyGroupMapper.studyGroupNoSelect", sg);
+	}
+
+
+	public int searchListCount(SqlSessionTemplate sqlSession, String searchContent) {
+		return sqlSession.selectOne("studyGroupMapper.searchListCount", searchContent);
+	}
+
+	public ArrayList<StudyGroup> sgSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String searchContent) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		return (ArrayList) sqlSession.selectList("studyGroupMapper.sgSearchList", searchContent, rowBounds);
+	}
+
+	public int max(SqlSessionTemplate sqlSession, int sgNo) {
+		return sqlSession.selectOne("studyGroupMapper.max", sgNo);
+	}
+
+	public int deleteStudyGroup(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+		return sqlSession.update("studyGroupMapper.deleteStudyGroup", map);
 	}
 
 }

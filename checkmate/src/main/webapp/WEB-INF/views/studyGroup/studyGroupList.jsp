@@ -89,45 +89,107 @@
 						.click(
 								function() {
 									location.href = 'studyGroupDetail.sg?sgNo='
-											+ $(this).parent().children("#sgNo").text();
+											+ $(this).parent()
+													.children("#sgNo").text();
 								})
 			})
 		</script>
+
+		<form class="row g-3 justify-content-center"
+			action="studyGroupSearch.sg" method="get">
+			<div class="col-3" style="float: center;">
+				<c:choose>
+					<c:when test="${empty searchContent}">
+						<input type="text" class="form-control" name="searchContent"
+							id="searchContent" placeholder="검색할 내용을 입력해주세요">
+					</c:when>
+					<c:otherwise>
+						<input type="text" class="form-control" name="searchContent"
+							id="searchContent" placeholder="검색할 내용을 입력해주세요"
+							value="${searchContent}">
+					</c:otherwise>
+				</c:choose>
+
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-secondary mb-3">검색</button>
+			</div>
+		</form>
+
 
 		<div id="pagingArea" class="">
 			<ul class="pagination justify-content-center"
 				style="margin-top: 10px;">
 				<c:choose>
-					<c:when test="${ pi.currentPage eq 1 }">
-						<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+					<c:when test="${empty searchContent}">
+						<c:choose>
+							<c:when test="${ pi.currentPage eq 1 }">
+								<li class="page-item disabled"><a class="page-link"
+									href="#">&laquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="studyGroupList.sg?cpage=${pi.currentPage-1}">&laquo;</a></li>
+							</c:otherwise>
+						</c:choose>
+
+						<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+
+							<li class="page-item"><a class="page-link"
+								href="studyGroupList.sg?cpage=${p }">${p}</a></li>
+
+						</c:forEach>
+
+
+						<c:choose>
+							<c:when test="${pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link"
+									href="#">&raquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="studyGroupList.sg?cpage=${pi.currentPage+1}">&raquo;</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
+
+
 					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="studyGroupList.sg?cpage=${pi.currentPage-1}">&laquo;</a></li>
-					</c:otherwise>
-				</c:choose>
+						<c:choose>
+							<c:when test="${ pi.currentPage eq 1 }">
+								<li class="page-item disabled"><a class="page-link"
+									href="studyGroupSearch.sg/#">&laquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="studyGroupSearch.sg?searchContent=${searchContent }&cpage=${pi.currentPage-1}">&laquo;</a></li>
+							</c:otherwise>
+						</c:choose>
 
-				<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+						<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 
-					<li class="page-item"><a class="page-link"
-						href="studyGroupList.sg?cpage=${p }">${p}</a></li>
+							<li class="page-item"><a class="page-link"
+								href="studyGroupSearch.sg?searchContent=${searchContent}&cpage=${p}">${p}</a></li>
 
-				</c:forEach>
+						</c:forEach>
 
 
-				<c:choose>
-					<c:when test="${pi.currentPage eq pi.maxPage }">
-						<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="page-item"><a class="page-link"
-							href="studyGroupList.sg?cpage=${pi.currentPage+1}">&raquo;</a></li>
+						<c:choose>
+							<c:when test="${pi.currentPage eq pi.maxPage }">
+								<li class="page-item disabled"><a class="page-link"
+									href="studyGroupSearch.sg/#">&raquo;</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="studyGroupSearch.sg?searchContent=${searchContent }&cpage=${pi.currentPage+1}">&raquo;</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="">
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>

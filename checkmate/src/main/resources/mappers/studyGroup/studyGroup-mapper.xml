@@ -18,7 +18,6 @@
 		SG_GOAL,
 		SG_CONTENT,
 		SG_OWNER_NICK,
-		SG_MEMBER_NICK,
 		SG_MAX,
 		SG_CATEGORY,
 		SG_LOCATION
@@ -29,7 +28,6 @@
 		#{sgName},
 		#{sgGoal},
 		#{sgContent},
-		#{sgOwnerNick},
 		#{sgOwnerNick},
 		#{sgMax},
 		#{sgCategory},
@@ -71,8 +69,40 @@
 
 	<select id="studyGroupNoSelect" resultType="studyGroup">
 		SELECT SG_NO
-		FROM STUDYGROUP
+		FROM
+		STUDYGROUP
 		WHERE SG_NAME = #{sgName}
 	</select>
+
+	<select id="searchListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM
+		STUDYGROUP
+		WHERE SG_NAME LIKE '%'||#{searchContent}||'%' OR SG_GOAL
+		LIKE
+		'%'||#{searchContent}||'%' OR SG_CONTENT LIKE
+		'%'||#{searchContent}||'%' OR SG_CATEGORY LIKE
+		'%'||#{searchContent}||'%'
+		ORDER BY SG_ENROLLDATE DESC
+	</select>
+
+	<select id="sgSearchList" resultType="studyGroup">
+		SELECT *
+		FROM STUDYGROUP
+		WHERE SG_NAME LIKE '%'||#{searchContent}||'%' OR SG_GOAL LIKE
+		'%'||#{searchContent}||'%' OR SG_CONTENT LIKE
+		'%'||#{searchContent}||'%' OR SG_CATEGORY LIKE
+		'%'||#{searchContent}||'%'
+		ORDER BY SG_ENROLLDATE DESC
+	</select>
+
+	<select id="max" resultType="_int">
+		SELECT SG_MAX
+		FROM STUDYGROUP
+		WHERE SG_NO = #{sgNo}
+	</select>
+
+	<update id=""></update>
+
 
 </mapper>
