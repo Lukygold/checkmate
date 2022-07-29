@@ -46,6 +46,11 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public ArrayList<StudyGroup> studyGroupList(PageInfo pi) {
 		return studyGroupDao.studyGroupList(sqlSession, pi);
 	}
+	
+	@Override
+	public ArrayList<StudyGroup> oneStudyGroupList() {
+		return studyGroupDao.oneStudyGroupList(sqlSession);
+	}
 
 	@Override
 	public StudyGroup studyGroupNoSelect(StudyGroup sg) {

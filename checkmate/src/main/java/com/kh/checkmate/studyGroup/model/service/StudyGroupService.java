@@ -20,6 +20,8 @@ public interface StudyGroupService {
 	int selectListCount();
 
 	ArrayList<StudyGroup> studyGroupList(PageInfo pi);
+	
+	ArrayList<StudyGroup> oneStudyGroupList();
 
 	StudyGroup studyGroupNoSelect(StudyGroup sg);
 
@@ -32,4 +34,6 @@ public interface StudyGroupService {
 	int deleteStudyGroup(Map<String, Object> map);
 
 	int sgCurrent(int sgNo);
+
+	
 }

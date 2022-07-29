@@ -39,6 +39,10 @@ public class StudyGroupDao {
 
 		return (ArrayList) sqlSession.selectList("studyGroupMapper.studyGroupList", null, rowBounds);
 	}
+	
+	public ArrayList<StudyGroup> oneStudyGroupList(SqlSessionTemplate sqlSession) {
+		return (ArrayList) sqlSession.selectList("studyGroupMapper.oneStudyGroupList");
+	}
 
 	public StudyGroup studyGroupNoSelect(SqlSessionTemplate sqlSession, StudyGroup sg) {
 		return sqlSession.selectOne("studyGroupMapper.studyGroupNoSelect", sg);
@@ -68,4 +72,6 @@ public class StudyGroupDao {
 	public int sgCurrent(SqlSessionTemplate sqlSession, int sgNo) {
 		return sqlSession.update("studyGroupMapper.sgCurrent", sgNo);
 	}
+
+	
 }

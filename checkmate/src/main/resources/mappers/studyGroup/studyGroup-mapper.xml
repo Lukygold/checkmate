@@ -58,6 +58,13 @@
 		WHERE SG_STATUS = 'Y'
 		ORDER BY SG_ENROLLDATE DESC
 	</select>
+	
+	<select id="oneStudyGroupList" resultType="studyGroup">
+		SELECT *
+		FROM STUDYGROUP
+		WHERE ((SG_MAX - 1) = SG_CURRENT)
+		ORDER BY SG_ENROLLDATE DESC
+	</select>
 
 	<select id="studyGroupNoSelect" resultType="studyGroup">
 		SELECT SG_NO

@@ -18,7 +18,7 @@
 	<br><br><br><br><br>
 
 	<div id="explorationContainer">
-		<h1><mark>한 자리 남았어요!!</mark></h1>
+		<h1><mark>한 자리 남았어요☝️</mark></h1>
 		<br>
 		<div class="row row-cols-1 row-cols-md-3">
 			<div class="col">
@@ -59,12 +59,12 @@
 			</div>
 		</div>
 		<br><br>
-		<h1><mark>일간 조회수 최다 스터디그룹</mark></h1>
+		<h1><mark>지원자 많은 스터디그룹🏃</mark></h1>
 		<br>
 		<div class="row row-cols-1 row-cols-md-3">
 			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
-					<div class="card-header bg-transparent border-primary">정보처리기사 실기</div>
+					<div class="card-header bg-transparent border-primary">fdafhkahfkah</div>
 					<div class="card-body">
 						<h5 class="card-title">주3회 출석필수</h5>
 						<p class="card-text">서울 도심권</p>

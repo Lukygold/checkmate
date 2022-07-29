@@ -130,7 +130,7 @@
 							<li><a href="jobList.si">취업정보 게시판</a></li>
 							<li><a href="locationMap.lo">내 주변 사용자 보기</a></li>
 						</ul></li>
-						
+						 
 					<c:choose>
 						<c:when test="${ empty loginUser }">
 							<li class="dropdown"><a href="#"><span>스터디그룹</span> <i class="bi bi-chevron-down"></i></a>

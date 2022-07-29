@@ -43,11 +43,6 @@ public class StudyGroupController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping("studyGroupExploration.sg")
-	public String studyGroupExploration() {
-		return "studyGroup/studyGroupExploration";
-	}
-
 	@RequestMapping("studyGroupEnrollForm.sg")
 	public String studyGroupEnrollForm() {
 		return "studyGroup/studyGroupEnrollForm";
@@ -126,6 +121,18 @@ public class StudyGroupController {
 		model.addAttribute("pi", pi);
 
 		return "studyGroup/studyGroupList";
+	}
+	
+	@RequestMapping("studyGroupExploration.sg")
+	public String exStudyGroupList(Model model) {
+		
+		ArrayList<StudyGroup> onestudyGroupList = studyGroupService.oneStudyGroupList();
+		
+		model.addAttribute("onestudyGroupList", onestudyGroupList);
+		
+		return "studyGroup/studyGroupExploration";
+		
+		
 	}
 
 	@RequestMapping("studyGroupSearch.sg")
