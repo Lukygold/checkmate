@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.checkmate.common.model.vo.PageInfo;
+import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 public interface StudyGroupService {
@@ -21,4 +22,12 @@ public interface StudyGroupService {
 	ArrayList<StudyGroup> studyGroupList(PageInfo pi);
 
 	StudyGroup studyGroupNoSelect(StudyGroup sg);
+
+	int searchListCount(String searchContent);
+
+	ArrayList<StudyGroup> sgSearchList(PageInfo pi, String searchContent);
+
+	int max(int sgNo);
+
+	int deleteStudyGroup(Map<String, Object> map);
 }

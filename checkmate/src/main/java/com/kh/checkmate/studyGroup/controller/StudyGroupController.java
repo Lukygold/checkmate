@@ -1,9 +1,7 @@
 package com.kh.checkmate.studyGroup.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
+import com.kh.checkmate.member.model.service.MemberService;
 import com.kh.checkmate.member.model.vo.Member;
 import com.kh.checkmate.studyGroup.model.service.StudyGroupService;
 import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
@@ -31,15 +30,18 @@ public class StudyGroupController {
 
 	@Autowired
 	private StudyGroupService studyGroupService;
-	
+
 	@Autowired
 	private StudyGroupApplyService studyGroupApplyService;
-	
+
 	@Autowired
 	private StudyGroupMemberService studyGroupMemberService;
-	
+
 	@Autowired
 	private StudyGroupMemberController studyGroupMemeberController;
+
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping("studyGroupExploration.sg")
 	public String studyGroupExploration() {
@@ -66,7 +68,7 @@ public class StudyGroupController {
 
 	@RequestMapping("insert.sg")
 	public String insertStudyGroup(StudyGroup sg, HttpSession session, Model model) {
-		
+
 		int result = studyGroupService.insertStudyGroup(sg);
 
 		if (result > 0) {
@@ -82,43 +84,89 @@ public class StudyGroupController {
 	// 구대영
 	@RequestMapping("studyGroupDetail.sg")
 	public String studyGroupDetail(int sgNo, HttpSession session, Model model) {
-		
-		Member member = (Member)session.getAttribute("loginUser");
+		Member member = (Member) session.getAttribute("loginUser");
 
 		ArrayList<StudyGroupApply> studyGroupApplyList = studyGroupApplyService.studyGroupApplyList(sgNo);
 		model.addAttribute("studyGroupApplyList", studyGroupApplyList);
 		int applyCount = studyGroupApplyService.applyCount(sgNo);
 		model.addAttribute("applyCount", applyCount);
-		
+
 		StudyGroup studyGroup = studyGroupService.studyGroupDetail(sgNo);
 		model.addAttribute("studyGroup", studyGroup);
-		
+
 		ArrayList<StudyGroupMember> studyGroupMember = studyGroupMemberService.memberList(sgNo);
 		int memberCount = studyGroupMemberService.memberCount(sgNo);
 		model.addAttribute("studyGroupMember", studyGroupMember);
 		model.addAttribute("memberCount", memberCount);
-	
+
+		// 김승현
+		Member member2 = memberService.userProfile(sgNo);
+		String[] userAddress = member2.getUserAddress().split(" ");
+		String userfullAddress = userAddress[0] + " " + userAddress[1];
+
+		member2.setUserAddress(userfullAddress);
+		model.addAttribute("member2", member2);
+
 		return "studyGroup/studyGroupDetail";
 	}
-	
+
 	@RequestMapping("studyGroupList.sg")
 	public String studyGroupList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
 
 		int listCount = studyGroupService.selectListCount();
-		
+
 		int pageLimit = 10;
 		int boardLimit = 10;
 
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
 		ArrayList<StudyGroup> studyGroupList = studyGroupService.studyGroupList(pi);
-		
+
 		model.addAttribute("studyGroupList", studyGroupList);
 		model.addAttribute("pi", pi);
 
 		return "studyGroup/studyGroupList";
 	}
-	
-	
-	
+
+	@RequestMapping("studyGroupSearch.sg")
+	public String mainSearch(@RequestParam(value = "searchContent") String searchContent,
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model) {
+
+		model.addAttribute("searchContent", searchContent);
+
+		int pageLimit = 10;
+		int boardLimit = 10;
+
+		int sgSearchCount = studyGroupService.searchListCount(searchContent);
+		model.addAttribute("sgSearchCount", sgSearchCount);
+
+		int totalListCount = sgSearchCount;
+
+		PageInfo pi = Pagination.getPageInfo(totalListCount, currentPage, pageLimit, boardLimit);
+
+		ArrayList<StudyGroup> studyGroupList = studyGroupService.sgSearchList(pi, searchContent);
+		model.addAttribute("studyGroupList", studyGroupList);
+
+		model.addAttribute("pi", pi);
+
+		return "studyGroup/studyGroupList";
+	}
+
+	@RequestMapping("deleteStudyGroup.sg")
+	public int deleteStudyGroup(@RequestParam(value = "sgNo") int sgNo, HttpSession session) {
+		Member member = (Member) session.getAttribute("loginUser");
+		Map<String, Object> map = new HashMap<>();
+		map.put("userNick", member.getUserNick());
+		map.put("sgNo", sgNo);
+
+		System.out.println(map);
+
+		int result = studyGroupService.deleteStudyGroup(map);
+		System.out.println(member);
+
+		System.out.println(result);
+
+		return result;
+	}
+
 }
