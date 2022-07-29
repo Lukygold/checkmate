@@ -30,11 +30,6 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public int insertStudyGroup(StudyGroup sg) {
 		return studyGroupDao.insertStudyGroup(sqlSession, sg);
 	}
-	
-	@Override
-	public int updateStudyGroup(StudyGroup sg) {
-		return studyGroupDao.updateStudyGroup(sqlSession, sg);
-	}
 
 	// 구대영
 	@Override
@@ -75,6 +70,11 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	@Override
 	public int deleteStudyGroup(Map<String, Object> map) {
 		return studyGroupDao.deleteStudyGroup(sqlSession, map);
+	}
+
+	@Override
+	public int sgCurrent(int sgNo) {
+		return studyGroupDao.sgCurrent(sqlSession, sgNo);
 	}
 
 }

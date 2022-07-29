@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
+import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 @Repository
 public class SharingInformationDao {
@@ -117,6 +118,33 @@ public class SharingInformationDao {
 
 	public int jobInsertReply(SqlSessionTemplate sqlSession, Reply r) {
 		return sqlSession.insert("jobSharingInformationMapper.jobInsertReply",r);
+	}
+
+	//구대영
+	public int searchListCount(SqlSessionTemplate sqlSession, String searchContent) {
+		return sqlSession.selectOne("sharingInformationMapper.searchListCount", searchContent);
+	}
+
+	public int searchListCount2(SqlSessionTemplate sqlSession, String searchContent) {
+		return sqlSession.selectOne("jobSharingInformationMapper.searchListCount2", searchContent);
+	}
+
+	public ArrayList<StudyGroup> siSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String searchContent) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		return (ArrayList) sqlSession.selectList("sharingInformationMapper.siSearchList", searchContent, rowBounds);
+	}
+
+	public ArrayList<StudyGroup> jsiSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String searchContent) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		return (ArrayList) sqlSession.selectList("jobSharingInformationMapper.jsiSearchList", searchContent, rowBounds);
 	}
 
 }

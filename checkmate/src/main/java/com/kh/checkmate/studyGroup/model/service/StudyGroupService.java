@@ -14,8 +14,6 @@ public interface StudyGroupService {
 
 	int insertStudyGroup(StudyGroup sg);
 	
-	int updateStudyGroup(StudyGroup sg);
-	
 	//구대영
 	StudyGroup studyGroupDetail(int sgNo);
 
@@ -32,4 +30,6 @@ public interface StudyGroupService {
 	int max(int sgNo);
 
 	int deleteStudyGroup(Map<String, Object> map);
+
+	int sgCurrent(int sgNo);
 }

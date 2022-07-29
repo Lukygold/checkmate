@@ -97,7 +97,7 @@ public class MemberController {
 		session.setAttribute("userProfile", userProfile);
 		System.out.println(apiResult);
 		Member loginUser = memberService.NaverloginMember(userId);
-			System.out.println(loginUser);
+			
 		if(loginUser!=null) {
 			session.setAttribute("loginUser", loginUser);
 			return "redirect:/";
@@ -324,8 +324,8 @@ public class MemberController {
 		Member updateMem1 =memberService.myPage(m);	
 		String [] address=updateMem1.getUserAddress().split(",");
 		String addressKakao = address[0];
-		String addressDetail = address[1];		
-		
+		String addressDetail = address[1];
+						
 		model.addAttribute("addressKakao", addressKakao);
 		model.addAttribute("addressDetail", addressDetail);
 		

@@ -21,10 +21,6 @@ public class StudyGroupDao {
 	public int insertStudyGroup(SqlSessionTemplate sqlSession, StudyGroup sg) {
 		return sqlSession.insert("studyGroupMapper.insertStudyGroup", sg);
 	}
-	
-	public int updateStudyGroup(SqlSessionTemplate sqlSession, StudyGroup sg) {
-		return sqlSession.update("studyGroupMapper.updateStudyGroup", sg);
-	}
 
 	// 구대영
 	public StudyGroup studyGroupDetail(SqlSessionTemplate sqlSession, int sgNo) {
@@ -48,7 +44,6 @@ public class StudyGroupDao {
 		return sqlSession.selectOne("studyGroupMapper.studyGroupNoSelect", sg);
 	}
 
-
 	public int searchListCount(SqlSessionTemplate sqlSession, String searchContent) {
 		return sqlSession.selectOne("studyGroupMapper.searchListCount", searchContent);
 	}
@@ -70,4 +65,7 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.deleteStudyGroup", map);
 	}
 
+	public int sgCurrent(SqlSessionTemplate sqlSession, int sgNo) {
+		return sqlSession.update("studyGroupMapper.sgCurrent", sgNo);
+	}
 }
