@@ -52,7 +52,8 @@
 		SELECT COUNT(*)
 		FROM
 		STUDYGROUPAPPLY
-		WHERE SG_APPLY_SG_NO = #{sgNo} AND SG_APPLY_STATUS = 'S'
+		WHERE SG_APPLY_SG_NO = #{sgNo} AND SG_APPLY_STATUS =
+		'S'
 	</select>
 
 </mapper>

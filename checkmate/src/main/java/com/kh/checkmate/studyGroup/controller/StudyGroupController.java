@@ -1,7 +1,6 @@
 package com.kh.checkmate.studyGroup.controller;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,22 +80,6 @@ public class StudyGroupController {
 		}
 
 	}
-	
-	@RequestMapping("update.sg")
-	public String updateStudyGroup(StudyGroup sg, HttpSession session, Model model) {
-		
-		int result = studyGroupService.updateStudyGroup(sg);
-		
-		if (result > 0) {
-			session.setAttribute("alertMsg", "스터디그룹 수정 성공");
-			return "redirect:/";
-		} else {
-			model.addAttribute("errorMsg", "스터디그룹 수정 실패");
-			return "common/errorPage";
-		}
-		
-	}
-	
 
 	// 구대영
 	@RequestMapping("studyGroupDetail.sg")

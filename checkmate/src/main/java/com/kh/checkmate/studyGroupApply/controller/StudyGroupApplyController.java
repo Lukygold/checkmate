@@ -73,6 +73,8 @@ public class StudyGroupApplyController {
 			int result = studyGroupApplyService.acceptStudyGroup(map);
 			// StudyGroupMember에 추가
 			int result1 = studyGroupMemberService.insertStudyGroupMember(map);
+			//SG_CURRNET 추가
+			int result2 = studyGroupService.sgCurrent(sgNo); 
 			// 메세지 전송
 			int message = messageService.sendAcceptMessage(map);
 			return result;

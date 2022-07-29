@@ -6,6 +6,7 @@ import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
+import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 
 public interface SharingInformationService {
@@ -53,4 +54,10 @@ public interface SharingInformationService {
 	ArrayList<SharingInformation> jobSearchList(PageInfo pi, SharingInformation b);
 	ArrayList<Reply> jobSelectReplyList(int informationNo);
 	int jobInsertReply(Reply r);
+	
+	//구대영
+	int searchListCount(String searchContent);
+	int searchListCount2(String searchContent);
+	ArrayList<StudyGroup> siSearchList(PageInfo pi, String searchContent);
+	ArrayList<StudyGroup> jsiSearchList(PageInfo pi, String searchContent);
 }

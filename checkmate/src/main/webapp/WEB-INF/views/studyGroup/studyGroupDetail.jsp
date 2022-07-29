@@ -123,7 +123,6 @@
 				<button type="button" class="btn btn-secondary"
 					onclick="studyGroupList();">수정</button>
 				<button type="button" class="btn btn-danger" onclick="deleteSg();">삭제</button>
-					data-bs-toggle="modal" data-bs-target="#sgUpdate">수정</button>
 				<button type="button" class="btn btn-secondary"
 					onclick="studyGroupList();">목록</button>
 			</c:when>
@@ -238,102 +237,6 @@
 
 				</div>
 			</div>
-		</div>
-
-
-		<!-- 스터디그룹 수정  -->
-		<div class="modal" id="sgUpdate">
-			<form action="update.sg" method="post">
-			<input type="hidden" name="sgOwnerNick" value="${loginUser.userNick}">
-				<div class="modal-dialog modal-xl">
-					<div class="modal-content">
-
-						<!-- Modal Header -->
-						<div class="modal-header">
-							<h4 class="modal-title">스터디그룹 수정</h4>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-						</div>
-
-						<!-- Modal body -->
-						<div class="modal-body">
-							<table id="updateList" class="table table-dark table-hover">
-								<div class="input-group mb-3">
-									<div class="form-floating">
-										<input type="text" class="form-control" id="sgName"
-											name="sgName" value="${studyGroup.sgName }" placeholder="스터디그룹 이름" readonly> <label
-											for="floatingInputGroup1">스터디그룹 이름</label>
-									</div>
-								</div>
-								<br>
-								<div class="form-floating mb-3">
-									<input type="text" class="form-control" name="sgGoal"
-										value="${studyGroup.sgGoal }"placeholder="스터디그룹 목표"> <label for="floatingInput">스터디그룹
-										목표</label>
-									<div class="form-text">ex) 정보처리기사 실기 / 토익 800점</div>
-								</div>
-								<br>
-								<div class="form-floating">
-									<textarea class="form-control" placeholder="스터디그룹 설명"
-										name="sgContent" style="height: 200px">${studyGroup.sgContent }</textarea>
-									<label for="floatingTextarea2">스터디그룹 설명</label>
-									<div class="form-text">ex) 주3회 출석 필수입니다 / 오프라인 만남은 OO에서</div>
-								</div>
-								<br>
-								<div class="form-floating">
-									<select class="form-select" name="sgMax" 
-										aria-label="Floating label select example">
-										<option selected>${studyGroup.sgMax }</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-									</select> <label for="floatingSelect">스터디그룹 인원수</label>
-								</div>
-								<br>
-								<div class="form-floating">
-									<select class="form-select" name="sgCategory" 
-										aria-label="Floating label select example">
-										<option selected>${studyGroup.sgCategory }</option>
-										<option value="자격증">자격증</option>
-										<option value="시험">시험</option>
-										<option value="취업">취업</option>
-									</select> <label for="floatingSelect">스터디그룹 카테고리</label>
-								</div>
-								<br>
-								<div class="form-floating">
-									<select class="form-select" name="sgLocation" 
-										aria-label="Floating label select example">
-										<option selected>${studyGroup.sgLocation }</option>
-										<option value="서울 서북권(마포/서대문/은평)">서울 서북권(마포/서대문/은평)</option>
-										<option value="서울 서남권(강서/관악/구로/금천/동작/양천/영등포)">서울
-											서남권(강서/관악/구로/금천/동작/양천/영등포)</option>
-										<option value="서울 도심권(용산/종로/중구)">서울 도심권(용산/종로/중구)</option>
-										<option value="서울 동북권(강북/광진/노원/도봉/동대문/성동/성북)">서울
-											동북권(강북/광진/노원/도봉/동대문/성동/성북)</option>
-										<option value="서울 동남권(강남/강동/서초/송파)">서울
-											동남권(강남/강동/서초/송파)</option>
-									</select> <label for="floatingSelect">스터디그룹 지역</label>
-								</div>
-							</table>
-						</div>
-
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-secondary"
-								data-bs-dismiss="modal">수정</button>
-							<button type="button" class="btn btn-danger"
-								data-bs-dismiss="modal">닫기</button>
-						</div>
-
-					</div>
-				</div>
-			</form>
 		</div>
 
 

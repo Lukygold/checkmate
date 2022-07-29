@@ -10,6 +10,7 @@ import com.kh.checkmate.board.sharingInformation.model.dao.SharingInformationDao
 import com.kh.checkmate.board.sharingInformation.model.vo.Reply;
 import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.vo.PageInfo;
+import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 @Service
 public class SharingInformationServiceImpl implements SharingInformationService{
@@ -128,6 +129,27 @@ public class SharingInformationServiceImpl implements SharingInformationService{
 	@Override
 	public int jobInsertReply(Reply r) {
 		return sid.jobInsertReply(sqlSession,r);
+	}
+
+	//구대영
+	@Override
+	public int searchListCount(String searchContent) {
+		return sid.searchListCount(sqlSession, searchContent);
+	}
+
+	@Override
+	public int searchListCount2(String searchContent) {
+		return sid.searchListCount2(sqlSession, searchContent);
+	}
+
+	@Override
+	public ArrayList<StudyGroup> siSearchList(PageInfo pi, String searchContent) {
+		return sid.siSearchList(sqlSession, pi, searchContent);
+	}
+
+	@Override
+	public ArrayList<StudyGroup> jsiSearchList(PageInfo pi, String searchContent) {
+		return sid.jsiSearchList(sqlSession, pi, searchContent);
 	}
 	
 	

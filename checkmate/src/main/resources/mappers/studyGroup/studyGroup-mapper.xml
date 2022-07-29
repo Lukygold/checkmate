@@ -19,6 +19,7 @@
 		SG_CONTENT,
 		SG_OWNER_NICK,
 		SG_MAX,
+		SG_CURRENT,
 		SG_CATEGORY,
 		SG_LOCATION
 		)
@@ -30,20 +31,11 @@
 		#{sgContent},
 		#{sgOwnerNick},
 		#{sgMax},
+		DEFAULT,
 		#{sgCategory},
 		#{sgLocation}
 		)
 	</insert>
-	
-	<update id="updateStudyGroup" parameterType="studyGroup">
-		UPDATE STUDYGROUP
-		SET SG_GOAL = #{sgGoal},
-			SG_CONTENT = #{sgContent},
-			SG_MAX = #{sgMax},
-			SG_CATEGORY = #{sgCategory},
-			SG_LOCATION = #{sgLocation}
-		WHERE SG_NAME = #{sgName}
-	</update>
 
 	<!-- 구대영 추가 -->
 	<select id="studyGroupDetail" resultType="studyGroup">
@@ -99,10 +91,15 @@
 	<select id="max" resultType="_int">
 		SELECT SG_MAX
 		FROM STUDYGROUP
-		WHERE SG_NO = #{sgNo}
+		WHERE
+		SG_NO = #{sgNo}
 	</select>
 
-	<update id=""></update>
+	<update id="sgCurrent">
+		UPDATE STUDYGROUP
+		SET SG_CURRENT = SG_CURRENT + 1
+		WHERE SG_NO = #{sgNo}
+	</update>
 
 
 </mapper>

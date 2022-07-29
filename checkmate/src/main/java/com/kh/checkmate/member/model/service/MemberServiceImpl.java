@@ -133,6 +133,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.emailCheck(sqlSession,userEmail);
 	}
 
+	@Override
+	public Member userProfile(int sgNo) {
+		return sqlSession.selectOne("memberMapper.userProfile",sgNo);
+	}
+
 	
 
 
