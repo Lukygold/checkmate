@@ -26,14 +26,14 @@
 		<br>
 		<div class="row row-cols-1 row-cols-md-3">
 		   
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
-				<input type="hidden" name="sgNo" id="sgNo" value="${onestudyGroupList[0].sgNo }">
+				<input type="hidden" name="sgNo" id="sgNo" value="${oneStudyGroupList[0].sgNo }">
 					<div class="card-header bg-transparent border-primary">${oneStudyGroupList[0].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${oneStudyGroupList[0].sgContent}</h5>
-						<p class="card-text">${fn:substring(oneStudyGroupList[0].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(oneStudyGroupList[0].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 						<button type="submit" class="btn btn-primary">상세보기</button>
@@ -42,13 +42,13 @@
 			</div>
 			</form>
 			
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
 					<div class="card-header bg-transparent border-primary">${oneStudyGroupList[1].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${oneStudyGroupList[1].sgContent}</h5>
-						<p class="card-text">${fn:substring(oneStudyGroupList[1].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(oneStudyGroupList[1].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 					<button type="submit" class="btn btn-primary">상세보기</button>
@@ -58,13 +58,13 @@
 			</form>
 			
 			
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
 					<div class="card-header bg-transparent border-primary">${oneStudyGroupList[2].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${oneStudyGroupList[2].sgContent}</h5>
-						<p class="card-text">${fn:substring(oneStudyGroupList[2].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(oneStudyGroupList[2].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 						<button type="submit" class="btn btn-primary">상세보기</button>
@@ -74,16 +74,16 @@
 			</form>
 		</div>
 		<br><br>
-		<h1><mark>지원자 많은 스터디그룹🏃</mark></h1>
+		<h1><mark>최신 스터디그룹⏱</mark></h1>
 		<br>
 		<div class="row row-cols-1 row-cols-md-3">
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
 					<div class="card-header bg-transparent border-primary">${studyGroupList[1].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${studyGroupList[1].sgContent}</h5>
-						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 					<button type="submit" class="btn btn-primary">상세보기</button>
@@ -92,13 +92,13 @@
 			</div>
 			</form>
 			
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
 					<div class="card-header bg-transparent border-primary">${studyGroupList[1].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${studyGroupList[1].sgContent}</h5>
-						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 					<button type="submit" class="btn btn-primary">상세보기</button>
@@ -107,13 +107,13 @@
 			</div>
 			</form>
 			
-			<div class="col">
 			<form action="studyGroupDetail.sg">
+			<div class="col">
 				<div class="card border-primary mb-3 h-100" style="max-width: 18rem;">
 					<div class="card-header bg-transparent border-primary">${studyGroupList[1].sgName}</div>
 					<div class="card-body">
 						<h5 class="card-title">${studyGroupList[1].sgContent}</h5>
-						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6}</p>
+						<p class="card-text">${fn:substring(studyGroupList[1].sgLocation, 0, 6)}</p>
 					</div>
 					<div class="card-footer bg-transparent border-primary" style="text-align: center;">
 					<button type="submit" class="btn btn-primary">상세보기</button>
