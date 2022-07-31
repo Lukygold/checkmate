@@ -35,5 +35,7 @@ public interface StudyGroupService {
 
 	int sgCurrent(int sgNo);
 
+	ArrayList<StudyGroup> myStudyGroupList(String userNick);
+
 	
 }

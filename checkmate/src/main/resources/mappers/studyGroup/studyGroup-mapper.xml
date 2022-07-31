@@ -58,10 +58,11 @@
 		WHERE SG_STATUS = 'Y'
 		ORDER BY SG_ENROLLDATE DESC
 	</select>
-	
+
 	<select id="oneStudyGroupList" resultType="studyGroup">
 		SELECT *
-		FROM STUDYGROUP
+		FROM
+		STUDYGROUP
 		WHERE ((SG_MAX - 1) = SG_CURRENT)
 		ORDER BY SG_ENROLLDATE DESC
 	</select>
@@ -107,6 +108,15 @@
 		SET SG_CURRENT = SG_CURRENT + 1
 		WHERE SG_NO = #{sgNo}
 	</update>
+
+	<select id="myStudyGroupList" resultType="studyGroup">
+		SELECT *
+		FROM STUDYGROUP
+		WHERE SG_NO IN (SELECT SGM_SG_NO
+		FROM STUDYGROUPMEMBER
+		WHERE SGM_NICK = #{userNick})
+		ORDER BY SG_ENROLLDATE DESC
+	</select>
 
 
 </mapper>
