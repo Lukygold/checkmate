@@ -3,7 +3,10 @@ package com.kh.checkmate.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +27,8 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.checkmate.member.model.dao.NaverLoginBO;
 import com.kh.checkmate.member.model.service.MemberService;
 import com.kh.checkmate.member.model.vo.Member;
+import com.kh.checkmate.studyGroup.model.service.StudyGroupService;
+import com.kh.checkmate.studyGroup.model.vo.StudyGroup;
 
 @Controller
 public class MemberController {
@@ -41,6 +46,9 @@ public class MemberController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
+	@Autowired
+	private StudyGroupService studyGroupService;
+	
 	@RequestMapping("login.me")
 	public ModelAndView loginMember(Member m,HttpSession session,ModelAndView mv) {
 		
@@ -53,12 +61,17 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getUserPw(), loginUser.getUserPw())) {
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("userNick", userNick);
+			
+			//로그인한 유저가 속한 스터디그룹 조회
+			ArrayList<StudyGroup> myStudyGroupList = studyGroupService.myStudyGroupList(userNick);
+			session.setAttribute("myStudyGroupList", myStudyGroupList);
+			
 			mv.setViewName("redirect:/");
 		}else {
 			session.setAttribute("alertMsg", "아이디와 비밀번호를 확인해주세요.");
 			mv.setViewName("member/memberLoginForm");			
 		}		
-		return mv;	
+		return mv;
 	}
 	
 	@RequestMapping("logout.me")

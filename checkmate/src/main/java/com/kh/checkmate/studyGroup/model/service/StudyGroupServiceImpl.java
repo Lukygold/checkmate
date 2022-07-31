@@ -82,4 +82,9 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return studyGroupDao.sgCurrent(sqlSession, sgNo);
 	}
 
+	@Override
+	public ArrayList<StudyGroup> myStudyGroupList(String userNick) {
+		return studyGroupDao.myStudyGroupList(sqlSession,userNick);
+	}
+
 }

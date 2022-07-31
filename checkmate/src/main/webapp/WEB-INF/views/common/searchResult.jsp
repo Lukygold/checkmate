@@ -55,9 +55,9 @@
 			<div class="input-group mb-3 input-group-lg">
 				<!-- <span class="input-group-text">Large</span> -->
 				<input type="text" class="form-control" id="searchContent"
-					name="searchContent" placeholder="검색할 내용을 입력해주세요" value="${searchContent }">
-				<button type="submit"
-					class="btn btn-secondary"
+					name="searchContent" placeholder="검색할 내용을 입력해주세요"
+					value="${searchContent }">
+				<button type="submit" class="btn btn-secondary"
 					style="border: none;">Search</button>
 			</div>
 		</form>
@@ -120,10 +120,116 @@
 			</tfoot>
 		</table>
 
+		<!-- 정보공유게시판 검색결과 -->
+		<table class="table table-dark" id="siSearchList">
+			<thead>
+				<th colspan="2">정보공유게시판 검색결과</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>제목</td>
+					<td>내용</td>
+				</tr>
+				<c:choose>
+					<c:when test="${siSearchCount == 0 }">
+						<tr>
+							<td colspan="2">조회된 결과가 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:when test="${siSearchCount < 4 }">
+						<c:forEach items="${siSearchList}" var="siSearchList">
+							<tr>
+								<input type="hidden" id=informationNo
+									value="${siSearchList.informationNo}">
+								<td>${siSearchList.informationTitle}</td>
+								<td>${siSearchList.informationContent}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${siSearchList}" var="siSearchList" end="2">
+							<tr>
+								<input type="hidden" id=informationNo
+									value="${siSearchList.informationNo}">
+								<td>${siSearchList.informationTitle}</td>
+								<td>${siSearchList.informationContent}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+			<tfoot id="siMore">
+				<c:choose>
+					<c:when test="${siSearchCount < 4 }">
+
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">더보기</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+			</tfoot>
+		</table>
+
+
+		<!-- 취업정보공유게시판 검색결과 -->
+		<table class="table table-dark" id="jsiSearchList">
+			<thead>
+				<th colspan="2">취업정보공유게시판 검색결과</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>제목</td>
+					<td>내용</td>
+				</tr>
+				<c:choose>
+					<c:when test="${jsiSearchCount == 0 }">
+						<tr>
+							<td colspan="2">조회된 결과가 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:when test="${jsiSearchCount < 4 }">
+						<c:forEach items="${jsiSearchList}" var="jsiSearchList">
+							<tr>
+								<input type="hidden" id=informationNo
+									value="${jsiSearchList.informationNo}">
+								<td>${jsiSearchList.informationTitle}</td>
+								<td>${jsiSearchList.informationContent}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${jsiSearchList}" var="jsiSearchList" end="2">
+							<tr>
+								<input type="hidden" id=informationNo
+									value="${jsiSearchList.informationNo}">
+								<td>${jsiSearchList.informationTitle}</td>
+								<td>${jsiSearchList.informationContent}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+			<tfoot id="jsiMore">
+				<c:choose>
+					<c:when test="${jsiSearchCount < 4 }">
+
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">더보기</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+			</tfoot>
+		</table>
+
 
 	</div>
 
 	<script>
+		//스터디그룹
 		$(function() {
 			if(${sgSearchCount == 0}){
 				
@@ -141,6 +247,48 @@
 					.click(
 							function() {
 								location.href = 'studyGroupSearch.sg?searchContent=${searchContent}';
+							})
+		})
+		
+		//정보공유
+		$(function() {
+			if(${siSearchCount == 0}){
+				
+			} else{
+			$("#siSearchList>tbody>tr>td").click(
+					function() {
+						location.href = 'detail.si?informationNo='
+								+ $(this).parent().children("#informationNo").val();
+					})
+			}
+		})
+
+		$(function() {
+			$("#siMore>tr>td")
+					.click(
+							function() {
+								location.href = 'siSearchList.si?searchContent=${searchContent}';
+							})
+		})
+		
+		//취업정보공유
+		$(function() {
+			if(${jsiSearchCount == 0}){
+				
+			} else{
+			$("#jsiSearchList>tbody>tr>td").click(
+					function() {
+						location.href = 'jobDetail.si?informationNo='
+								+ $(this).parent().children("#informationNo").val();
+					})
+			}
+		})
+
+		$(function() {
+			$("#jsiMore>tr>td")
+					.click(
+							function() {
+								location.href = 'jsiSearchList.si?searchContent=${searchContent}';
 							})
 		})
 	</script>

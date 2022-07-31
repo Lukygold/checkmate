@@ -73,5 +73,9 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.sgCurrent", sgNo);
 	}
 
+	public ArrayList<StudyGroup> myStudyGroupList(SqlSessionTemplate sqlSession, String userNick) {
+		return (ArrayList) sqlSession.selectList("studyGroupMapper.myStudyGroupList", userNick);
+	}
+
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.checkmate.board.sharingInformation.model.service.SharingInformationService;
+import com.kh.checkmate.board.sharingInformation.model.vo.SharingInformation;
 import com.kh.checkmate.common.model.service.CommonService;
 import com.kh.checkmate.common.model.vo.PageInfo;
 import com.kh.checkmate.common.template.Pagination;
@@ -43,7 +44,9 @@ public class CommonController {
 		int sgSearchCount = studyGroupService.searchListCount(searchContent);
 		model.addAttribute("sgSearchCount", sgSearchCount);
 		int siSearchCount = sharingInformationService.searchListCount(searchContent);
+		model.addAttribute("siSearchCount", siSearchCount);
 		int jsiSearchCount = sharingInformationService.searchListCount2(searchContent);
+		model.addAttribute("jsiSearchCount", jsiSearchCount);
 //		int NoticeSearchCount = NoticeService.searchListCount(searchContent); 
 
 		int totalListCount = sgSearchCount + siSearchCount + jsiSearchCount;
@@ -52,8 +55,8 @@ public class CommonController {
 
 		// 검색결과 리스트
 		ArrayList<StudyGroup> sgSearchList = studyGroupService.sgSearchList(pi, searchContent);
-		ArrayList<StudyGroup> siSearchList = sharingInformationService.siSearchList(pi, searchContent);
-		ArrayList<StudyGroup> jsiSearchList = sharingInformationService.jsiSearchList(pi, searchContent);
+		ArrayList<SharingInformation> siSearchList = sharingInformationService.siSearchList(pi, searchContent);
+		ArrayList<SharingInformation> jsiSearchList = sharingInformationService.jsiSearchList(pi, searchContent);
 		model.addAttribute("sgSearchList", sgSearchList);
 		model.addAttribute("siSearchList", siSearchList);
 		model.addAttribute("jsiSearchList", jsiSearchList);
@@ -62,11 +65,12 @@ public class CommonController {
 		System.out.println(sgSearchCount);
 		System.out.println(totalListCount);
 		System.out.println(sgSearchList);
+		System.out.println(siSearchList);
+		System.out.println(jsiSearchList);
 
 //		model.addAttribute("studyGroupList", studyGroupList);
 		model.addAttribute("pi", pi);
 
 		return "common/searchResult";
 	}
-
 }

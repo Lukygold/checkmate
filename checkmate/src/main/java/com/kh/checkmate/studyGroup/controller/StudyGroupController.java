@@ -116,9 +116,11 @@ public class StudyGroupController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 
 		ArrayList<StudyGroup> studyGroupList = studyGroupService.studyGroupList(pi);
+		ArrayList<StudyGroup> oneStudyGroupList = studyGroupService.oneStudyGroupList();
 
 		model.addAttribute("studyGroupList", studyGroupList);
 		model.addAttribute("pi", pi);
+		model.addAttribute("oneStudyGroupList", oneStudyGroupList);
 
 		return "studyGroup/studyGroupList";
 	}
@@ -139,9 +141,7 @@ public class StudyGroupController {
 		model.addAttribute("oneStudyGroupList", oneStudyGroupList);
 		model.addAttribute("studyGroupList", studyGroupList);
 		
-		return "studyGroup/studyGroupExploration";
-		
-		
+		return "studyGroup/studyGroupExploration";	
 	}
 
 	@RequestMapping("studyGroupSearch.sg")
@@ -160,9 +160,11 @@ public class StudyGroupController {
 
 		PageInfo pi = Pagination.getPageInfo(totalListCount, currentPage, pageLimit, boardLimit);
 
+		//통합검색
 		ArrayList<StudyGroup> studyGroupList = studyGroupService.sgSearchList(pi, searchContent);
 		model.addAttribute("studyGroupList", studyGroupList);
 
+		
 		model.addAttribute("pi", pi);
 
 		return "studyGroup/studyGroupList";
